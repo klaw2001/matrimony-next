@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const ProfilesFilter = () => {
@@ -261,7 +262,7 @@ const ProfilesFilter = () => {
                             >
                               Send interest
                             </a>
-                            <a href="profile-details.html">More detaiils</a>
+                            <Link href='/profile-details/1'>More detaiils</Link>
                           </div>
                         </div>
                         {/* <!--END PROFILE NAME--> */}

@@ -3,7 +3,6 @@ import "./globals.css";
 import Layout from "@/components/layouts/Layout";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.css";
-// ..
 // const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

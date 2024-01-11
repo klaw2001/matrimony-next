@@ -9223,7 +9223,7 @@ span.mail::before {
     z-index: 1;
 }
 .db-new-pro div *{
-    color: #fff;
+    color: #fff !important;
 }
 .db-new-pro div h5{
     font-size: 16px;
