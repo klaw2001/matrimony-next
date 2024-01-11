@@ -316,7 +316,7 @@ const Header = () => {
                                   <span>1200+ Verified profiles</span>
                                 </h5>
                                 <span className="explor-cta">More details</span>
-                                <a href="all-profiles.html" className="fclick"></a>
+                                <Link href="/all-profiles" className="fclick"></Link>
                               </div>
                             </li>
                             <li>
@@ -361,7 +361,7 @@ const Header = () => {
                               <h4>Page sets 1</h4>
                               <ul>
                                 <li>
-                                  <a href="all-profiles.html">All profiles</a>
+                                <Link href='/all-profiles' className="fclick">All Profiles</Link>
                                 </li>
                                 <li>
                                   <a href="profile-details.html">

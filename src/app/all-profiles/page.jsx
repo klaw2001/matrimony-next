@@ -1,0 +1,37 @@
+import Layout from "@/components/layouts/Layout";
+import ProfilesFilter from "@/components/layouts/ProfilesFilter";
+import Link from "next/link";
+import React from "react";
+
+const AllProfiles = () => {
+  return (
+    <Layout>
+      {/* <!-- SUB-HEADING --> */}
+      <section>
+        <div className="all-pro-head">
+          <div className="container">
+            <div className="row">
+              <h1 className="text-white">Lakhs of Happy Marriages</h1>
+              <Link href="sign-up.html" className="text-white">
+                Join now for Free{" "}
+                <i className="fa fa-handshake-o" aria-hidden="true"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* <!--FILTER ON MOBILE VIEW--> */}
+        <div className="fil-mob fil-mob-act">
+          <h4>
+            Profile filters <i className="fa fa-filter" aria-hidden="true"></i>{" "}
+          </h4>
+        </div>
+      </section>
+      {/* <!-- END --> */}
+
+      <ProfilesFilter/>
+      
+    </Layout>
+  );
+};
+
+export default AllProfiles;
