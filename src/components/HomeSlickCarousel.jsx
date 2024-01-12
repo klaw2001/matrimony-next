@@ -59,10 +59,11 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/user.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">Browse Profiles</h4>
                           <p className="text-white">1200+ Profiles</p>
-                          <Link className="text-light" href="all-profiles.html">View more</Link>
+                          <Link className="text-light" href="/all-profiles">View more</Link>
                         </div>
                       </div>
                     </li>
@@ -76,6 +77,7 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/gate.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">Wedding</h4>
                           <p className="text-white">1200+ Profiles</p>
@@ -93,6 +95,7 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/couple.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">All Services</h4>
                           <p className="text-white">1200+ Profiles</p>
@@ -110,6 +113,7 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/hall.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">Join Now</h4>
                           <p className="text-white">Start for free</p>
@@ -127,6 +131,7 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/photo-camera.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">Photo gallery</h4>
                           <p className="text-white">1200+ Profiles</p>
@@ -144,6 +149,7 @@ const HomeSlickCarousel = () => {
                             src="/images/icon/cake.png"
                             alt=""
                             loading="lazy"
+                            className="mx-auto mb-3"
                           />
                           <h4 className="text-white">Blog & Articles</h4>
                           <p className="text-white">Start for free</p>

@@ -34,9 +34,9 @@ const TimeLineSection = () => {
                         <h5>Register</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Begin your journey by registering and creating a
+                          detailed profile. Let others know who you are and what
+                          you're looking for in a life partner.
                         </p>
                       </div>
                     </div>
@@ -47,9 +47,10 @@ const TimeLineSection = () => {
                         <h5>Find your Match</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Explore profiles, discover potential matches, and
+                          connect with individuals who share your values and
+                          interests. Your perfect match may be just a click
+                          away.
                         </p>
                       </div>
                       <div className="tline-im " data-aos="fade-up">
@@ -74,9 +75,9 @@ const TimeLineSection = () => {
                         <h5>Send Interest</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Show your interest by sending likes and messages.
+                          Express your feelings and start building connections
+                          with potential life partners.
                         </p>
                       </div>
                     </div>
@@ -87,9 +88,9 @@ const TimeLineSection = () => {
                         <h5>Get Profile Information</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Dive deeper into profiles, gather information, and get
+                          to know your matches better. Understand their
+                          preferences, values, and aspirations.
                         </p>
                       </div>
                       <div className="tline-im " data-aos="fade-up">
@@ -110,9 +111,9 @@ const TimeLineSection = () => {
                         <h5>Start Meetups</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Initiate meetups and conversations. Communicate with
+                          your potential life partner, share experiences, and
+                          build a strong connection.
                         </p>
                       </div>
                     </div>
@@ -123,9 +124,9 @@ const TimeLineSection = () => {
                         <h5>Getting Marriage</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever.
+                          Congratulations! You've found the one. Take the next
+                          step towards a lifelong commitment. Plan your wedding
+                          and embark on a beautiful journey together.
                         </p>
                       </div>
                       <div className="tline-im" data-aos="fade-up">

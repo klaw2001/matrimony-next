@@ -5,6 +5,7 @@ import Layout from "@/components/layouts/Layout";
 import HomeSlickCarousel from "@/components/HomeSlickCarousel";
 import TimeLineSection from "@/components/layouts/TimeLineSection";
 import GalleryGrid from "@/components/layouts/GalleryGrid";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
                 <div className="row">
                   <div className="hom-ban">
                     <div className="ban-tit">
-                      <span>
+                      <span className="text-white">
                         <i className="no1">#1</i> Matrimony
                       </span>
                       <h1>
@@ -210,9 +211,9 @@ export default function Home() {
                     <div className="row">
                         <div className="hom-ban">
                             <div className="ban-tit">
-                                <span><i className="no1">#1</i> Wedding Website</span>
+                                <span className="text-warning"><i className="no1">#1</i> Wedding Website</span>
                                 <h2>Why choose us</h2>
-                                <p>Most Trusted and premium Matrimony Service in the World.</p>
+                                <p>Most Trusted and premium Matrimony Service in India.</p>
                             </div>
                         </div>
                     </div>
@@ -267,18 +268,18 @@ export default function Home() {
                     <div className="col-lg-6">
                         <div className="ab-wel-lhs">
                             <span className="ab-wel-3"></span>
-                            <img src="images/about/1.jpg" alt="" loading="lazy" className="ab-wel-1"/>
-                            <img src="images/couples/20.jpg" alt="" loading="lazy" className="ab-wel-2"/>
+                            <img src="images/about-home-1.jpg" alt="" loading="lazy" className="ab-wel-1"/>
+                            <img src="images/about-home-2.jpg" alt="" loading="lazy" className="ab-wel-2 img-fluid"/>
                             <span className="ab-wel-4"></span>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <div className="ab-wel-rhs">
                             <div className="ab-wel-tit">
-                                <h2>Welcome to <em>Wedding matrimony</em></h2>
+                                <h2>Welcome to <em>Quick Match matrimony</em></h2>
                                 <p>Best wedding matrimony It is a long established fact that a reader will be distracted
                                     by the readable content of a page when looking at its layout. </p>
-                                <p> <a href="plans.html">Click here to</a> Start you matrimony service now.</p>
+                                <p> <Link href="/plans">Click here to</Link> Start you matrimony service now.</p>
                             </div>
                             <div className="ab-wel-tit-1">
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
@@ -375,10 +376,13 @@ export default function Home() {
                     <div className="fot-ban-inn">
                         <div className="lhs">
                             <h2>Find your perfect Match now</h2>
-                            <p>lacinia viverra lectus. Fusce imperdiet ullamcorper metus eu fringilla.Lorem Ipsum is
-                                simply dummy text of the printing and typesetting industry.</p>
-                            <a href="sign-up.html" className="cta-3">Register Now</a>
-                            <a href="sign-up.html" className="cta-4">Help & Support</a>
+                           <p>
+                           Start your journey to finding true love and lifelong happiness.
+              Our platform is designed to connect you with like-minded
+              individuals who share your values and aspirations.
+                            </p> 
+                            <Link href="/signup" className="cta-3 text-white">Register Now</Link>
+                            <Link href="/contact" className="cta-4">Help & Support</Link>
                         </div>
                     </div>
                 </div>
