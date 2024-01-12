@@ -586,13 +586,13 @@ const Header = () => {
               <div className="mob-menu">
                 <div className="mob-me-ic">
                   <span className="ser-open mobile-ser">
-                    <img src="../../public/images/icon/search.svg" alt="" />
+                    <img src="/images/icon/search.svg" alt="" />
                   </span>
                   <span className="mobile-exprt" data-mob="dashbord">
-                    <img src="../../public/images/icon/users.svg" alt="" />
+                    <img src="/images/icon/users.svg" alt="" />
                   </span>
                   <span className="mobile-menu" data-mob="mobile">
-                    <img src="../../public/images/icon/menu.svg" alt="" />
+                    <img src="/images/icon/menu.svg" alt="" />
                   </span>
                 </div>
               </div>
