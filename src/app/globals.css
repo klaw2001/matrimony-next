@@ -2315,7 +2315,7 @@ table td{}
     width: 95px;
     height: 1px;
     border-top: 1px solid #fff;
-    bottom: 24px;
+    bottom: 12px !important;
 }
 
 .home-acces .slick-arrow:hover {}
