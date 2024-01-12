@@ -6,7 +6,7 @@ import { sendEmail } from "@/helpers/mailer.js";
 connect();
 console.log(connect());
 
-export async function POST(req, res) {
+export default async function POST(req, res) {
   try {
     const { name, email, phone, password } = req.body;
 
