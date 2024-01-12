@@ -15,7 +15,30 @@ const HomeSlickCarousel = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     autoplay: true,
-    autoplaySpeed: 2000, // Adjust as needed
+    autoplaySpeed: 2000, 
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],// Adjust as needed
   };
   // Initialize Slick slider after component is mounted
   //     const slickSlider = new Slider('.hom-qui-acc-sli', sliderSettings);
@@ -47,7 +70,7 @@ const HomeSlickCarousel = () => {
                 <span className="tit-ani-"></span>
               </div>
               <div className="home-acces">
-                <ul className="hom-qui-acc-sli text-center">
+                <ul className="hom-qui-acc-sli text-center py-5">
                   <Slider {...sliderSettings}>
                     <li>
                       <div

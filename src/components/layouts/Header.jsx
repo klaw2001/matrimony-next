@@ -386,12 +386,6 @@ const Header = () => {
                 {/* <!--MOBILE MENU--> */}
                 <div className="mob-menu">
                   <div className="mob-me-ic">
-                    <span className="ser-open mobile-ser">
-                      <img src="/images/icon/search.svg" alt="" />
-                    </span>
-                    <span className="mobile-exprt" data-mob="dashbord">
-                      <img src="/images/icon/users.svg" alt="" />
-                    </span>
                     <button
                       className="mobile-menu bg-transparent"
                       data-mob="mobile"
@@ -409,11 +403,10 @@ const Header = () => {
         {/* <!-- END --> */}
 
         {/* <!-- EXPLORE MENU POPUP --> */}
-        {/* {isMenuOpen && (
-          
-        )} */}
+        {isMenuOpen && (
+          <MobileMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        )}
         {/* <!-- END MOBILE MENU POPUP --> */}
-        {/* <MobileMenu isOpen={isMenuOpen} toggleMenu={toggleMenu}/> */}
 
         {/* <!-- MOBILE USER PROFILE MENU POPUP --> */}
         <div className="mob-me-all dashbord_menu">
