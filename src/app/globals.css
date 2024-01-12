@@ -902,19 +902,20 @@ img{
 .cta-5:hover{background: #000;
     color: #fff;}
 .menu-box-1 {
-    background-image: url('../../public/images/gallery/2.jpg');
+    background-image: url('/images/menu-box-2.jpg');
 }
 
 .menu-box-2 {
-    background-image: url('../../public/images/profiles/2.jpg');
+    background-image: url('/images/menu-box-1.jpg');
+    /* background-size: cover; */
 }
 
 .menu-box-3 {
-    background-image: url('../../public/images/profiles/3.jpg');
+    background-image: url('/images/menu-box-3.jpg');
 }
 
 .menu-box-4 {
-    background-image: url('../../public/images/profiles/4.jpg');
+    background-image: url('/images/menu-box-4.jpg');
 }
 
 .menu-box-1:before {

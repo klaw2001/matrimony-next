@@ -93,11 +93,14 @@ const Header = () => {
                 {/* <!-- LOGO --> */}
                 <div className="logo">
                   <Link href="/" className="logo-brand">
-                    <img
-                      src="/images/logo-b.png"
+                    <Image
+                      src="/images/logo.svg"
                       alt="logo"
                       loading="lazy"
-                      className="ic-logo"
+                      // layout="fill"
+                      width={200}
+                      height={50}
+                      className="img-fluid mt-1"
                     />
                   </Link>
                 </div>
@@ -114,11 +117,11 @@ const Header = () => {
                             <ul>
                               <li>
                                 <div className="menu-box menu-box-2">
-                                  <h5>
+                                  <h5 className="text-white">
                                     Browse profiles{" "}
-                                    <span>1200+ Verified profiles</span>
+                                    <span className="text-white">1200+ Verified profiles</span>
                                   </h5>
-                                  <span className="explor-cta">
+                                  <span className="explor-cta text-white">
                                     More details
                                   </span>
                                   <Link
@@ -129,38 +132,38 @@ const Header = () => {
                               </li>
                               <li>
                                 <div className="menu-box menu-box-1">
-                                  <h5>
-                                    Wedding page <span>Make reservation</span>
+                                  <h5 className="text-white">
+                                    Wedding page <span className="text-white">Make reservation</span>
                                   </h5>
-                                  <span className="explor-cta">
+                                  <span className="explor-cta text-white">
                                     More details
                                   </span>
-                                  <a href="wedding.html" className="fclick"></a>
+                                  <Link href="/wedding" className="fclick"></Link>
                                 </div>
                               </li>
                               <li>
                                 <div className="menu-box menu-box-3">
-                                  <h5>
-                                    All Services<span>Lorem ipsum dummy</span>
+                                  <h5 className="text-white">
+                                    All Services<span className="text-white">Lorem ipsum dummy</span>
                                   </h5>
-                                  <span className="explor-cta">
+                                  <span className="explor-cta text-white">
                                     More details
                                   </span>
-                                  <a
-                                    href="services.html"
+                                  <Link
+                                    href="/services"
                                     className="fclick"
-                                  ></a>
+                                  ></Link>
                                 </div>
                               </li>
                               <li>
                                 <div className="menu-box menu-box-4">
-                                  <h5>
-                                    Join Now <span>Lorem ipsum dummy</span>
+                                  <h5 className="text-white">
+                                    Join Now <span className="text-white">Lorem ipsum dummy</span>
                                   </h5>
-                                  <span className="explor-cta">
+                                  <span className="explor-cta text-white">
                                     More details
                                   </span>
-                                  <a href="plans.html" className="fclick"></a>
+                                  <Link href="/plans" className="fclick"></Link>
                                 </div>
                               </li>
                             </ul>
