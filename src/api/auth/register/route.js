@@ -1,6 +1,6 @@
 import { connect } from "@/dbConfig/dbConfig.js";
 import User from "@/models/userModel.js";
-import bcryptjs from "bcryptjs";
+// import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer.js";
 
 connect();
