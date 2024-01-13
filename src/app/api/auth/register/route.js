@@ -10,11 +10,11 @@ connectDB()
     console.log("not connected");
   });
 
-
 export async function POST(req, res) {
+  console.log(req.body);
   try {
     const { name, email, phone, password } = req.body;
-    console.log(req.body ,name, email, phone, password);
+    console.log(req.body, name, email, phone, password);
 
     const user = await User.findOne({ email });
 
@@ -39,7 +39,7 @@ export async function POST(req, res) {
 
     await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 
-     res.status(201).json({
+    res.status(201).json({
       message: "User created successfully",
       success: true,
       savedUser,
@@ -47,6 +47,5 @@ export async function POST(req, res) {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: error.message });
-  
   }
-};
+}
