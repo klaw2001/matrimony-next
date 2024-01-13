@@ -1,4 +1,5 @@
 import Layout from '@/components/layouts/Layout'
+import Link from 'next/link'
 import React from 'react'
 
 const About = () => {
@@ -67,18 +68,18 @@ const About = () => {
                     <div className="col-lg-6">
                         <div className="ab-wel-lhs">
                             <span className="ab-wel-3"></span>
-                            <img src="images/about/1.jpg" alt="" loading="lazy" className="ab-wel-1"/>
-                            <img src="images/couples/20.jpg" alt="" loading="lazy" className="ab-wel-2"/>
+                            <img src="images/about-home-1.jpg" alt="" loading="lazy" className="ab-wel-1"/>
+                            <img src="images/about-home-2.jpg" alt="" loading="lazy" className="ab-wel-2 img-fluid"/>
                             <span className="ab-wel-4"></span>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <div className="ab-wel-rhs">
                             <div className="ab-wel-tit">
-                                <h2>Welcome to <em>Wedding matrimony</em></h2>
+                                <h2>Welcome to <em>Quick Match matrimony</em></h2>
                                 <p>Best wedding matrimony It is a long established fact that a reader will be distracted
                                     by the readable content of a page when looking at its layout. </p>
-                                <p> <a href="plans.html">Click here to</a> Start you matrimony service now.</p>
+                                <p> <Link href="/plans">Click here to</Link> Start you matrimony service now.</p>
                             </div>
                             <div className="ab-wel-tit-1">
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have

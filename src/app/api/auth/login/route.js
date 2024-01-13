@@ -1,6 +1,7 @@
 import connectDB from '@/dbConfig/dbConfig';
 import User from '@/models/userModel';
 import bcryptjs from 'bcryptjs';
+import  jwt  from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 
 connectDB()
@@ -41,9 +42,20 @@ export async function POST(request) {
       );
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+      },
+      "mysecretkey",
+      { expiresIn: "1h" }
+    );
+
+
     return NextResponse.json({
       message: 'Login successful!',
       success: true,
+      token,
       user: user
     });
   } catch (error) {

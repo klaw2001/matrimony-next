@@ -25,7 +25,10 @@ const Login = () => {
         try {
           const response = await axios.post('/api/auth/login', credentials);
           console.log(response.data);
-          toast.success('Login Successful') // Handle successful login response
+          toast.success('Login Successful')
+          localStorage.setItem('token' , response.data.token)
+          localStorage.setItem('loggedinUser' , response.data.user._id)
+          localStorage.setItem('userName', response.data.user.name)
         } catch (error) {
             toast.error('Something Went Wrong')
           console.error(error); // Handle login error
