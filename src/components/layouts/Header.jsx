@@ -236,19 +236,18 @@ const Header = () => {
                 </div>
 
                 {/* <!-- USER PROFILE --> */}
-                <Link href={`/user-profile/${id}`} className="al" key={id}>
-                  {/* {user ? ( */}
-                      <div className="head-pro">
-                    {/* <Link href={`/user-profile/${id}`}> */}
-                        {user}
-                    {/* </Link> */}
-                      </div>
-                  {/* // ) : (
-                  //   <Link href="/signup" className="cta-dark text-white">
-                  //     Sign Up
-                  //   </Link>
-                  // )} */}
-                </Link>
+                <div className="al" key={id}>
+                  {user ? (
+                    <div className="head-pro">
+                      <Link href={`/user-profile/${id}`}>{user}</Link>
+                    </div>
+                  ) : (
+                    <Link href="/signup" className="cta-dark text-white">
+                      Sign Up
+                    </Link>
+                  )}{" "}
+                  
+                </div>
 
                 {/* <!--MOBILE MENU--> */}
                 <div className="mob-menu">
