@@ -6,6 +6,7 @@ import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   const toggleMenu = () => {
     console.log("Toggle Menu");
@@ -14,23 +15,7 @@ const Header = () => {
   return (
     <>
       <div>
-        {/* <!-- POPUP SEARCH --> */}
-        {/* <div className="pop-search">
-        <span className="ser-clo">+</span>
-        <div className="inn">
-          <form>
-            <input type="text" placeholder="Search here..." />
-          </form>
-          <div className="rel-sear">
-            <h4>Top searches:</h4>
-            <a href="all-profiles.html">Browse all profiles</a>
-            <a href="all-profiles.html">Mens profile</a>
-            <a href="all-profiles.html">Female profile</a>
-            <a href="all-profiles.html">New profiles</a>
-          </div>
-        </div>
-      </div> */}
-        {/* <!-- END --> */}
+        
 
         {/* <!-- TOP MENU --> */}
         <div className="head-top">
@@ -39,13 +24,13 @@ const Header = () => {
               <div className="lhs">
                 <ul className="m-0">
                   <li>
-                    <a href="about.html">About</a>
+                    <Link href="/about">About</Link>
                   </li>
                   <li>
                     <a href="faq.html">FAQ</a>
                   </li>
                   <li>
-                    <a href="contact.html">Contact</a>
+                    <Link href="/contact">Contact</Link>
                   </li>
                 </ul>
               </div>
@@ -89,7 +74,7 @@ const Header = () => {
         <div className="hom-top">
           <div className="container">
             <div className="row align-items-center">
-              <div className="hom-nav">
+              <div className="hom-nav d-flex align-items-center">
                 {/* <!-- LOGO --> */}
                 <div className="logo">
                   <Link href="/" className="logo-brand">
@@ -119,7 +104,9 @@ const Header = () => {
                                 <div className="menu-box menu-box-2">
                                   <h5 className="text-white">
                                     Browse profiles{" "}
-                                    <span className="text-white">1200+ Verified profiles</span>
+                                    <span className="text-white">
+                                      1200+ Verified profiles
+                                    </span>
                                   </h5>
                                   <span className="explor-cta text-white">
                                     More details
@@ -133,18 +120,27 @@ const Header = () => {
                               <li>
                                 <div className="menu-box menu-box-1">
                                   <h5 className="text-white">
-                                    Wedding page <span className="text-white">Make reservation</span>
+                                    Wedding page{" "}
+                                    <span className="text-white">
+                                      Make reservation
+                                    </span>
                                   </h5>
                                   <span className="explor-cta text-white">
                                     More details
                                   </span>
-                                  <Link href="/wedding" className="fclick"></Link>
+                                  <Link
+                                    href="/wedding"
+                                    className="fclick"
+                                  ></Link>
                                 </div>
                               </li>
                               <li>
                                 <div className="menu-box menu-box-3">
                                   <h5 className="text-white">
-                                    All Services<span className="text-white">Lorem ipsum dummy</span>
+                                    All Services
+                                    <span className="text-white">
+                                      Lorem ipsum dummy
+                                    </span>
                                   </h5>
                                   <span className="explor-cta text-white">
                                     More details
@@ -158,7 +154,10 @@ const Header = () => {
                               <li>
                                 <div className="menu-box menu-box-4">
                                   <h5 className="text-white">
-                                    Join Now <span className="text-white">Lorem ipsum dummy</span>
+                                    Join Now{" "}
+                                    <span className="text-white">
+                                      Lorem ipsum dummy
+                                    </span>
                                   </h5>
                                   <span className="explor-cta text-white">
                                     More details
@@ -171,152 +170,12 @@ const Header = () => {
                         </div>
                       </div>
                     </li>
-                    <li className="smenu-pare">
-                      <span className="smenu">All pages</span>
-                      <div className="smenu-open smenu-multi">
-                        <div className="container">
-                          <div className="row">
-                            <div className="multi-col">
-                              <div className="inn">
-                                <h4>Page sets 1</h4>
-                                <ul>
-                                  <li>
-                                    <Link
-                                      href="/all-profiles"
-                                      className="fclick"
-                                    >
-                                      All Profiles
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <a href="profile-details.html">
-                                      Profile details
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="wedding.html">Wedding</a>
-                                  </li>
-                                  <li>
-                                    <a href="wedding-video.html">
-                                      Wedding video
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="services.html">Our Services</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="multi-col">
-                              <div className="inn">
-                                <h4>Page sets 2</h4>
-                                <ul>
-                                  <li>
-                                    <a href="plans.html">Pricing plans</a>
-                                  </li>
-                                  <li>
-                                    <a href="login.html">Login</a>
-                                  </li>
-                                  <li>
-                                    <a href="sign-up.html">Sign-up</a>
-                                  </li>
-                                  <li>
-                                    <a href="photo-gallery.html">
-                                      Photo gallery
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="photo-gallery-1.html">
-                                      Photo gallery 1
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="multi-col">
-                              <div className="inn">
-                                <h4>Page sets 3</h4>
-                                <ul>
-                                  <li>
-                                    <a href="contact.html">Contact</a>
-                                  </li>
-                                  <li>
-                                    <a href="about.html">About</a>
-                                  </li>
-                                  <li>
-                                    <a href="blog.html">Blog</a>
-                                  </li>
-                                  <li>
-                                    <a href="blog-detail.html">Blog detail</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="multi-col">
-                              <div className="inn">
-                                <h4>Page sets 4</h4>
-                                <ul>
-                                  <li>
-                                    <a href="enquiry.html">Ask your doubts</a>
-                                  </li>
-                                  <li>
-                                    <a href="make-reservation.html">
-                                      Make Reservation
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="faq.html">FAQ</a>
-                                  </li>
-                                  <li>
-                                    <a href="coming-soon.html" target="_blank">
-                                      Coming soon
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="404.html">404</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="multi-col full">
-                              <div className="inn">
-                                <h4>User dashboard pages</h4>
-                                <ul>
-                                  <li>
-                                    <a href="user-dashboard.html">Dashboard</a>
-                                  </li>
-                                  <li>
-                                    <a href="user-profile.html">My profile</a>
-                                  </li>
-                                  <li>
-                                    <a href="user-interests.html">Interests</a>
-                                  </li>
-                                  <li>
-                                    <a href="user-chat.html">Chat lists</a>
-                                  </li>
-                                  <li>
-                                    <a href="user-plan.html">My plan details</a>
-                                  </li>
-                                  <li>
-                                    <a href="user-setting.html">
-                                      Profile settings
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="user-profile-edit.html">
-                                      Edit full profile
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="login.html">Sign in</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    {/* <li className="smenu-pare">
+                      <span className="">
+                        <Link href='/all-profiles'>ALL Profiles</Link>
+                      </span>
+                     
+                    </li> */}
                     <li className="smenu-pare">
                       <span className="smenu">Top pages</span>
                       <div className="smenu-open smenu-single">
@@ -373,17 +232,21 @@ const Header = () => {
 
                 {/* <!-- USER PROFILE --> */}
                 <div className="al">
-                  <div className="head-pro">
-                    <img
-                      src="../../public/images/profiles/1.jpg"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <b>Advisor</b>
-                    <br />
-                    <h4>Ashley emyy</h4>
-                    <span className="fclick"></span>
-                  </div>
+                  {user ? (
+                    <div className="head-pro">
+                      <img
+                        src="../../public/images/profiles/1.jpg"
+                        alt=""
+                        loading="lazy"
+                      />
+                      <b>Advisor</b>
+                      <br />
+                      <h4>Ashley emyy</h4>
+                      <span className="fclick"></span>
+                    </div>
+                  ) : (
+                    <Link href="/signup" className="cta-dark text-white">Sign Up</Link>
+                  )}
                 </div>
 
                 {/* <!--MOBILE MENU--> */}
