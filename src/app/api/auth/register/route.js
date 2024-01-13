@@ -1,14 +1,20 @@
-
 import connectDB from '@/dbConfig/dbConfig';
 import User from '@/models/userModel';
 import bcryptjs from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
 
-connectDB();
+connectDB()
+// POST route (Create a new user inside the DB)
 export async function POST(request) {
   try {
-    const { name, email, phone, password } = req.body;
-    console.log(req.body ,name, email, phone, password);
+    // grab data from body
+    const reqBody = await request.json();
+
+    // destructure the incoming variables
+    const { name, email, password , phone } = reqBody;
+
+    // REMOVE IN PRODUCTION
+    console.log(reqBody);
 
     const user = await User.findOne({ email });
 
@@ -35,20 +41,13 @@ export async function POST(request) {
 
     // save it inside the DB
     const savedUser = await newUser.save();
-    console.log(savedUser);
 
-    console.log(savedUser, res);
-
-    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
-
-     res.status(201).json({
-      message: "User created successfully",
+    return NextResponse.json({
+      message: 'User created!',
       success: true,
       savedUser,
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
-  
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
