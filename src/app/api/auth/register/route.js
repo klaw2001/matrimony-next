@@ -1,30 +1,35 @@
-import User from "@/models/userModel.js";
-import bcrypt from "bcrypt";
-import { sendEmail } from "@/helpers/mailer.js";
-import connectDB from "@/dbConfig/dbConfig";
-connectDB()
-  .then(() => {
-    console.log("connected");
-  })
-  .catch(() => {
-    console.log("not connected");
-  });
 
+import connectDB from '@/dbConfig/dbConfig';
+import User from '@/models/userModel';
+import bcryptjs from 'bcryptjs';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req, res) {
+connectDB();
+export async function POST(request) {
   try {
-    const { name, email, phone, password } = req.body;
-    console.log(req.body ,name, email, phone, password);
+    // grab data from body
+    const reqBody = await request.json();
+
+    // destructure the incoming variables
+    const { name, email, password ,phone} = reqBody;
+
 
     const user = await User.findOne({ email });
 
-    // if (user) {
-    //   return res.status(400).json({ error: "User already exists" });
-    // }
+    if (user) {
+      return NextResponse.json(
+        {
+          error: 'This user already exists',
+        },
+        { status: 400 }
+      );
+    }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // hash password
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
 
+    // create a new user
     const newUser = new User({
       name,
       email,
@@ -32,21 +37,15 @@ export async function POST(req, res) {
       password: hashedPassword,
     });
 
+    // save it inside the DB
     const savedUser = await newUser.save();
-    console.log(savedUser);
 
-    console.log(savedUser, res);
-
-    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
-
-     res.status(201).json({
-      message: "User created successfully",
+    return NextResponse.json({
+      message: 'User created!',
       success: true,
       savedUser,
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
-  
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-};
+}
