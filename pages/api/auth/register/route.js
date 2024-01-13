@@ -14,7 +14,6 @@ export async function POST(request) {
     const { name, email, password , phone } = reqBody;
 
     // REMOVE IN PRODUCTION
-    console.log(reqBody);
 
     const user = await User.findOne({ email });
 
