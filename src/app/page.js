@@ -34,9 +34,9 @@ export default function Home() {
                         <ul>
                           <li className="sr-look">
                             <div className="form-group">
-                              <label>I'm looking for</label>
+                              <label>I am looking for</label>
                               <select className="chosen-select">
-                                <option value="">I'm looking for</option>
+                                <option value="">I am looking for</option>
                                 <option value="Men">Men</option>
                                 <option value="Women">Women</option>
                               </select>
@@ -148,7 +148,7 @@ export default function Home() {
                       <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,{" "}
+                        industries standard dummy text ever since the 1500s,{" "}
                       </p>
                       <h5>Jack danial</h5>
                       <span>New york</span>
@@ -165,7 +165,7 @@ export default function Home() {
                       <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,{" "}
+                        industries standard dummy text ever since the 1500s,{" "}
                       </p>
                       <h5>Jack danial</h5>
                       <span>New york</span>
@@ -182,7 +182,7 @@ export default function Home() {
                       <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,{" "}
+                        industries standard dummy text ever since the 1500s,{" "}
                       </p>
                       <h5>Jack danial</h5>
                       <span>New york</span>
@@ -284,7 +284,7 @@ export default function Home() {
                             <div className="ab-wel-tit-1">
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in some form, by injected humour, or randomised words which
-                                    don't look even slightly believable.</p>
+                                    do not look even slightly believable.</p>
                             </div>
                             <div className="ab-wel-tit-2">
                                 <ul>
