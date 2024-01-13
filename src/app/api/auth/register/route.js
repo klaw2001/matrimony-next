@@ -7,12 +7,8 @@ import { NextRequest, NextResponse } from 'next/server';
 connectDB();
 export async function POST(request) {
   try {
-    // grab data from body
-    const reqBody = await request.json();
-
-    // destructure the incoming variables
-    const { name, email, password ,phone} = reqBody;
-
+    const { name, email, phone, password } = req.body;
+    console.log(req.body ,name, email, phone, password);
 
     const user = await User.findOne({ email });
 
@@ -39,13 +35,20 @@ export async function POST(request) {
 
     // save it inside the DB
     const savedUser = await newUser.save();
+    console.log(savedUser);
 
-    return NextResponse.json({
-      message: 'User created!',
+    console.log(savedUser, res);
+
+    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+
+     res.status(201).json({
+      message: "User created successfully",
       success: true,
       savedUser,
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.log(error);
+    return res.status(500).json({ error: error.message });
+  
   }
 }
