@@ -84,7 +84,7 @@ const About = () => {
                             <div className="ab-wel-tit-1">
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in some form, by injected humour, or randomised words which
-                                    don't look even slightly believable.</p>
+                                    do not look even slightly believable.</p>
                             </div>
                             <div className="ab-wel-tit-2">
                                 <ul>

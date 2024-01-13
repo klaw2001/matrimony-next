@@ -14,12 +14,12 @@ const ProfilesFilter = () => {
                 {/* <!-- START --> */}
                 <div className="filt-com lhs-cate">
                   <h4>
-                    <i className="fa fa-search" aria-hidden="true"></i> I'm
+                    <i className="fa fa-search" aria-hidden="true"></i> I am
                     looking for
                   </h4>
                   <div className="form-group">
                     <select className="chosen-select">
-                      <option value="">I'm looking for</option>
+                      <option value="">I am looking for</option>
                       <option value="Men">Men</option>
                       <option value="Women">Women</option>
                     </select>
@@ -298,10 +298,10 @@ const ProfilesFilter = () => {
                             <span className="pro-ave-yes"></span>
                           </div>
                           <div className="pro-avl-status">
-                            <span className="marqu">
+                            {/* <span className="marqu">
                               Last login 10 mins ago | I'll be available on
                               10:00 AM
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                         {/* <!--END PROFILE IMAGE--> */}
@@ -430,10 +430,10 @@ const ProfilesFilter = () => {
                           </div>
                           <div className="pro-avl-status">
                             <h5>Last login 10 mins ago</h5>
-                            <span className="marqu">
+                            {/* <span className="marqu">
                               Last login 10 mins ago | I'll be available on
                               10:00 AM
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                         {/* <!--END PROFILE IMAGE--> */}
@@ -497,10 +497,10 @@ const ProfilesFilter = () => {
                           </div>
                           <div className="pro-avl-status">
                             <h5>Last login 10 mins ago</h5>
-                            <span className="marqu">
+                            {/* <span className="marqu">
                               Last login 10 mins ago | I'll be available on
                               10:00 AM
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                         {/* <!--END PROFILE IMAGE--> */}

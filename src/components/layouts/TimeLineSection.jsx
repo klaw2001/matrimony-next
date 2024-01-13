@@ -36,7 +36,7 @@ const TimeLineSection = () => {
                         <p>
                           Begin your journey by registering and creating a
                           detailed profile. Let others know who you are and what
-                          you're looking for in a life partner.
+                          you are looking for in a life partner.
                         </p>
                       </div>
                     </div>
@@ -124,7 +124,7 @@ const TimeLineSection = () => {
                         <h5>Getting Marriage</h5>
                         <span>Timing: 7:00 PM</span>
                         <p>
-                          Congratulations! You've found the one. Take the next
+                          Congratulations! You have found the one. Take the next
                           step towards a lifelong commitment. Plan your wedding
                           and embark on a beautiful journey together.
                         </p>

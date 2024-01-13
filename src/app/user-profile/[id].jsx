@@ -1,23 +1,25 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
 import React, { useEffect } from "react";
+import User from "@/models/userModel";
 
 const UserProfile = () => {
-  const router = useRouter()
-  const {id} = router.query
+  const router = useRouter();
+  const { id } = router.query;
   console.log(id);
 
-  useEffect(()=>{
-    axios.get(`/api/auth/user/${id}`)
-    .then((res)=>{
-      console.log(res)
-    }).catch((err)=>console.log(err))
-  },[])
+  useEffect(() => {
+    axios
+      .get(`/api/auth/singleuser/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <Layout>
-      {/* <!-- LOGIN --> */}
       <section>
         <div className="db">
           <div className="container">
@@ -72,8 +74,7 @@ const UserProfile = () => {
                                     <option value="Premium">Premium</option>
                                     <option value="Free">Free</option>
                                     <option value="Free">
-                                      No-more visible(You can't visible, so no
-                                      one can view your profile)
+                                      stealth
                                     </option>
                                   </select>
                                 </div>
@@ -110,8 +111,12 @@ const UserProfile = () => {
                       >
                         <div className="foll-set-tit fol-pro-abo-ico">
                           <h4>Account</h4>
-                          <a href="#!" className="sett-edit-btn sett-acc-edit-eve">
-                            <i className="fa fa-edit" aria-hidden="true"></i> Edit
+                          <a
+                            href="#!"
+                            className="sett-edit-btn sett-acc-edit-eve"
+                          >
+                            <i className="fa fa-edit" aria-hidden="true"></i>{" "}
+                            Edit
                           </a>
                         </div>
                         <div className="fol-sett-box sett-acc-view sett-two-tab">
@@ -180,7 +185,11 @@ const UserProfile = () => {
                                 </div>
                               </li>
                               <li>
-                                <input type="submit" value="Update" className="" />
+                                <input
+                                  type="submit"
+                                  value="Update"
+                                  className=""
+                                />
                                 <input
                                   type="reset"
                                   value="Cancel"
@@ -297,7 +306,6 @@ const UserProfile = () => {
           </div>
         </div>
       </section>
-      {/* <!-- END --> */}
     </Layout>
   );
 };

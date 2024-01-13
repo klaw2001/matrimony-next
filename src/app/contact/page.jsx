@@ -83,7 +83,7 @@ const Contact = () => {
                         <div className="rhs">
                             <div>
                                 <div className="form-tit">
-                                    <h4>Let's talk</h4>
+                                    <h4>Lets talk</h4>
                                     <h1>Send your enquiry now </h1>
                                 </div>
                                 <div className="form-login">

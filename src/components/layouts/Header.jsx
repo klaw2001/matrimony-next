@@ -7,23 +7,21 @@ import MobileMenu from "./MobileMenu";
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [userID , setUserId] = useState(null)
+  const [id, setUserId] = useState(null);
   const toggleMenu = () => {
     console.log("Toggle Menu");
     setMenuOpen(!isMenuOpen);
   };
 
-  useEffect(()=>{
-    const userName = localStorage.getItem('userName')
-    const id = localStorage.getItem('loggedinUser')
-    setUserId(id)
-    setUser(userName)
-  },[])
+  useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    const userID = localStorage.getItem("loggedinUser");
+    setUserId(userID);
+    setUser(userName);
+  }, []);
   return (
     <>
       <div>
-        
-
         {/* <!-- TOP MENU --> */}
         <div className="head-top">
           <div className="container">
@@ -238,23 +236,19 @@ const Header = () => {
                 </div>
 
                 {/* <!-- USER PROFILE --> */}
-                <div className="al">
-                  {user ? (
-                    <div className="head-pro">
-                      {/* <img
-                        src="../../public/images/profiles/1.jpg"
-                        alt=""
-                        loading="lazy"
-                      /> */}
-                      {/* <b>Advisor</b>
-                      <br /> */}
-                      <Link href={`/user-profile/${userID}`}> <h4>{user}</h4></Link>
-                      <span className="fclick"></span>
-                    </div>
-                  ) : (
-                    <Link href="/signup" className="cta-dark text-white">Sign Up</Link>
-                  )}
-                </div>
+                <Link href={`/user-profile/${id}`} className="al" key={id}>
+                  {/* {user ? ( */}
+                      <div className="head-pro">
+                    {/* <Link href={`/user-profile/${id}`}> */}
+                        {user}
+                    {/* </Link> */}
+                      </div>
+                  {/* // ) : (
+                  //   <Link href="/signup" className="cta-dark text-white">
+                  //     Sign Up
+                  //   </Link>
+                  // )} */}
+                </Link>
 
                 {/* <!--MOBILE MENU--> */}
                 <div className="mob-menu">
