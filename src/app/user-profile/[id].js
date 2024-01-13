@@ -1,7 +1,20 @@
+"use client"
+import { useRouter } from "next/navigation";
 import Layout from "@/components/layouts/Layout";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 const UserProfile = () => {
+  const router = useRouter()
+  const {id} = router.query
+  console.log(id);
+
+  useEffect(()=>{
+    axios.get(`/api/auth/user/${id}`)
+    .then((res)=>{
+      console.log(res)
+    }).catch((err)=>console.log(err))
+  },[])
   return (
     <Layout>
       {/* <!-- LOGIN --> */}

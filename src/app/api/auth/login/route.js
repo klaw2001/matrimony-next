@@ -1,45 +1,64 @@
-import { connect } from "@/dbConfig/dbConfig.js";
-import User from "@/models/userModel.js";
-import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
+import connectDB from '@/dbConfig/dbConfig';
+import User from '@/models/userModel';
+import bcryptjs from 'bcryptjs';
+import  jwt  from 'jsonwebtoken';
+import { NextRequest, NextResponse } from 'next/server';
 
-connect();
+connectDB()
 
-export default async function POST(req, res) {
+// POST route (Login)
+export async function POST(request) {
   try {
-    const { email, password } = req.body;
+    // grab data from body
+    const reqBody = await request.json();
 
+    // destructure the incoming variables
+    const { email, password } = reqBody;
+
+    // REMOVE IN PRODUCTION
+    console.log(reqBody);
+
+    // check if the user exists
     const user = await User.findOne({ email });
+
     if (!user) {
-      return res.json({ error: "User does not exist" }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: 'User not found',
+        },
+        { status: 404 }
+      );
     }
-    console.log("user already exists");
 
-    const validPassword = await bcryptjs.compare(password, user.password);
-    if (!validPassword) {
-      return res.json({ error: "Invalid password" }, { status: 400 });
+    // compare passwords
+    const isPasswordValid = await bcryptjs.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return NextResponse.json(
+        {
+          error: 'Invalid password',
+        },
+        { status: 401 }
+      );
     }
-    console.log(user);
 
-    const tokenData = {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-    };
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+      },
+      "mysecretkey",
+      { expiresIn: "1h" }
+    );
 
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, {
-      expiresIn: "1d",
-    });
 
-    const response = res.status(200).json({
-      message: "Login successful",
+    return NextResponse.json({
+      message: 'Login successful!',
       success: true,
+      token,
+      user: user
     });
-    response.cookies.set("token", token, {
-      httpOnly: true,
-    });
-    return response;
   } catch (error) {
-    return res.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

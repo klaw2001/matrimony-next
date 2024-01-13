@@ -1,17 +1,24 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
-
+  const [userID , setUserId] = useState(null)
   const toggleMenu = () => {
     console.log("Toggle Menu");
     setMenuOpen(!isMenuOpen);
   };
+
+  useEffect(()=>{
+    const userName = localStorage.getItem('userName')
+    const id = localStorage.getItem('loggedinUser')
+    setUserId(id)
+    setUser(userName)
+  },[])
   return (
     <>
       <div>
@@ -234,14 +241,14 @@ const Header = () => {
                 <div className="al">
                   {user ? (
                     <div className="head-pro">
-                      <img
+                      {/* <img
                         src="../../public/images/profiles/1.jpg"
                         alt=""
                         loading="lazy"
-                      />
-                      <b>Advisor</b>
-                      <br />
-                      <h4>Ashley emyy</h4>
+                      /> */}
+                      {/* <b>Advisor</b>
+                      <br /> */}
+                      <Link href={`/user-profile/${userID}`}> <h4>{user}</h4></Link>
                       <span className="fclick"></span>
                     </div>
                   ) : (
