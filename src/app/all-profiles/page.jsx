@@ -1,9 +1,20 @@
+"use client"
 import Layout from "@/components/layouts/Layout";
 import ProfilesFilter from "@/components/layouts/ProfilesFilter";
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const AllProfiles = () => {
+  const [user , setUsers] = useState([])
+  useEffect(()=>{
+    axios.get('/api/auth/all-users')
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>console.log(err))
+  },[])
+
   return (
     <Layout>
       {/* <!-- SUB-HEADING --> */}
@@ -12,7 +23,7 @@ const AllProfiles = () => {
           <div className="container">
             <div className="row">
               <h1 className="text-white">Lakhs of Happy Marriages</h1>
-              <Link href="sign-up.html" className="text-white">
+              <Link href="/signup" className="text-white">
                 Join now for Free{" "}
                 <i className="fa fa-handshake-o" aria-hidden="true"></i>
               </Link>

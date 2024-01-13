@@ -1,23 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
-import React, { useEffect } from "react";
-import User from "@/models/userModel";
+import React from "react";
 
 const UserProfile = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  console.log(id);
-
-  useEffect(() => {
-    axios
-      .get(`/api/auth/singleuser/${id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  
   return (
     <Layout>
       <section>

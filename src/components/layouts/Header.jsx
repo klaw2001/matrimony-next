@@ -239,14 +239,15 @@ const Header = () => {
                 <div className="al" key={id}>
                   {user ? (
                     <div className="head-pro">
-                      <Link href={`/user-profile/${id}`}>{user}</Link>
+                      <Link href={`/user-profile`}>
+                        <h4>{user}</h4>
+                      </Link>
                     </div>
                   ) : (
                     <Link href="/signup" className="cta-dark text-white">
                       Sign Up
                     </Link>
                   )}{" "}
-                  
                 </div>
 
                 {/* <!--MOBILE MENU--> */}

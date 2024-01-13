@@ -8,23 +8,23 @@ const profileDetailsSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     age: {
       type: Number,
-      required: true,
+      required: false,
     },
     height: {
       type: Number,
-      required: true,
+      required: false,
     },
     job: {
       type: String,
-      required: true,
+      required: false,
     },
     about: {
       type: String,
-      required: true,
+      required: false,
     },
     images: {
       type: String,
