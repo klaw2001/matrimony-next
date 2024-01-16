@@ -210,6 +210,8 @@ const Header = () => {
                     <li>
                       <Link href="/signup">Register</Link>
                     </li>
+                    {id && (
+
                     <li className="smenu-pare">
                       <span className="smenu">Dashboard</span>
                       <div className="smenu-open smenu-single">
@@ -232,12 +234,13 @@ const Header = () => {
                         </ul>
                       </div>
                     </li>
+                    )}
                   </ul>
                 </div>
 
                 {/* <!-- USER PROFILE --> */}
                 <div className="al" key={id}>
-                  {user ? (
+                  {id ? (
                     <div className="head-pro">
                       <Link href={`/user-profile`}>
                         <h4>{user}</h4>

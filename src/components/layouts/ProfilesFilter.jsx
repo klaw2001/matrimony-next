@@ -1,7 +1,19 @@
+"use client";
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ProfilesFilter = () => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/auth/all-users")
+      .then((res) => {
+        setUsers(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       {/* <!-- START --> */}
@@ -188,7 +200,7 @@ const ProfilesFilter = () => {
               <div className="col-md-9">
                 <div className="short-all">
                   <div className="short-lhs">
-                    Showing <b>32</b> profiles
+                    Showing <b>{users.length}</b> profiles
                   </div>
                   <div className="short-rhs">
                     <ul>
@@ -217,334 +229,76 @@ const ProfilesFilter = () => {
                 </div>
                 <div className="all-list-sh">
                   <ul>
-                    <li>
-                      <div
-                        className="all-pro-box user-avil-onli"
-                        data-useravil="avilyes"
-                        data-aviltxt="Available online"
-                      >
-                        {/* <!--PROFILE IMAGE--> */}
-                        <div className="pro-img">
-                          <a href="profile-details.html">
-                            <img src="images/profiles/4.jpg" alt="" />
-                          </a>
-                          <div
-                            className="pro-ave"
-                            title="User currently available"
-                          >
-                            <span className="pro-ave-yes"></span>
-                          </div>
-                          <div className="pro-avl-status">
-                            <h5>Available Online</h5>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE IMAGE--> */}
-
-                        {/* <!--PROFILE NAME--> */}
-                        <div className="pro-detail">
-                          <h4>
-                            <a href="profile-details.html">Ashley emyy</a>
-                          </h4>
-                          <div className="pro-bio">
-                            <span>B.Sc</span>
-                            <span>IT Profession</span>
-                            <span>29 Yeard old</span>
-                            <span>Height: 155Cms</span>
-                          </div>
-                          <div className="links">
-                            <span className="cta-chat">Chat now</span>
-                            <a href="#!">WhatsApp</a>
-                            <a
-                              href="#!"
-                              className="cta cta-sendint"
-                              data-bs-toggle="modal"
-                              data-bs-target="#sendInter"
-                            >
-                              Send interest
-                            </a>
-                            <Link href='/profile-details/1'>More detaiils</Link>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE NAME--> */}
-                        {/* <!--SAVE--> */}
-                        <span
-                          className="enq-sav"
-                          data-toggle="tooltip"
-                          title="Click to save this provile."
+                    {users.map((elem) => (
+                      <li key={elem._id}>
+                        <div
+                          className="all-pro-box user-avil-onli"
+                          data-useravil="avilyes"
+                          data-aviltxt="Available online"
                         >
-                          <i
-                            className="fa fa-thumbs-o-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {/* <!--END SAVE--> */}
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="all-pro-box"
-                        data-useravil="avilno"
-                        data-aviltxt="Offline"
-                      >
-                        {/* <!--PROFILE IMAGE--> */}
-                        <div className="pro-img">
-                          <a href="profile-details.html">
-                            <img src="images/profiles/10.jpg" alt="" />
-                          </a>
-                          <div
-                            className="pro-ave"
-                            title="User currently available"
-                          >
-                            <span className="pro-ave-yes"></span>
-                          </div>
-                          <div className="pro-avl-status">
-                            {/* <span className="marqu">
-                              Last login 10 mins ago | I'll be available on
-                              10:00 AM
-                            </span> */}
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE IMAGE--> */}
-
-                        {/* <!--PROFILE NAME--> */}
-                        <div className="pro-detail">
-                          <h4>
-                            <a href="profile-details.html">Elizabeth Taylor</a>
-                          </h4>
-                          <div className="pro-bio">
-                            <span>B.Sc</span>
-                            <span>IT Profession</span>
-                            <span>29 Yeard old</span>
-                            <span>Height: 155Cms</span>
-                          </div>
-                          <div className="links">
-                            <span className="cta-chat">Chat now</span>
-                            <a href="#!">WhatsApp</a>
-                            <a
-                              href="#!"
-                              className="cta cta-sendint"
-                              data-bs-toggle="modal"
-                              data-bs-target="#sendInter"
-                            >
-                              Send interest
+                          {/* <!--PROFILE IMAGE--> */}
+                          <div className="pro-img">
+                            <a href="profile-details.html">
+                              <img src="images/profiles/4.jpg" alt="" />
                             </a>
-                            <a href="profile-details.html">More detaiils</a>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE NAME--> */}
-                        {/* <!--SAVE--> */}
-                        <span
-                          className="enq-sav"
-                          data-toggle="tooltip"
-                          title="Click to save this provile."
-                        >
-                          <i
-                            className="fa fa-thumbs-o-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {/* <!--END SAVE--> */}
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="all-pro-box user-avil-onli"
-                        data-useravil="avilyes"
-                        data-aviltxt="Available online"
-                      >
-                        {/* <!--PROFILE IMAGE--> */}
-                        <div className="pro-img">
-                          <a href="profile-details.html">
-                            <img src="images/profiles/11.jpg" alt="" />
-                          </a>
-                          <div
-                            className="pro-ave"
-                            title="User currently available"
-                          >
-                            <span className="pro-ave-yes"></span>
-                          </div>
-                          <div className="pro-avl-status">
-                            <h5>Available Online</h5>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE IMAGE--> */}
-
-                        {/* <!--PROFILE NAME--> */}
-                        <div className="pro-detail">
-                          <h4>
-                            <a href="profile-details.html">Angelina Jolie</a>
-                          </h4>
-                          <div className="pro-bio">
-                            <span>B.Sc</span>
-                            <span>IT Profession</span>
-                            <span>29 Yeard old</span>
-                            <span>Height: 155Cms</span>
-                          </div>
-                          <div className="links">
-                            <span className="cta-chat">Chat now</span>
-                            <a href="#!">WhatsApp</a>
-                            <a
-                              href="#!"
-                              className="cta cta-sendint"
-                              data-bs-toggle="modal"
-                              data-bs-target="#sendInter"
+                            <div
+                              className="pro-ave"
+                              title="User currently available"
                             >
-                              Send interest
-                            </a>
-                            <a href="profile-details.html">More detaiils</a>
+                              <span className="pro-ave-yes"></span>
+                            </div>
+                            <div className="pro-avl-status">
+                              <h5>Available Online</h5>
+                            </div>
                           </div>
-                        </div>
-                        {/* <!--END PROFILE NAME--> */}
+                          {/* <!--END PROFILE IMAGE--> */}
 
-                        {/* <!--END USER AND GET QUOTE--> */}
-                        {/* <!--SAVE--> */}
-                        <span
-                          className="enq-sav"
-                          data-toggle="tooltip"
-                          title="Click to save this provile."
-                        >
-                          <i
-                            className="fa fa-thumbs-o-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {/* <!--END SAVE--> */}
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="all-pro-box"
-                        data-useravil="avilno"
-                        data-aviltxt="Offline"
-                      >
-                        {/* <!--PROFILE IMAGE--> */}
-                        <div className="pro-img">
-                          <a href="profile-details.html">
-                            <img src="images/profiles/12.jpg" alt="" />
-                          </a>
-                          <div
-                            className="pro-ave"
-                            title="User currently available"
+                          {/* <!--PROFILE NAME--> */}
+                          <div className="pro-detail">
+                            <h4>
+                              <Link href={`/profile-details/${elem._id}`}>
+                                {elem.name}
+                              </Link>
+                            </h4>
+                            <div className="pro-bio">
+                              <span className="text-white">{elem.personalInfo[0].degree}</span>
+                              <span className="text-white">{elem.personalInfo[0].profession}</span>
+                              <span className="text-white">{`${elem.personalInfo[0].infoAge} Years old`}</span>
+                              <span className="text-white">{`Height: ${elem.personalInfo[0].infoHeight}Cms`}</span>
+                            </div>
+
+                            <div className="links">
+                              <span className="cta-chat">Chat now</span>
+                              <a href="#!">WhatsApp</a>
+                              <a
+                                href="#!"
+                                className="cta cta-sendint"
+                                data-bs-toggle="modal"
+                                data-bs-target="#sendInter"
+                              >
+                                Send interest
+                              </a>
+                              <Link href={`/profile-details/${elem._id}`}>
+                                More detaiils
+                              </Link>
+                            </div>
+                          </div>
+                          {/* <!--END PROFILE NAME--> */}
+                          {/* <!--SAVE--> */}
+                          <span
+                            className="enq-sav"
+                            data-toggle="tooltip"
+                            title="Click to save this provile."
                           >
-                            <span className="pro-ave-yes"></span>
-                          </div>
-                          <div className="pro-avl-status">
-                            <h5>Last login 10 mins ago</h5>
-                            {/* <span className="marqu">
-                              Last login 10 mins ago | I'll be available on
-                              10:00 AM
-                            </span> */}
-                          </div>
+                            <i
+                              className="fa fa-thumbs-o-up"
+                              aria-hidden="true"
+                            ></i>
+                          </span>
+                          {/* <!--END SAVE--> */}
                         </div>
-                        {/* <!--END PROFILE IMAGE--> */}
-
-                        {/* <!--PROFILE NAME--> */}
-                        <div className="pro-detail">
-                          <h4>
-                            <a href="profile-details.html">Olivia mia</a>
-                          </h4>
-                          <div className="pro-bio">
-                            <span>B.Sc</span>
-                            <span>IT Profession</span>
-                            <span>29 Yeard old</span>
-                            <span>Height: 155Cms</span>
-                          </div>
-                          <div className="links">
-                            <span className="cta-chat">Chat now</span>
-                            <a href="#!">WhatsApp</a>
-                            <a
-                              href="#!"
-                              className="cta cta-sendint"
-                              data-bs-toggle="modal"
-                              data-bs-target="#sendInter"
-                            >
-                              Send interest
-                            </a>
-                            <a href="profile-details.html">More detaiils</a>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE NAME--> */}
-                        {/* <!--SAVE--> */}
-                        <span
-                          className="enq-sav"
-                          data-toggle="tooltip"
-                          title="Click to save this provile."
-                        >
-                          <i
-                            className="fa fa-thumbs-o-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {/* <!--END SAVE--> */}
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="all-pro-box"
-                        data-useravil="avilno"
-                        data-aviltxt="Offline"
-                      >
-                        {/* <!--PROFILE IMAGE--> */}
-                        <div className="pro-img">
-                          <a href="profile-details.html">
-                            <img src="images/profiles/13.jpg" alt="" />
-                          </a>
-                          <div
-                            className="pro-ave"
-                            title="User currently available"
-                          >
-                            <span className="pro-ave-yes"></span>
-                          </div>
-                          <div className="pro-avl-status">
-                            <h5>Last login 10 mins ago</h5>
-                            {/* <span className="marqu">
-                              Last login 10 mins ago | I'll be available on
-                              10:00 AM
-                            </span> */}
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE IMAGE--> */}
-
-                        {/* <!--PROFILE NAME--> */}
-                        <div className="pro-detail">
-                          <h4>
-                            <a href="profile-details.html">Jennifer</a>
-                          </h4>
-                          <div className="pro-bio">
-                            <span>B.Sc</span>
-                            <span>IT Profession</span>
-                            <span>29 Yeard old</span>
-                            <span>Height: 155Cms</span>
-                          </div>
-                          <div className="links">
-                            <span className="cta-chat">Chat now</span>
-                            <a href="#!">WhatsApp</a>
-                            <a
-                              href="#!"
-                              className="cta cta-sendint"
-                              data-bs-toggle="modal"
-                              data-bs-target="#sendInter"
-                            >
-                              Send interest
-                            </a>
-                            <a href="profile-details.html">More detaiils</a>
-                          </div>
-                        </div>
-                        {/* <!--END PROFILE NAME--> */}
-                        {/* <!--SAVE--> */}
-                        <span
-                          className="enq-sav"
-                          data-toggle="tooltip"
-                          title="Click to save this provile."
-                        >
-                          <i
-                            className="fa fa-thumbs-o-up"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                        {/* <!--END SAVE--> */}
-                      </div>
-                    </li>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

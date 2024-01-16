@@ -27,15 +27,14 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user)
     // Perform validation if needed before making the request
 
-    axios.post('/api/auth/register/', user)
+    axios.post('/api/auth/add-users/', user)
       .then(response => {
         toast.success('Sign Up Successful')
-        // setTimeout(() => {
-        //   router.push('/login')
-        // }, 3000);
+        setTimeout(() => {
+          router.push('/login')
+        }, 3000);
         console.log(response.data);
       })
       .catch(error => {

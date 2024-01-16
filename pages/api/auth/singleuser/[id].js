@@ -6,11 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 
 // GET method handler
-export default async function GET(req,res) {
-  const userId = req.query.id
+export default async function GET(req, res) {
+  const userId = req.query.id;
   try {
-
-
     const userData = await User.findOne({
       _id: userId,
     });
@@ -54,38 +52,68 @@ export default async function GET(req,res) {
 // }
 
 // PUT/PATCH method handler
-// export async function PUT(req, res) {
-//   const userId = req.query.id;
-//   const { name, email, phone } = req.body;
+export async function PUT(req, res) {
+  const userId = req.query.id;
+  const {
+    name,
+    email,
+    password,
 
-//   try {
-//     const updatedData = await User.updateOne(
-//       { _id: userId },
-//       {
-//         $set: {
-//           name,
-//           email,
-//           phone,
-//         },
-//       }
-//     );
+    interests,
+    city,
+    age,
+    height,
+    job,
+    about,
+    images,
+    contactInfo,
+    personalInfo,
+    hobbies,
 
-//     const validationError = updatedData.validateSync();
-//     if (validationError) {
-//       return res.status(400).json({ message: validationError.message });
-//     }
+    phone,
+  } = req.body;
 
-//     if (updatedData.nModified > 0) {
-//       return res.status(200).json({
-//         data: updatedData,
-//         message: "User Updated Successfully",
-//       });
-//     } else {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// }
+  try {
+    const updatedData = await User.updateOne(
+      { _id: userId },
+      {
+        $set: {
+          name,
+          email,
+          password,
+
+          interests,
+          city,
+          age,
+          height,
+          job,
+          about,
+          images,
+          contactInfo,
+          personalInfo,
+          hobbies,
+
+          phone,
+        },
+      }
+    );
+
+    const validationError = updatedData.validateSync();
+    if (validationError) {
+      return res.status(400).json({ message: validationError.message });
+    }
+
+    if (updatedData.nModified > 0) {
+      return res.status(200).json({
+        data: updatedData,
+        message: "User Updated Successfully",
+      });
+    } else {
+      return res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+}

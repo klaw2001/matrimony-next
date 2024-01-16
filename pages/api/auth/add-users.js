@@ -5,24 +5,37 @@ import { NextRequest, NextResponse } from 'next/server';
 
 connectDB()
 // POST route (Create a new user inside the DB)
-export async function POST(request) {
+export default async function POST(req,res) {
   try {
     // grab data from body
-    const reqBody = await request.json();
 
     // destructure the incoming variables
-    const { name, email, password , phone } = reqBody;
+    const {
+      name,
+      email,
+      password,
+  
+      interests,
+      city,
+      age,
+      height,
+      job,
+      about,
+      images,
+      contactInfo,
+      personalInfo,
+      hobbies,
+    } = req.body;
 
     // REMOVE IN PRODUCTION
 
     const user = await User.findOne({ email });
 
     if (user) {
-      return NextResponse.json(
+      return res.status(400).json(
         {
           error: 'This user already exists',
         },
-        { status: 400 }
       );
     }
 
@@ -34,19 +47,27 @@ export async function POST(request) {
     const newUser = new User({
       name,
       email,
-      phone,
-      password: hashedPassword,
+      password : hashedPassword,
+      interests,
+      city,
+      age,
+      height,
+      job,
+      about,
+      images,
+      contactInfo,
+      personalInfo,
+      hobbies,
     });
 
-    // save it inside the DB
-    const savedUser = await newUser.save();
+     newUser.save();
 
-    return NextResponse.json({
+    return res.status(201).json({
       message: 'User created!',
       success: true,
-      savedUser,
+      newUser,
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return res.status(500).json({ error: error.message });
   }
 }

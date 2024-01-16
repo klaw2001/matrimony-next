@@ -1,10 +1,12 @@
 "use client"
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const router = useRouter()
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -24,11 +26,13 @@ const Login = () => {
     
         try {
           const response = await axios.post('/api/auth/login', credentials);
-          console.log(response.data);
           toast.success('Login Successful')
           localStorage.setItem('token' , response.data.token)
           localStorage.setItem('loggedinUser' , response.data.user._id)
           localStorage.setItem('userName', response.data.user.name)
+          setTimeout(() => {
+            router.push('/')
+          }, 2000);
         } catch (error) {
             toast.error('Something Went Wrong')
           console.error(error); // Handle login error

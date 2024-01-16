@@ -1,7 +1,40 @@
+"use client";
 import Layout from "@/components/layouts/Layout";
-import React from "react";
+import { getSingleUser } from "@/helpers/getUsers";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 
 const UserEditProfile = () => {
+  const [user, setUser] = useState({});
+
+  const [loading, setLoading] = useState(true);
+  const id = localStorage.getItem("loggedinUser");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await getSingleUser(id);
+        setUser(userData);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+  const personal_info = user.personalInfo || [];
+
   return (
     <Layout>
       {/* <!-- REGISTER --> */}
@@ -26,6 +59,7 @@ const UserEditProfile = () => {
                             className="form-control"
                             placeholder="Enter your full name"
                             name="name"
+                            value={user.name}
                           />
                         </div>
                         <div className="form-group">
@@ -36,6 +70,7 @@ const UserEditProfile = () => {
                             id="email"
                             placeholder="Enter email"
                             name="email"
+                            value={user.email}
                           />
                         </div>
                         <div className="form-group">
@@ -46,6 +81,7 @@ const UserEditProfile = () => {
                             id="phone"
                             placeholder="Enter phone number"
                             name="phone"
+                            value={user.phone}
                           />
                         </div>
                         <div className="form-group">
@@ -56,6 +92,7 @@ const UserEditProfile = () => {
                             id="pwd"
                             placeholder="Enter password"
                             name="pswd"
+                            value={user.password}
                           />
                         </div>
                       </div>
@@ -93,11 +130,22 @@ const UserEditProfile = () => {
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Date of birth:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="dob"
+                              value={personal_info && personal_info?.dob}
+                              disabled
+                            />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">Age:</label>
-                            <input type="number" className="form-control" />
+                            <input
+                              type="number"
+                              className="form-control"
+                              name="infoAge"
+                              value={personal_info?.infoAge}
+                            />
                           </div>
                         </div>
                         <div className="row">
@@ -221,24 +269,13 @@ const UserEditProfile = () => {
                         </div>
                         <div className="chosenini">
                           <div className="form-group">
-                            <select
-                              className="chosen-select"
-                              data-placeholder="Select your Hobbies"
-                              multiple
-                            >
-                              <option></option>
-                              <option>Modelling </option>
-                              <option>Watching </option>
-                              <option>movies </option>
-                              <option>Playing </option>
-                              <option>volleyball</option>
-                              <option>Hangout with family </option>
-                              <option>Adventure travel </option>
-                              <option>Books reading </option>
-                              <option>Music </option>
-                              <option>Cooking </option>
-                              <option>Yoga</option>
-                            </select>
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={user.hobbies}
+                              name="hobbies"
+                              placeholder="Enter Your Hobbies Seperated By Commas"
+                            />
                           </div>
                         </div>
                       </div>

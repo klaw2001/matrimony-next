@@ -7,26 +7,18 @@ import { NextRequest, NextResponse } from 'next/server';
 connectDB()
 
 // POST route (Login)
-export async function POST(request) {
+export default async function POST(req,res) {
   try {
-    // grab data from body
-    const reqBody = await request.json();
 
-    // destructure the incoming variables
-    const { email, password } = reqBody;
+    const { email, password } = req.body;
 
-    // REMOVE IN PRODUCTION
-    console.log(reqBody);
-
-    // check if the user exists
     const user = await User.findOne({ email });
 
     if (!user) {
-      return NextResponse.json(
+      return res.status(400).json(
         {
           error: 'User not found',
-        },
-        { status: 404 }
+        }
       );
     }
 
@@ -34,11 +26,10 @@ export async function POST(request) {
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return NextResponse.json(
+      return res.status(400).json(
         {
           error: 'Invalid password',
-        },
-        { status: 401 }
+        }
       );
     }
 
@@ -47,18 +38,18 @@ export async function POST(request) {
         id: user._id,
         email: user.email,
       },
-      "mysecretkey",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
 
-    return NextResponse.json({
+    return res.status(200).json({
       message: 'Login successful!',
       success: true,
       token,
       user: user
     });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return res.status(500).json({ error: error.message });
   }
 }
