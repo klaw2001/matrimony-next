@@ -151,7 +151,7 @@ const UserProfile = () => {
                           <div className="foll-set-tit fol-pro-abo-ico">
                             <h4>Account</h4>
                             <Link
-                              href="/edit-profile"
+                              href={`/edit-profile/${id}`}
                               className="sett-edit-btn sett-acc-edit-eve"
                             >
                               <i className="fa fa-edit" aria-hidden="true"></i>{" "}

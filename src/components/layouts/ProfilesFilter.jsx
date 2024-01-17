@@ -5,14 +5,67 @@ import React, { useEffect, useState } from "react";
 
 const ProfilesFilter = () => {
   const [users, setUsers] = useState([]);
+
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [genderFilter, setGenderFilter] = useState("");
+  const [ageFilter, setAgeFilter] = useState("");
+  const [religionFilter, setReligionFilter] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [availabilityFilter, setAvailabilityFilter] = useState("");
+  const [profileFilter, setProfileFilter] = useState("");
+
   useEffect(() => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
         setUsers(res.data.data);
+        setFilteredUsers(res.data.data); // Set filteredUsers to all users by default
+
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const filterUsers = () => {
+    let newFilteredUsers = users.filter((user) => {
+      // Implement your filtering logic here
+      let isGenderMatch = !genderFilter || user.gender === genderFilter;
+      let isAgeMatch = !ageFilter || user.age.toString() === ageFilter;
+      let isReligionMatch = !religionFilter || user.religion === religionFilter;
+      let isLocationMatch = !locationFilter || user.city === locationFilter;
+      let isAvailabilityMatch =
+        !availabilityFilter ||
+        (availabilityFilter === "available" && user.isVerfied) ||
+        (availabilityFilter === "offline" && !user.isVerfied);
+      let isProfileMatch =
+        !profileFilter ||
+        (profileFilter === "all" && true) ||
+        (profileFilter === "premium" && user.isAdmin) ||
+        (profileFilter === "free" && !user.isAdmin);
+
+      return (
+        isGenderMatch &&
+        isAgeMatch &&
+        isReligionMatch &&
+        isLocationMatch &&
+        isAvailabilityMatch &&
+        isProfileMatch
+      );
+    });
+
+    setFilteredUsers(newFilteredUsers.length > 0 ? newFilteredUsers : users);
+  };
+
+  useEffect(() => {
+    filterUsers();
+  }, [
+    genderFilter,
+    ageFilter,
+    religionFilter,
+    locationFilter,
+    availabilityFilter,
+    profileFilter,
+    users
+  ]);
 
   return (
     <>
@@ -30,10 +83,14 @@ const ProfilesFilter = () => {
                     looking for
                   </h4>
                   <div className="form-group">
-                    <select className="chosen-select">
+                    <select
+                      className="chosen-select"
+                      onChange={(e) => setGenderFilter(e.target.value)}
+                      value={genderFilter}
+                    >
                       <option value="">I am looking for</option>
-                      <option value="Men">Men</option>
-                      <option value="Women">Women</option>
+                      <option value="male">Men</option>
+                      <option value="female">Women</option>
                     </select>
                   </div>
                 </div>
@@ -200,7 +257,7 @@ const ProfilesFilter = () => {
               <div className="col-md-9">
                 <div className="short-all">
                   <div className="short-lhs">
-                    Showing <b>{users.length}</b> profiles
+                    Showing <b>{filteredUsers.length}</b> profiles
                   </div>
                   <div className="short-rhs">
                     <ul>
@@ -229,7 +286,7 @@ const ProfilesFilter = () => {
                 </div>
                 <div className="all-list-sh">
                   <ul>
-                    {users.map((elem) => (
+                    {filteredUsers.map((elem) => (
                       <li key={elem._id}>
                         <div
                           className="all-pro-box user-avil-onli"
@@ -261,10 +318,12 @@ const ProfilesFilter = () => {
                               </Link>
                             </h4>
                             <div className="pro-bio">
-                              <span className="text-white">{elem.personalInfo[0].degree}</span>
-                              <span className="text-white">{elem.personalInfo[0].profession}</span>
-                              <span className="text-white">{`${elem.personalInfo[0].infoAge} Years old`}</span>
-                              <span className="text-white">{`Height: ${elem.personalInfo[0].infoHeight}Cms`}</span>
+                              <span className="text-white">{elem.degree}</span>
+                              <span className="text-white">
+                                {elem.position}
+                              </span>
+                              <span className="text-white">{`${elem.age} Years old`}</span>
+                              <span className="text-white">{`Height: ${elem.height} Cms`}</span>
                             </div>
 
                             <div className="links">

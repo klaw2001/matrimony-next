@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please provide a password"],
+  },
+  images: {
+    type: String,
+    default: null,
+  },
+  about: {
+    type: String,
+    default: null,
   },
   isVerfied: {
     type: Boolean,
@@ -123,6 +131,19 @@ const userSchema = new mongoose.Schema({
     default: null,
   },
 
+  connectionRequests: [
+    {
+      requester: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+      },
+      status: {
+        type: String,
+        enum: ["pending", "accepted", "rejected"],
+        default: "pending",
+      },
+    },
+  ],
   forgotPasswordToken: String,
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,

@@ -2,15 +2,17 @@
 import Layout from "@/components/layouts/Layout";
 import { getSingleUser } from "@/helpers/getUsers";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
 const UserEditProfile = () => {
+  const router = useParams();
+  const { id } = router;
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
-  const id = localStorage.getItem("loggedinUser");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,18 +36,15 @@ const UserEditProfile = () => {
     });
   };
 
-  const personal_info = formData.personalInfo || [];
-  const contactInfo = formData.contactInfo || [{}]; // Ensure contactInfo is an array with at least one object
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`/api/auth/singleuser/${id}` ,formData)
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch((err)=>console.log(err))
+    axios
+      .put(`/api/auth/singleuser/${id}`, formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
     console.log("Form submitted:", formData);
-
   };
   return (
     <Layout>
@@ -95,7 +94,7 @@ const UserEditProfile = () => {
                             id="phone"
                             placeholder="Enter phone number"
                             name="phone"
-                            value={contactInfo[0]?.phone}
+                            value={formData?.phone}
                             onChange={handleInputChange}
                           />
                         </div>
@@ -161,7 +160,7 @@ const UserEditProfile = () => {
                               type="date"
                               className="form-control"
                               name="dob"
-                              value={personal_info[0]?.dob}
+                              value={formData?.dob}
                               onChange={handleInputChange}
                             />
                           </div>
@@ -170,8 +169,8 @@ const UserEditProfile = () => {
                             <input
                               type="number"
                               className="form-control"
-                              name="infoAge"
-                              value={personal_info[0]?.infoAge}
+                              name="age"
+                              value={formData?.age}
                             />
                           </div>
                         </div>
@@ -179,18 +178,20 @@ const UserEditProfile = () => {
                           <div className="col-md-6 form-group">
                             <label className="lb">Height:</label>
                             <input
-                              type="text"
+                              type="Number"
                               className="form-control"
-                              value={personal_info[0]?.infoHeight}
+                              name="height"
+                              value={formData?.height}
                               onChange={handleInputChange}
                             />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">Weight:</label>
                             <input
-                              type="text"
+                              type="Number"
+                              name="weight"
                               className="form-control"
-                              value={personal_info[0]?.weight}
+                              value={formData?.weight}
                               onChange={handleInputChange}
                             />
                           </div>
@@ -201,7 +202,8 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               className="form-control"
-                              value={personal_info[0]?.fathersName}
+                              name="fathersName"
+                              value={formData?.fathersName}
                               onChange={handleInputChange}
                             />
                           </div>
@@ -210,7 +212,8 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               className="form-control"
-                              value={personal_info[0]?.familyName}
+                              name="familyName"
+                              value={formData?.familyName}
                             />
                           </div>
                         </div>
@@ -219,7 +222,8 @@ const UserEditProfile = () => {
                           <input
                             type="text"
                             className="form-control"
-                            value={personal_info[0]?.religion}
+                            name="religion"
+                            value={formData?.religion}
                             onChange={handleInputChange}
                           />
                         </div>
@@ -235,12 +239,14 @@ const UserEditProfile = () => {
                           <label className="lb">Job type:</label>
                           <select
                             className="form-select chosen-select"
-                            data-placeholder="Select your Hobbies"
+                            typeof="text"
+                            name="jobType"
+                            value={formData?.jobType}
                           >
-                            <option>Business</option>
-                            <option>Employee</option>
-                            <option>Government</option>
-                            <option>Jobless</option>
+                            <option value='Business'>Business</option>
+                            <option value='Employee'>Employee</option>
+                            <option value='Government'>Government</option>
+                            <option value='Jobless'>Jobless</option>
                           </select>
                         </div>
                         <div className="form-group">
@@ -248,7 +254,8 @@ const UserEditProfile = () => {
                           <input
                             type="text"
                             className="form-control"
-                            value={personal_info[0]?.company}
+                            name="company"
+                            value={formData?.company}
                             onChange={handleInputChange}
                           />
                         </div>
@@ -258,7 +265,8 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               className="form-control"
-                              value={personal_info[0]?.salary}
+                              name="salary"
+                              value={formData?.salary}
                               onChange={handleInputChange}
                             />
                           </div>
@@ -267,7 +275,8 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               className="form-control"
-                              value={personal_info[0]?.position}
+                              name="position"
+                              value={formData?.position}
                               onChange={handleInputChange}
                             />
                           </div>
@@ -277,19 +286,32 @@ const UserEditProfile = () => {
                           <label className="lb">Degree:</label>
                           <input
                             type="text"
+                            name="degree"
                             className="form-control"
-                            value={personal_info[0]?.degree}
+                            value={formData?.degree}
                             onChange={handleInputChange}
                           />
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">School:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="school"
+                              value={formData?.school}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">College:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="college"
+                              className="form-control"
+                              value={formData?.college}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                       </div>
@@ -303,31 +325,72 @@ const UserEditProfile = () => {
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">WhatsApp:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="whatsapp"
+                              className="form-control"
+                              value={formData?.whatsapp}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">Facebook:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="facebook"
+
+                              className="form-control"
+                              value={formData?.facebook}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Instagram:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="instagram"
+
+                              className="form-control"
+                              value={formData?.instagram}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
-                            <label className="lb">X:</label>
-                            <input type="text" className="form-control" />
+                            <label className="lb">Twitter:</label>
+                            <input
+                              type="text"
+                              name="twitter"
+
+                              className="form-control"
+                              value={formData?.twitter}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Youtube:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="youtube"
+
+                              className="form-control"
+                              value={formData?.youtube}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">Linkedin:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              name="linkedin"
+
+                              className="form-control"
+                              value={formData?.linkedin}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                       </div>

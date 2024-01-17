@@ -1,7 +1,7 @@
 // Import necessary modules
 import connectDB from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
-
+import bcryptjs from "bcryptjs"
 connectDB();
 
 // Combined handler for GET, PUT, and DELETE requests
@@ -31,76 +31,79 @@ export default async function handler(req, res) {
     try {
       const userId = req.query.id;
 
+
       const {
         name,
         email,
         password,
-        interests,
+        phone,
+        images,
+        gender,
         city,
+        dob,
         age,
         height,
-        job,
+        weight,
+        fathersName,
+        familyName,
+        religion,
+        jobType,
+        company,
+        salary,
+        position,
+        degree,
+        school,
+        college,
+        whatsapp,
+        facebook,
+        instagram,
+        twitter,
+        youtube,
+        linkedin,
         about,
-        images,
-        contactInfo,
-        personalInfo,
         hobbies,
       } = req.body;
-
-      const updateFields = {
-        name,
-        email,
-        password,
-        interests,
-        city,
-        age,
-        height,
-        job,
-        about,
-        images,
-        hobbies,
-      };
-
-      // if (password) {
-      //   // Hash the password before updating
-      //   // Ensure to use a secure hashing algorithm
-      //   updateFields.password = hashPasswordFunction(password);
-      // }
-
-      if (contactInfo && contactInfo.length > 0) {
-        // If contactInfo is provided, update the array or add new entries
-        updateFields.contactInfo = contactInfo.map((contact) => ({
-          phone: contact.phone || null,
-          email: contact.email || null,
-          address: contact.address || null,
-        }));
-      }
-
-      if (personalInfo && personalInfo.length > 0) {
-        // If personalInfo is provided, update the array or add new entries
-        updateFields.personalInfo = personalInfo.map((info) => ({
-          infoName: info.infoName || null,
-          fathersName: info.fathersName || null,
-          familyName: info.familyName || null,
-          infoAge: info.infoAge || null,
-          dob: info.dob || null,
-          infoHeight: info.infoHeight || null,
-          weight: info.weight || null,
-          degree: info.degree || null,
-          religion: info.religion || null,
-          profession: info.profession || null,
-          company: info.company || null,
-          position: info.position || null,
-          salary: info.salary || null,
-        }));
-      }
+      const salt = await bcryptjs.genSalt(10);
+      const hashedPassword = await bcryptjs.hash(password, salt);
 
       const updatedData = await User.updateOne(
         { _id: userId },
-        { $set: updateFields }
+        {
+          $set: {
+            name,
+            email,
+            password : hashedPassword,
+            phone,
+            images,
+            gender,
+            city,
+            dob,
+            age,
+            height,
+            weight,
+            fathersName,
+            familyName,
+            religion,
+            jobType,
+            company,
+            salary,
+            position,
+            degree,
+            school,
+            college,
+            whatsapp,
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+            linkedin,
+            about,
+            hobbies,
+          },
+        }
       );
 
-      if (updatedData.nModified > 0) {
+      if (updatedData.acknowledged) {
         return res.status(200).json({
           data: updatedData,
           message: "User Updated Successfully",

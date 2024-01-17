@@ -1,11 +1,11 @@
-import connectDB from '@/dbConfig/dbConfig';
-import User from '@/models/userModel';
-import bcryptjs from 'bcryptjs';
-import { NextRequest, NextResponse } from 'next/server';
+import connectDB from "@/dbConfig/dbConfig";
+import User from "@/models/userModel";
+import bcryptjs from "bcryptjs";
+import { NextRequest, NextResponse } from "next/server";
 
-connectDB()
+connectDB();
 // POST route (Create a new user inside the DB)
-export default async function POST(req,res) {
+export default async function POST(req, res) {
   try {
     // grab data from body
 
@@ -14,16 +14,31 @@ export default async function POST(req,res) {
       name,
       email,
       password,
-  
-      interests,
+      phone,
+      images,
+      gender,
       city,
+      dob,
       age,
       height,
-      job,
+      weight,
+      fathersName,
+      familyName,
+      religion,
+      jobType,
+      company,
+      salary,
+      position,
+      degree,
+      school,
+      college,
+      whatsapp,
+      facebook,
+      instagram,
+      twitter,
+      youtube,
+      linkedin,
       about,
-      images,
-      contactInfo,
-      personalInfo,
       hobbies,
     } = req.body;
 
@@ -32,11 +47,9 @@ export default async function POST(req,res) {
     const user = await User.findOne({ email });
 
     if (user) {
-      return res.status(400).json(
-        {
-          error: 'This user already exists',
-        },
-      );
+      return res.status(400).json({
+        error: "This user already exists",
+      });
     }
 
     // hash password
@@ -47,23 +60,39 @@ export default async function POST(req,res) {
     const newUser = new User({
       name,
       email,
-      password : hashedPassword,
-      interests,
+      password: hashedPassword,
+      phone,
+      images,
+      gender,
       city,
+      dob,
       age,
       height,
-      job,
+      weight,
+      fathersName,
+      familyName,
+      religion,
+      jobType,
+      company,
+      salary,
+      position,
+      degree,
+      school,
+      college,
+      whatsapp,
+      facebook,
+      instagram,
+      twitter,
+      youtube,
+      linkedin,
       about,
-      images,
-      contactInfo,
-      personalInfo,
       hobbies,
     });
 
-     newUser.save();
+    newUser.save();
 
     return res.status(201).json({
-      message: 'User created!',
+      message: "User created!",
       success: true,
       newUser,
     });

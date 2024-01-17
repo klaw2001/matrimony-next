@@ -3,6 +3,7 @@ import PreLoader from "@/app/loading";
 import BootstrapSpinner from "@/components/BootstrapSpinner";
 import { getSingleUser } from "@/helpers/getUsers";
 import axios from "axios";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -65,11 +66,11 @@ const ProfileDetails = () => {
                       />
                     </div>
                     <div className="s3">
-                      <a href="#!" className="cta fol cta-chat">
+                      <a href="#!" className="cta fol cta-chat text-white">
                         Chat now
                       </a>
                       <span
-                        className="cta cta-sendint"
+                        className="cta cta-sendint text-white"
                         data-toggle="modal"
                         data-target="#sendInter"
                       >
@@ -125,7 +126,7 @@ const ProfileDetails = () => {
                             />
                             <span>
                               Height:{" "}
-                              <strong>{user.height || "Not provided"}</strong>
+                              <strong> {user.height || "Not provided"}</strong>
                             </span>
                           </div>
                         </li>
@@ -137,7 +138,7 @@ const ProfileDetails = () => {
                               alt=""
                             />
                             <span>
-                              Job: <strong>{user.job || "Not provided"}</strong>
+                              Job: <strong>{user.jobType || "Not provided"}</strong>
                             </span>
                           </div>
                         </li>
@@ -146,18 +147,7 @@ const ProfileDetails = () => {
                     {/* <!-- PROFILE ABOUT --> */}
                     <div className="pr-bio-c pr-bio-abo">
                       <h3>About</h3>
-                      <p>
-                        It is a long established fact that a reader will be
-                        distracted by the readable content of a page when
-                        looking at its layout. The point of using Lorem Ipsum is
-                        that it has a more-or-less normal distribution of
-                        letters, as opposed to using Content here, content here,
-                        making it look like readable English.{" "}
-                      </p>
-                      <p>
-                        Many desktop publishing packages and web page editors
-                        now use Lorem Ipsum as their default model text.
-                      </p>
+                      <p>{user.about}</p>
                     </div>
                     {/* <!-- END PROFILE ABOUT --> */}
                     {/* <!-- PROFILE ABOUT --> */}
@@ -222,88 +212,75 @@ const ProfileDetails = () => {
                     <div className="pr-bio-c pr-bio-conta">
                       <h3>Contact info</h3>
                       <ul>
-                        {user.contactInfo?.map((contact, index) => (
-                          <li key={index}>
-                            <span>
-                              <i
-                                className="fa fa-mobile"
-                                aria-hidden="true"
-                              ></i>
-                              <b>Phone:</b> {contact.phone}
-                            </span>
-                          </li>
-                        ))}
-                        {user.contactInfo?.map((contact, index) => (
-                          <li key={index}>
-                            <span>
-                              <i
-                                className="fa fa-envelope-o"
-                                aria-hidden="true"
-                              ></i>
-                              <b>Email:</b> {contact.email}
-                            </span>
-                          </li>
-                        ))}
-                        {user.contactInfo?.map((contact, index) => (
-                          <li key={index}>
-                            <span>
-                              <i
-                                className="fa fa-map-marker"
-                                aria-hidden="true"
-                              ></i>
-                              <b>Address:</b> {contact.address}
-                            </span>
-                          </li>
-                        ))}
+                        <li>
+                          <span>
+                            <i className="fa fa-mobile" aria-hidden="true"></i>
+                            <b>Phone:</b>{user.phone}
+                          </span>
+                        </li>
+                        <li>
+                          <span>
+                            <i
+                              className="fa fa-envelope-o"
+                              aria-hidden="true"
+                            ></i>
+                            <b>Email:</b>{user.email}
+                          </span>
+                        </li>
+                        {/* <li>
+                          <span>
+                            <i
+                              className="fa fa fa-map-marker"
+                              aria-hidden="true"
+                            ></i>
+                            <b>Address: </b>{user.address}
+                          </span>
+                        </li> */}
                       </ul>
                     </div>
                     {/* <!-- END PROFILE ABOUT --> */}
                     {/* <!-- PROFILE ABOUT --> */}
-                    <div className="pr-bio-c pr-bio-info">
+                    <div class="pr-bio-c pr-bio-info">
                       <h3>Personal information</h3>
-
                       <ul>
                         <li>
-                          <b>Name:</b> {personal_info[0]?.infoName}
+                          <b>Name:</b> {user.name}
                         </li>
                         <li>
-                          <b>Fatheres name:</b> {personal_info[0]?.fathersName}
+                          <b>Fatheres name:</b> {user.fathersName}
                         </li>
                         <li>
-                          <b>Family name:</b> {personal_info[0]?.familyName}
+                          <b>Family name:</b> {user.familyName}
                         </li>
                         <li>
-                          <b>Age:</b> {personal_info[0]?.infoAge}
+                          <b>Age:</b> {user.age}
                         </li>
                         <li>
-                          <b>Date of birth:</b>{" "}
-                          {user
-                            ? formatDateString(personal_info[0]?.dob)
-                            : "Not provided"}
+                          <b>Date of birth:</b>{user.age}
                         </li>
                         <li>
-                          <b>Height:</b> {personal_info[0]?.infoHeight} cms
+                          <b>Height:</b>{user.height} cm
                         </li>
                         <li>
-                          <b>Weight:</b> {personal_info[0]?.weight} kgs
+                          <b>Weight:</b>{user.weight} kg
                         </li>
                         <li>
-                          <b>Degree:</b> {personal_info[0]?.degree}
+                          <b>Degree:</b> {user.degree}
                         </li>
                         <li>
-                          <b>Religion:</b> {personal_info[0]?.religion}
+                          <b>Religion:</b> {user.religion}
                         </li>
                         <li>
-                          <b>Profession:</b> {personal_info[0]?.profession}
+                          <b>Job Type:</b> {user.jobType}
                         </li>
                         <li>
-                          <b>Company:</b> {personal_info[0]?.company}
+                          <b>Company:</b> {user.company}
                         </li>
                         <li>
-                          <b>Position:</b> {personal_info[0]?.position}
+                          <b>Position:</b> {user.position}
                         </li>
                         <li>
-                          <b>Salary:</b> ${personal_info[0]?.salary}
+                          <b>Salary:</b> {user.salary}
                         </li>
                       </ul>
                     </div>
@@ -331,7 +308,7 @@ const ProfileDetails = () => {
                       <h3>Social media</h3>
                       <ul>
                         <li>
-                          <a href="#!">
+                          <a href={user.facebook}>
                             <i
                               className="fa fa-facebook"
                               aria-hidden="true"
@@ -339,12 +316,12 @@ const ProfileDetails = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="#!">
+                          <a href={user.twitter}>
                             <i className="fa fa-twitter" aria-hidden="true"></i>
                           </a>
                         </li>
                         <li>
-                          <a href="#!">
+                          <a href={user.whatsapp}>
                             <i
                               className="fa fa-whatsapp"
                               aria-hidden="true"
@@ -352,7 +329,7 @@ const ProfileDetails = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="#!">
+                          <a href={user.linkedin}>
                             <i
                               className="fa fa-linkedin"
                               aria-hidden="true"
@@ -360,7 +337,7 @@ const ProfileDetails = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="#!">
+                          <a href={user.youtube}>
                             <i
                               className="fa fa-youtube-play"
                               aria-hidden="true"
@@ -368,7 +345,7 @@ const ProfileDetails = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="#!">
+                          <a href={user.instagram}>
                             <i
                               className="fa fa-instagram"
                               aria-hidden="true"
@@ -384,13 +361,13 @@ const ProfileDetails = () => {
                   <div className="rhs">
                     {/* <!-- HELP BOX --> */}
                     <div className="prof-rhs-help">
-                      <div className="inn">
-                        <h3>Tell us your Needs</h3>
-                        <p>
+                      <div className="inn text-white">
+                        <h3 className="text-white">Tell us your Needs</h3>
+                        <p className="text-white">
                           Tell us what kind of service or experts you are
                           looking.
                         </p>
-                        <a href="sign-up.html">Register for free</a>
+                        <Link href="/signup" className="text-white">Register for free</Link>
                       </div>
                     </div>
                     {/* <!-- END HELP BOX --> */}

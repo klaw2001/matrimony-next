@@ -1,19 +1,18 @@
-"use client"
+// "use client"
 import Layout from "@/components/layouts/Layout";
 import ProfilesFilter from "@/components/layouts/ProfilesFilter";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 const AllProfiles = () => {
-  const [user , setUsers] = useState([])
-  useEffect(()=>{
-    axios.get('/api/auth/all-users')
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch((err)=>console.log(err))
-  },[])
+  // const [user , setUsers] = useState([])
+  // useEffect(()=>{
+  //   axios.get('/api/auth/all-users')
+  //   .then((res)=>{
+  //     console.log(res)
+  //   })
+  //   .catch((err)=>console.log(err))
+  // },[])
 
   return (
     <Layout>
