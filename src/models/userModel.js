@@ -10,6 +10,11 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a email"],
     unique: true,
   },
+  phone: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   password: {
     type: String,
     required: [true, "Please provide a password"],
@@ -22,12 +27,18 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  interests: {
-    type: Array,
+  gender: {
+    type: String,
     default: null,
+    enum: ["male", "female"],
   },
   city: {
     type: String,
+    default: null,
+  },
+
+  dob: {
+    type: Date,
     default: null,
   },
   age: {
@@ -38,37 +49,8 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: null,
   },
-  job: {
-    type: String,
-    default: null,
-  },
-  about: {
-    type: String,
-    default: null,
-  },
-  gender: {
-    type: String,
-    default: null,
-    enum: ["male", "female"],
-  },
-  images: {
-    type: String,
-    default: null,
-  },
-  phone: {
+  weight: {
     type: Number,
-    default: null,
-  },
-  email: {
-    type: String,
-    default: null,
-  },
-  address: {
-    type: String,
-    default: null,
-  },
-  infoName: {
-    type: String,
     default: null,
   },
   fathersName: {
@@ -79,39 +61,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  infoAge: {
-    type: Number,
-    default: null,
-  },
-  dob: {
-    type: Date,
-    default: null,
-  },
-  infoHeight: {
-    type: Number,
-    default: null,
-  },
-  weight: {
-    type: Number,
-    default: null,
-  },
-  degree: {
-    type: String,
-    default: null,
-  },
   religion: {
     type: String,
     default: null,
   },
-  profession: {
+  jobType: {
     type: String,
     default: null,
+    enum: ["Business", "Employee", "Government", "Jobless"],
   },
   company: {
-    type: String,
-    default: null,
-  },
-  position: {
     type: String,
     default: null,
   },
@@ -119,10 +78,51 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  position: {
+    type: String,
+    default: null,
+  },
+  degree: {
+    type: String,
+    default: null,
+  },
+  school: {
+    type: String,
+    default: null,
+  },
+  college: {
+    type: String,
+    default: null,
+  },
+  whatsapp: {
+    type: String,
+    default: null,
+  },
+  facebook: {
+    type: String,
+    default: null,
+  },
+  instagram: {
+    type: String,
+    default: null,
+  },
+  twitter: {
+    type: String,
+    default: null,
+  },
+  youtube: {
+    type: String,
+    default: null,
+  },
+  linkedin: {
+    type: String,
+    default: null,
+  },
   hobbies: {
     type: String,
     default: null,
   },
+
   forgotPasswordToken: String,
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,

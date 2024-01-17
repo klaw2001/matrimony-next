@@ -1,13 +1,14 @@
 "use client";
 import Layout from "@/components/layouts/Layout";
 import { getSingleUser } from "@/helpers/getUsers";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
 const UserEditProfile = () => {
   const [user, setUser] = useState({});
-
+  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
   const id = localStorage.getItem("loggedinUser");
   useEffect(() => {
@@ -15,6 +16,7 @@ const UserEditProfile = () => {
       try {
         const userData = await getSingleUser(id);
         setUser(userData);
+        setFormData(userData);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -32,9 +34,19 @@ const UserEditProfile = () => {
     });
   };
 
+  const personal_info = formData.personalInfo || [];
+  const contactInfo = formData.contactInfo || [{}]; // Ensure contactInfo is an array with at least one object
 
-  const personal_info = user.personalInfo || [];
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put(`/api/auth/singleuser/${id}` ,formData)
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>console.log(err))
+    console.log("Form submitted:", formData);
 
+  };
   return (
     <Layout>
       {/* <!-- REGISTER --> */}
@@ -45,7 +57,7 @@ const UserEditProfile = () => {
               <div className="inn">
                 <div className="rhs">
                   <div className="form-login">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       {/* <!--PROFILE BIO--> */}
                       <div className="edit-pro-parti">
                         <div className="form-tit">
@@ -59,7 +71,8 @@ const UserEditProfile = () => {
                             className="form-control"
                             placeholder="Enter your full name"
                             name="name"
-                            value={user.name}
+                            value={formData.name}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="form-group">
@@ -70,7 +83,8 @@ const UserEditProfile = () => {
                             id="email"
                             placeholder="Enter email"
                             name="email"
-                            value={user.email}
+                            value={formData.email}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="form-group">
@@ -81,7 +95,8 @@ const UserEditProfile = () => {
                             id="phone"
                             placeholder="Enter phone number"
                             name="phone"
-                            value={user.phone}
+                            value={contactInfo[0]?.phone}
+                            onChange={handleInputChange}
                           />
                         </div>
                         <div className="form-group">
@@ -92,7 +107,8 @@ const UserEditProfile = () => {
                             id="pwd"
                             placeholder="Enter password"
                             name="pswd"
-                            value={user.password}
+                            value={formData.password}
+                            onChange={handleInputChange}
                           />
                         </div>
                       </div>
@@ -109,14 +125,17 @@ const UserEditProfile = () => {
                             <select
                               className="form-select chosen-select"
                               data-placeholder="Select your Gender"
+                              value={formData.gender}
+                              onChange={handleInputChange}
+                              name="gender"
                             >
-                              <option>Male</option>
-                              <option>Female</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
                             </select>
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">City:</label>
-                            <select
+                            {/* <select
                               className="form-select chosen-select"
                               data-placeholder="Select your City"
                             >
@@ -124,18 +143,26 @@ const UserEditProfile = () => {
                               <option>Newyork</option>
                               <option>London</option>
                               <option>Chicago</option>
-                            </select>
+                            </select> */}
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="city"
+                              placeholder="Enter Your City"
+                              value={formData.city}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Date of birth:</label>
                             <input
-                              type="text"
+                              type="date"
                               className="form-control"
                               name="dob"
-                              value={personal_info && personal_info?.dob}
-                              disabled
+                              value={personal_info[0]?.dob}
+                              onChange={handleInputChange}
                             />
                           </div>
                           <div className="col-md-6 form-group">
@@ -144,33 +171,57 @@ const UserEditProfile = () => {
                               type="number"
                               className="form-control"
                               name="infoAge"
-                              value={personal_info?.infoAge}
+                              value={personal_info[0]?.infoAge}
                             />
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Height:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.infoHeight}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
                             <label className="lb">Weight:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.weight}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Fathers name:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.fathersName}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
-                            <label className="lb">Mothers name:</label>
-                            <input type="text" className="form-control" />
+                            <label className="lb">Family name:</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.familyName}
+                            />
                           </div>
                         </div>
                         <div className="form-group">
-                          <label className="lb">Address:</label>
-                          <input type="text" className="form-control" />
+                          <label className="lb">Religion:</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={personal_info[0]?.religion}
+                            onChange={handleInputChange}
+                          />
                         </div>
                       </div>
                       {/* <!--END PROFILE BIO--> */}
@@ -194,22 +245,42 @@ const UserEditProfile = () => {
                         </div>
                         <div className="form-group">
                           <label className="lb">Company name:</label>
-                          <input type="text" className="form-control" />
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={personal_info[0]?.company}
+                            onChange={handleInputChange}
+                          />
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
                             <label className="lb">Salary:</label>
-                            <input type="text" className="form-control" />
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.salary}
+                              onChange={handleInputChange}
+                            />
                           </div>
                           <div className="col-md-6 form-group">
-                            <label className="lb">Job total experience:</label>
-                            <input type="text" className="form-control" />
+                            <label className="lb">Position:</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={personal_info[0]?.position}
+                              onChange={handleInputChange}
+                            />
                           </div>
                         </div>
 
                         <div className="form-group">
                           <label className="lb">Degree:</label>
-                          <input type="text" className="form-control" />
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={personal_info[0]?.degree}
+                            onChange={handleInputChange}
+                          />
                         </div>
                         <div className="row">
                           <div className="col-md-6 form-group">
@@ -272,7 +343,8 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               className="form-control"
-                              value={user.hobbies}
+                              value={formData.hobbies}
+                              onChange={handleInputChange}
                               name="hobbies"
                               placeholder="Enter Your Hobbies Seperated By Commas"
                             />
