@@ -2,6 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const ProfilesFilter = () => {
   const [users, setUsers] = useState([]);
@@ -13,14 +14,18 @@ const ProfilesFilter = () => {
   const [locationFilter, setLocationFilter] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("");
   const [profileFilter, setProfileFilter] = useState("");
+  const [show, setShow] = useState(false);
+  const userID = localStorage.getItem("loggedinUser");
+  const [sentRequests, setSentRequests] = useState([]);
+
 
   useEffect(() => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
-        setUsers(res.data.data);
-        setFilteredUsers(res.data.data); // Set filteredUsers to all users by default
-
+        const updatedUsers = res.data.data.filter((user) => user._id !== userID);
+        setUsers(updatedUsers);
+        setFilteredUsers(updatedUsers); // Set filteredUsers to all users by default
       })
       .catch((err) => console.log(err));
   }, []);
@@ -64,8 +69,27 @@ const ProfilesFilter = () => {
     locationFilter,
     availabilityFilter,
     profileFilter,
-    users
+    users,
   ]);
+
+  const sendRequestHandler = (requestedUserId) => {
+
+    if (sentRequests.includes(requestedUserId)) {
+      // If the request has already been sent, handle accordingly
+      toast.info("Request already sent to this user");
+      return;
+    }
+
+    axios
+      .post("/api/connections/sendRequest/", userID, requestedUserId)
+      .then((res) => {
+        setSentRequests((prevRequests) => [...prevRequests, requestedUserId]);
+        toast.success("Request Sent Successfully");
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      });
+  };
 
   return (
     <>
@@ -326,18 +350,17 @@ const ProfilesFilter = () => {
                               <span className="text-white">{`Height: ${elem.height} Cms`}</span>
                             </div>
 
-                            <div className="links">
-                              <span className="cta-chat">Chat now</span>
-                              <a href="#!">WhatsApp</a>
-                              <a
-                                href="#!"
-                                className="cta cta-sendint"
-                                data-bs-toggle="modal"
-                                data-bs-target="#sendInter"
+                            <div className="">
+                              <button
+                                className="py-1 px-3 rounded-pill bg-success text-white"
+                                onClick={() => sendRequestHandler(elem._id)}
                               >
-                                Send interest
-                              </a>
-                              <Link href={`/profile-details/${elem._id}`}>
+                                Send Interest
+                              </button>
+                              <Link
+                                href={`/profile-details/${elem._id}`}
+                                className="py-1 px-3 rounded-pill"
+                              >
                                 More detaiils
                               </Link>
                             </div>
