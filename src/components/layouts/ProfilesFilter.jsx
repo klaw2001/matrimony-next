@@ -15,15 +15,14 @@ const ProfilesFilter = () => {
   const [availabilityFilter, setAvailabilityFilter] = useState("");
   const [profileFilter, setProfileFilter] = useState("");
   const [show, setShow] = useState(false);
-  const userID = localStorage.getItem("loggedinUser");
-  const [sentRequests, setSentRequests] = useState([]);
+  const requesterId = localStorage.getItem("loggedinUser");
 
 
   useEffect(() => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
-        const updatedUsers = res.data.data.filter((user) => user._id !== userID);
+        const updatedUsers = res.data.data.filter((user) => user._id !== requesterId);
         setUsers(updatedUsers);
         setFilteredUsers(updatedUsers); // Set filteredUsers to all users by default
       })
@@ -72,21 +71,24 @@ const ProfilesFilter = () => {
     users,
   ]);
 
-  const sendRequestHandler = (requestedUserId) => {
 
-    if (sentRequests.includes(requestedUserId)) {
-      // If the request has already been sent, handle accordingly
-      toast.info("Request already sent to this user");
-      return;
-    }
-
-    axios
-      .post("/api/connections/sendRequest/", userID, requestedUserId)
+  const sendRequestHandler = async (requestedUserId) => {
+    console.log("Sending request to user:", requestedUserId);
+  
+    await axios
+      .post("/api/connections/sendRequest/", {
+        requesterId: requesterId,
+        requestedUserId: requestedUserId,
+      })
       .then((res) => {
-        setSentRequests((prevRequests) => [...prevRequests, requestedUserId]);
+        console.log(res.data);
+        if (res.data.success === true) {
+          console.log("Request sent successfully");
+        }
         toast.success("Request Sent Successfully");
       })
       .catch((err) => {
+        console.error("Error sending request:", err);
         toast.error("Something went wrong");
       });
   };

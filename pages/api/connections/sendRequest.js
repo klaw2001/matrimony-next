@@ -8,9 +8,9 @@ export default async function POST(req, res) {
 
   try {
     // Check if requesterId and requestedUserId are the same
-    if (requesterId === requestedUserId) {
-      return res.status(400).json({ message: "Cannot send connection request to yourself" });
-    }
+    // if (requesterId === requestedUserId) {
+    //   return res.status(400).json({ message: "Cannot send connection request to yourself" });
+    // }
 
     const existingRequest = await User.findOne({
       _id: requestedUserId,
