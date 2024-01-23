@@ -22,6 +22,10 @@ const ConnectionRequests = () => {
       .catch((err) => console.log(err));
   }, [userID]);
 
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   const connections = user;
   const filteredConnections = {
     newRequests: connections.filter(
@@ -47,86 +51,165 @@ const ConnectionRequests = () => {
 
       // Optionally, you can update the local state to reflect the changes
       // For example, you can remove the accepted request from the 'newRequests' array
-    //   setUser((prevUser) => ({
-    //     ...prevUser,
-    //     newRequests: prevUser?.newRequests?.filter((user) => user.requester._id !== id),
-    //   }));
+      //   setUser((prevUser) => ({
+      //     ...prevUser,
+      //     newRequests: prevUser?.newRequests?.filter((user) => user.requester._id !== id),
+      //   }));
     } catch (error) {
       console.error("Error accepting connection request:", error);
     }
   };
 
+  const finalUsers =
+    filteredConnections.newRequests.length > 0
+      ? filteredConnections.newRequests
+      : null;
+  const acceptedData =
+    filteredConnections.acceptRequests.length > 0
+      ? filteredConnections.acceptRequests
+      : null;
 
-  const finalUsers = filteredConnections.newRequests || null;
   return (
     <>
-      <div className="db-inte-main">
-        <Nav variant="tabs" activeKey={activeTab} onSelect={handleTabSelect}>
-          <Nav.Item>
-            <Nav.Link eventKey="newRequests">New requests</Nav.Link>
-          </Nav.Item>
-        </Nav>
+      
 
-        {finalUsers === null ? (
+        <div className="db-inte-main">
+          <ul className="nav nav-tabs">
+            <li className="nav-item">
+              <a
+                className={`nav-link ${
+                  activeTab === "newRequests" ? "active" : ""
+                }`}
+                onClick={() => handleTabSelect("newRequests")}
+              >
+                New requests
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={`nav-link ${
+                  activeTab === "acceptedRequests" ? "active" : ""
+                }`}
+                onClick={() => handleTabSelect("acceptedRequests")}
+              >
+                Accepted requests
+              </a>
+            </li>
+          </ul>
 
-            <div className="w-100 py-5 my-5" style={{height:"300px"}}>
-                <h4>No Requests</h4>
+          <div className="tab-content">
+            <div
+              className={`tab-pane ${
+                activeTab === "newRequests" ? "active" : ""
+              }`}
+            >
+              {finalUsers ? (
+                <ul>
+                  {finalUsers?.map((elem) => (
+                    <li key={elem.requester._id} className="d-flex mb-2">
+                      <div className="db-int-pro-1">
+                        {" "}
+                        <img src="/images/profiles/men5.jpg" alt="" />{" "}
+                      </div>
+                      <div className="db-int-pro-2">
+                        <h4>{elem.requester.name}</h4>
+                        <ol className="poi d-flex gap-3 p-0">
+                          <li>
+                            City: <strong>{elem.requester.city}</strong>
+                          </li>
+                          <li>
+                            Age: <strong>{elem.requester.age}</strong>
+                          </li>
+                          <li>
+                            Height: <strong>{elem.requester.height}</strong>
+                          </li>
+                          <li>
+                            Job: <strong>{elem.requester.position}</strong>
+                          </li>
+                        </ol>
+
+                        <Link
+                          href={`/profile-details/${elem.requester._id}`}
+                          className="cta-5"
+                        >
+                          View full profile
+                        </Link>
+                      </div>
+                      <div className="db-int-pro-3">
+                        <button
+                          type="button"
+                          className="btn btn-success btn-sm"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-danger btn-sm"
+                        >
+                          Denay
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <h2>No New Requests</h2>
+              )}
             </div>
-        ):(
-        <Tab.Content>
-          <Tab.Pane
-            eventKey="newRequests"
-            className={finalUsers ? "d-block opacity-100" : "d-none"}
-          >
-            <ul>
-              {finalUsers?.map((elem) => (
-                <li key={elem.requester._id} className="d-flex mb-2">
-                  <div className="db-int-pro-1">
-                    {" "}
-                    <img src="/images/profiles/men5.jpg" alt="" />{" "}
-                  </div>
-                  <div className="db-int-pro-2">
-                    <h4>{elem.requester.name}</h4>
-                    <ol className="poi d-flex gap-3 p-0">
-                      <li>
-                        City: <strong>{elem.requester.city}</strong>
-                      </li>
-                      <li>
-                        Age: <strong>{elem.requester.age}</strong>
-                      </li>
-                      <li>
-                        Height: <strong>{elem.requester.height}</strong>
-                      </li>
-                      <li>
-                        Job: <strong>{elem.requester.position}</strong>
-                      </li>
-                    </ol>
 
-                    <Link
-                      href={`/profile-details/${elem.requester._id}`}
-                      className="cta-5"
-                    >
-                      View full profile
-                    </Link>
-                  </div>
-                  <div className="db-int-pro-3">
-                    <button type="button" className="btn btn-success btn-sm" onClick={()=>acceptRequestHandler(elem.requester._id)}>
-                      Accept
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline-danger btn-sm"
-                    >
-                      Denay
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Tab.Pane>
-        </Tab.Content>
-        )}
-      </div>
+            <div
+              className={`tab-pane ${
+                activeTab === "acceptedRequests" ? "active" : ""
+              }`}
+            >
+              <ul>
+                {acceptedData?.map((elem) => (
+                  <li key={elem.requester._id} className="d-flex mb-2">
+                    <div className="db-int-pro-1">
+                      {" "}
+                      <img src="/images/profiles/men5.jpg" alt="" />{" "}
+                    </div>
+                    <div className="db-int-pro-2">
+                      <h4>{elem.requester.name}</h4>
+                      <ol className="poi d-flex gap-3 p-0">
+                        <li>
+                          City: <strong>{elem.requester.city}</strong>
+                        </li>
+                        <li>
+                          Age: <strong>{elem.requester.age}</strong>
+                        </li>
+                        <li>
+                          Height: <strong>{elem.requester.height}</strong>
+                        </li>
+                        <li>
+                          Job: <strong>{elem.requester.position}</strong>
+                        </li>
+                      </ol>
+
+                      <Link
+                        href={`/profile-details/${elem.requester._id}`}
+                        className="cta-5"
+                      >
+                        View full profile
+                      </Link>
+                    </div>
+                    <div className="db-int-pro-3">
+                      <button
+                        type="button"
+                        className="btn btn-success btn-sm">
+                        <Link href='/chat-list' className="text-white">
+
+                        Chat Now
+                        </Link>
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {/* </div> */}
     </>
   );
 };
