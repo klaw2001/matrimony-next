@@ -104,7 +104,7 @@ const Footer = () => {
               <div className="col-12 col-md-6 text-center text-md-end">
                 <p>
                   Developed By{" "}
-                  <a href="hrishikeshnetke.in" target="_blank">
+                  <a href="https://hrishikeshnetke.in" target="_blank">
                     Hrishikesh Netke
                   </a>
                 </p>

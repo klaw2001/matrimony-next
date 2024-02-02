@@ -6228,6 +6228,8 @@ span.mail::before {
 
 .chatbox .s2 .chat-lhs,
 .chatbox .s2 .chat-rhs {
+    width: fit-content;
+    display: inline-block;
     font-size: 13px;
     font-weight: 400;
     background: rgb(255, 255, 255);
