@@ -17,8 +17,11 @@ const ProfilesFilter = () => {
   const [availabilityFilter, setAvailabilityFilter] = useState("");
   const [profileFilter, setProfileFilter] = useState("");
   const [show, setShow] = useState(false);
-  const requesterId = localStorage.getItem("loggedinUser");
+  const [requesterId, SetrequesterId] = useState(null);
 
+  useEffect(() => {
+    SetrequesterId(localStorage.getItem("loggedinUser"));
+  } ,[]);
   useEffect(() => {
     axios
       .get("/api/auth/all-users")

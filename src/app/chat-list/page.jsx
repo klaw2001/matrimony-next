@@ -14,8 +14,11 @@ const ChatListPage = () => {
   const [messages, setMessages] = useState([]);
   const [conversations, setConversations] = useState([]);
   const [user, setUser] = useState([]);
+  const [userID, SetUserID] = useState(null);
 
-  const userID = localStorage.getItem("loggedinUser");
+  useEffect(() => {
+    SetUserID(localStorage.getItem("loggedinUser"));
+  } ,[]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -76,7 +79,6 @@ const ChatListPage = () => {
                       <div className="col-6 text-start">
                         <h2 className="db-tit">Chat list</h2>
                       </div>
-                     
                     </div>
                     <div className="db-pro-stat mt-2">
                       <div className="db-chat">
@@ -95,7 +97,12 @@ const ChatListPage = () => {
                           ))}
                         </ul>
                       </div>
-                      <RecentConnections sender={userID} users={user} conversations={conversations} setConversations={conversations}/>
+                      <RecentConnections
+                        sender={userID}
+                        users={user}
+                        conversations={conversations}
+                        setConversations={conversations}
+                      />
                       {/* <div className="db-chat">
                         <ul>
                           {user.map((elem) => (

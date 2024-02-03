@@ -12,8 +12,11 @@ const UserProfile = () => {
   const router = useRouter()
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [id, setid] = useState(null)
 
-  const id = localStorage.getItem("loggedinUser");
+  useEffect(() => {
+    setid(localStorage.getItem("loggedinUser"));
+  } ,[]);
   useEffect(() => {
     const fetchData = async () => {
       try {

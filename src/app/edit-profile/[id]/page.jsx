@@ -52,10 +52,10 @@ const UserEditProfile = () => {
   const imageUpload = async () => {
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", "ml_default");
-    data.append("cloud_name", "dua6sy5y5");
+    data.append("upload_preset", process.env.UPLOAD_PRESET);
+    data.append("cloud_name", process.env.CLOUD_NAME);
     const res = await fetch(
-      "	https://api.cloudinary.com/v1_1/dua6sy5y5/image/upload",
+      `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`,
       {
         method: "POST",
         body: data,

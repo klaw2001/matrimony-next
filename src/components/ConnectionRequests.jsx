@@ -7,11 +7,15 @@ import { Nav, Tab } from "react-bootstrap";
 const ConnectionRequests = () => {
   const [activeTab, setActiveTab] = useState("newRequests");
   const [user, setUser] = useState([]);
+  const [userID, SetUserID] = useState(null);
   const handleTabSelect = (selectedTab) => {
     setActiveTab(selectedTab);
   };
 
-  const userID = localStorage.getItem("loggedinUser");
+
+  useEffect(() => {
+    SetUserID(localStorage.getItem("loggedinUser"));
+  } ,[]);
   useEffect(() => {
     axios
       .get(`/api/connections/${userID}`)
