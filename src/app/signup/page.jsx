@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const SignUp = () => {
   const router = useRouter();
-  
+
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -27,19 +27,31 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!user.name || !user.email || !user.password || !user.phone) {
+      toast.error("Fields Are Incomplete");
+      return;
+    }
     // Perform validation if needed before making the request
 
-    axios.post('/api/auth/add-users/', user)
-      .then(response => {
-        toast.success('Sign Up Successful')
+    axios
+      .post("/api/auth/add-users/", user)
+      .then((response) => {
+        toast.success("Sign Up Successful");
         setTimeout(() => {
-          router.push('/login')
+          router.push("/login");
         }, 3000);
         console.log(response.data);
       })
-      .catch(error => {
-        toast.error("Something Went Wrong")
-        console.error(error);
+      .catch((error) => {
+        if (error.response && error.response.status === 400) {
+          // User already exists
+          toast.error("User already exists");
+        } else {
+          // Other error
+          toast.error("An error occurred");
+          console.error(error);
+        }
       });
   };
   return (
@@ -118,7 +130,7 @@ const SignUp = () => {
                         </div>
                         <div className="form-group form-check">
                           <label className="form-check-label">
-                          <input
+                            <input
                               className="form-check-input"
                               type="checkbox"
                               name="agree"
@@ -126,8 +138,8 @@ const SignUp = () => {
                               onChange={handleChange}
                             />
                             Creating an account means you’re okay with our
-                            <Link href="/">Terms of Service</Link>, Privacy Policy,
-                            and our default Notification Settings.
+                            <Link href="/">Terms of Service</Link>, Privacy
+                            Policy, and our default Notification Settings.
                           </label>
                         </div>
                         <button

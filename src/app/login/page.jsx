@@ -1,6 +1,7 @@
 "use client"
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -67,7 +68,7 @@ const Login = () => {
                       <h4>Start for free</h4>
                       <h1>Sign in to Matrimony</h1>
                       <p>
-                        Not a member? <a href="sign-up.html">Sign up now</a>
+                        Not a member? <Link href="/signup">Sign up now</Link>
                       </p>
                     </div>
                     <div className="form-login">
