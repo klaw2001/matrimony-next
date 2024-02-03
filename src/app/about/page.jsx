@@ -297,9 +297,10 @@ const About = () => {
                               <span>(50 Reviews)</span>
                             </div>
                             <div className="ab-test-conte">
-                              <p>
-                              My wife and I met through their portal; we're deeply grateful for the wonderful service they provide.
-                              </p>
+                            <p>
+  My wife and I met through their portal; we&rsquo;re deeply grateful for the wonderful service they provide.
+</p>
+
                             </div>
                           </div>
                           <div className="ab-rat-user">
