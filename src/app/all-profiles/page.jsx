@@ -1,10 +1,8 @@
 import Layout from "@/components/layouts/Layout";
 import ProfilesFilter from "@/components/layouts/ProfilesFilter";
-import axios from "axios";
 import Link from "next/link";
 
 const AllProfiles = () => {
-  
   return (
     <Layout>
       {/* <!-- SUB-HEADING --> */}
@@ -29,8 +27,7 @@ const AllProfiles = () => {
       </section>
       {/* <!-- END --> */}
 
-      <ProfilesFilter/>
-      
+      <ProfilesFilter />
     </Layout>
   );
 };
