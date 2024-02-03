@@ -47,10 +47,7 @@ const Conversation = ({
           <span>Tap To Chat</span>
         </div>
         <div className="db-chat-info">
-          <div className="time new">
-            <span className="timer">9:00 PM</span>
-            <span className="cont">3</span>
-          </div>
+          
         </div>
       </li>
 
@@ -59,7 +56,8 @@ const Conversation = ({
           showChatbox={showChatbox}
           closeBox={closeBox}
           friend={friend}
-          messages={messages}
+          messages={allMessages}
+          setAllMessages={setAllMessages}
           userID={userID}
           currentChat={currentChat}
         />

@@ -9,42 +9,39 @@ const Footer = () => {
           <div className="text-center">
             <div className="row foot-supp justify-content-center">
               <h2 className="text-white">
-                <span className="text-white">Free support:</span> +92 (8800) 68
-                - 8960 &nbsp;&nbsp;|&nbsp;&nbsp;{" "}
+                <span className="text-white">Free support:</span> +91 81046 66091 &nbsp;&nbsp;|&nbsp;&nbsp;{" "}
                 <span className="text-white">Email:</span>
-                info@example.com
+                info@quickmatch.com 
               </h2>
             </div>
           </div>
           <div className="row wed-foot-link wed-foot-link-1">
             <div className="col-md-4">
               <h4>Get In Touch</h4>
-              <p>Address: 3812 Lena Lane City Jackson Mississippi</p>
+              <p>Address: Sai raje cooperative housing society -G2 floor , Subhash nagar road , Near Marian school , Mauli nursing home . Kalyan 421004 .</p>
               <p>
-                Phone: <a href="tel:+917904462944">+92 (8800) 68 - 8960</a>
+                Phone: <a href="tel:+91 8104666091">+91 81046 66091</a>
               </p>
               <p>
-                Email: <a href="mailto:info@example.com">info@example.com</a>
+                Email: <a href="mailto:info@quickmatch.com">info@quickmatch.com</a>
               </p>
             </div>
             <div className="col-md-4">
               <h4>HELP &amp; SUPPORT</h4>
               <ul>
                 <li>
-                  <a href="about-us.html">About company</a>
+                  <Link href="/about">About company</Link>
                 </li>
                 <li>
-                  <a href="#!">Contact us</a>
+                  <Link href="/contact">Contact us</Link>
                 </li>
                 <li>
-                  <a href="#!">Feedback</a>
+                  <Link href="/gallery">Gallery</Link>
                 </li>
                 <li>
-                  <a href="about-us.html#faq">FAQs</a>
+                  <Link href="/faq">FAQs</Link>
                 </li>
-                <li>
-                  <a href="about-us.html#testimonials">Testimonials</a>
-                </li>
+                
               </ul>
             </div>
             <div className="col-md-4 fot-soc">
@@ -75,10 +72,10 @@ const Footer = () => {
           </div>
           <div className="row foot-count">
             <p>
-              Company name Site - Trusted by over thousands of Boys & Girls for
+             Quick Match Matrimony - Trusted by over thousands of Boys & Girls for
               successfull marriage.{" "}
               <Link
-                href="sign-up.html"
+                href="/signup"
                 className="btn btn-primary btn-sm text-white"
               >
                 Join us today !
@@ -104,8 +101,8 @@ const Footer = () => {
               <div className="col-12 col-md-6 text-center text-md-end">
                 <p>
                   Developed By{" "}
-                  <a href="https://hrishikeshnetke.in" target="_blank">
-                    Hrishikesh Netke
+                  <a href="https://reduxsolutions.com" target="_blank">
+                    Redux Solutions
                   </a>
                 </p>
               </div>

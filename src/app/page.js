@@ -6,8 +6,11 @@ import HomeSlickCarousel from "@/components/HomeSlickCarousel";
 import TimeLineSection from "@/components/layouts/TimeLineSection";
 import GalleryGrid from "@/components/layouts/GalleryGrid";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import HeroSearchLayout from "@/components/layouts/HeroSearchLayout";
 
 export default function Home() {
+  
   return (
     <Layout>
       {/* <!-- BANNER & SEARCH --> */}
@@ -30,65 +33,7 @@ export default function Home() {
                       <p>Most trusted Matrimony Brand in the World.</p>
                     </div>
                     <div className="ban-search chosenini">
-                      <form>
-                        <ul>
-                          <li className="sr-look">
-                            <div className="form-group">
-                              <label>I am looking for</label>
-                              <select className="chosen-select">
-                                <option value="">I am looking for</option>
-                                <option value="Men">Men</option>
-                                <option value="Women">Women</option>
-                              </select>
-                            </div>
-                          </li>
-                          <li className="sr-age">
-                            <div className="form-group">
-                              <label>Age</label>
-                              <select className="chosen-select">
-                                <option value="">Age</option>
-                                <option value="">18 to 30</option>
-                                <option value="">31 to 40</option>
-                                <option value="">41 to 50</option>
-                                <option value="">51 to 60</option>
-                                <option value="">61 to 70</option>
-                                <option value="">71 to 80</option>
-                                <option value="">81 to 90</option>
-                                <option value="">91 to 100</option>
-                              </select>
-                            </div>
-                          </li>
-                          <li className="sr-reli">
-                            <div className="form-group">
-                              <label>Religion</label>
-                              <select className="chosen-select">
-                                <option>Religion</option>
-                                <option>Any</option>
-                                <option>Hindu</option>
-                                <option>Muslim</option>
-                                <option>Jain</option>
-                                <option>Christian</option>
-                              </select>
-                            </div>
-                          </li>
-                          <li className="sr-cit">
-                            <div className="form-group">
-                              <label>City</label>
-                              <select className="chosen-select">
-                                <option>Location</option>
-                                <option>Any location</option>
-                                <option>Chennai</option>
-                                <option>New york</option>
-                                <option>Perth</option>
-                                <option>London</option>
-                              </select>
-                            </div>
-                          </li>
-                          <li className="sr-btn">
-                            <input type="submit" value="Search" />
-                          </li>
-                        </ul>
-                      </form>
+                      <HeroSearchLayout/>
                     </div>
                   </div>
                 </div>
@@ -146,12 +91,10 @@ export default function Home() {
                         <i className="cir-com cir-3"></i>
                       </div>
                       <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industries standard dummy text ever since the 1500s,{" "}
+                      I met my soulmate through Quick Matche matrimony , and we recently celebrated our first wedding anniversary! Their unique matching algorithm identified our compatibility perfectly.{" "}
                       </p>
-                      <h5>Jack danial</h5>
-                      <span>New york</span>
+                      <h5>Shubham (32)</h5>
+                      <span>Delhi</span>
                     </div>
                   </li>
                   <li>
@@ -163,12 +106,10 @@ export default function Home() {
                         <i className="cir-com cir-3"></i>
                       </div>
                       <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industries standard dummy text ever since the 1500s,{" "}
+                      After trying various dating apps without success, I stumbled upon Quick Matche Matrimony. Their emphasis on genuine connections resonated deeply, leading me to my ideal partner!{" "}
                       </p>
-                      <h5>Jack danial</h5>
-                      <span>New york</span>
+                      <h5>Sarah</h5>
+                      <span> Mumbai</span>
                     </div>
                   </li>
                   <li>
@@ -180,22 +121,16 @@ export default function Home() {
                         <i className="cir-com cir-3"></i>
                       </div>
                       <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industries standard dummy text ever since the 1500s,{" "}
+                      Their site has been instrumental in connecting like-minded individuals seeking long-term relationships. I highly recommend them!{" "}
                       </p>
-                      <h5>Jack danial</h5>
-                      <span>New york</span>
+                      <h5>Siddhartha (40)</h5>
+                      <span>Bangalore</span>
                     </div>
                   </li>
                   
                 </ul>
               </div>
-              <div className="cta-full-wid">
-                <a href="#!" className="cta-dark text-white">
-                  More customer reviews
-                </a>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -261,7 +196,7 @@ export default function Home() {
     {/* <!-- END --> */}
 
     {/* <!-- ABOUT START --> */}
-    <section>
+    <section>S
         <div className="ab-wel">
             <div className="container">
                 <div className="row">
@@ -277,27 +212,24 @@ export default function Home() {
                         <div className="ab-wel-rhs">
                             <div className="ab-wel-tit">
                                 <h2>Welcome to <em>Quick Match matrimony</em></h2>
-                                <p>Best wedding matrimony It is a long established fact that a reader will be distracted
-                                    by the readable content of a page when looking at its layout. </p>
+                                <p>Our one-stop shop for finding the ideal life partner! We are passionate about uniting individuals based on shared values, interests, and goals. Our journey began 6 years ago when we realized that many people were dissatisfied with traditional marriage methods.  </p>
                                 <p> <Link href="/plans">Click here to</Link> Start you matrimony service now.</p>
                             </div>
                             <div className="ab-wel-tit-1">
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in some form, by injected humour, or randomised words which
-                                    do not look even slightly believable.</p>
+                                <p>As a result, we established our own platform to provide users with modern tools and resources to find their perfect match conveniently. Our team consists of highly skilled professionals with extensive industry expertise and commitment to delivering exceptional customer service.</p>
                             </div>
                             <div className="ab-wel-tit-2">
                                 <ul>
                                     <li>
                                         <div>
                                             <i className="fa fa-phone" aria-hidden="true"></i>
-                                            <h4>Enquiry <em>+01 2242 3366</em></h4>
+                                            <h4>Enquiry <em>+91 81046 66091</em></h4>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                                            <h4>Get Support <em>info@example.com</em></h4>
+                                            <h4>Get Support <em>info@quickmatch.com</em></h4>
                                         </div>
                                     </li>
                                 </ul>

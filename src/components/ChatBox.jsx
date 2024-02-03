@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Message from "./Message";
 import axios from "axios";
+import { io } from "socket.io-client";
 
-const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat , currentFriend}) => {
+const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat , setAllMessages}) => {
   const [newMessage, setNewMessage] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,12 +16,12 @@ const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat
     try {
       const res = await axios.post("/api/chat/addMessage", message);
       setAllMessages([...messages, res.data.data]);
+      setNewMessage('')
     } catch (error) {
       console.log(error);
     }
   };
-//   const chatfriendId = friend?._id === currentChat?._id
-//   console.log(chatfriendId)
+   
 
 
   return (

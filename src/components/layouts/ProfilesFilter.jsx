@@ -17,12 +17,13 @@ const ProfilesFilter = () => {
   const [show, setShow] = useState(false);
   const requesterId = localStorage.getItem("loggedinUser");
 
-
   useEffect(() => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
-        const updatedUsers = res.data.data.filter((user) => user._id !== requesterId);
+        const updatedUsers = res.data.data.filter(
+          (user) => user._id !== requesterId
+        );
         setUsers(updatedUsers);
         setFilteredUsers(updatedUsers); // Set filteredUsers to all users by default
       })
@@ -71,27 +72,58 @@ const ProfilesFilter = () => {
     users,
   ]);
 
-
   const sendRequestHandler = async (requestedUserId) => {
-    console.log("Sending request to user:", requestedUserId);
-  
-    await axios
-      .post("/api/connections/sendRequest/", {
+    // Check if requesterId is already present
+    const isRequesterIdPresent = filteredUsers.some((user) =>
+      user.connectionRequests.some(
+        (request) => request.requester === requesterId
+      )
+    );
+
+    if (isRequesterIdPresent) {
+      console.error("Error: RequesterId already present in connectionRequests");
+      toast.info("You've already sent a request to this user");
+      return; // Do not proceed with sending the request
+    }
+
+    // If requesterId is not present, proceed with sending the request
+    try {
+      const res = await axios.post("/api/connections/sendRequest/", {
         requesterId: requesterId,
         requestedUserId: requestedUserId,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.success === true) {
-          console.log("Request sent successfully");
-        }
-        toast.success("Request Sent Successfully");
-      })
-      .catch((err) => {
-        console.error("Error sending request:", err);
-        toast.error("Something went wrong");
       });
+
+      console.log(res.data);
+
+      if (res.data.success === true) {
+        console.log("Request sent successfully");
+      }
+
+      toast.success("Request Sent Successfully");
+    } catch (err) {
+      console.error("Error sending request:", err);
+      toast.error("Something went wrong");
+    }
   };
+  const handleSortChange = (sortOption) => {
+    let sortedUsers = [...filteredUsers];
+  
+    switch (sortOption) {
+      case 'newest':
+        sortedUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        break;
+      case 'oldest':
+        sortedUsers.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        break;
+      default:
+        // Default to most relevant
+        break;
+    }
+  
+    setFilteredUsers(sortedUsers);
+  };
+
+  // console.log(filteredUser)
 
   return (
     <>
@@ -127,16 +159,16 @@ const ProfilesFilter = () => {
                     <i className="fa fa-clock-o" aria-hidden="true"></i>Age
                   </h4>
                   <div className="form-group">
-                    <select className="chosen-select">
+                    <select
+                      className="chosen-select"
+                      onChange={(e) => setAgeFilter(e.target.value)}
+                      value={ageFilter}
+                    >
                       <option value="">Select age</option>
-                      <option value="">18 to 30</option>
-                      <option value="">31 to 40</option>
-                      <option value="">41 to 50</option>
-                      <option value="">51 to 60</option>
-                      <option value="">61 to 70</option>
-                      <option value="">71 to 80</option>
-                      <option value="">81 to 90</option>
-                      <option value="">91 to 100</option>
+                      <option value="18-30">18 to 30</option>
+                      <option value="31-40">31 to 40</option>
+                      <option value="41-50">41 to 50</option>
+                      {/* Add similar options for other age ranges */}
                     </select>
                   </div>
                 </div>
@@ -148,31 +180,35 @@ const ProfilesFilter = () => {
                     Religion
                   </h4>
                   <div className="form-group">
-                    <select className="chosen-select">
-                      <option>Religion</option>
-                      <option>Any</option>
-                      <option>Hindu</option>
-                      <option>Muslim</option>
-                      <option>Jain</option>
-                      <option>Christian</option>
+                    <select
+                      className="chosen-select"
+                      onChange={(e) => setReligionFilter(e.target.value)}
+                      value={religionFilter}
+                    >
+                      <option value="">Select Religion</option>
+                      <option value="">Any</option>
+                      <option value="Hindu">Hindu</option>
+                      <option value="Muslim">Muslim</option>
+                      <option value="Jain">Jain</option>
+                      <option value="Christian">Christian</option>
                     </select>
                   </div>
                 </div>
                 {/* <!-- END --> */}
                 {/* <!-- START --> */}
-                <div className="filt-com lhs-cate">
-                  <h4>
-                    <i className="fa fa-map-marker" aria-hidden="true"></i>
-                    Location
-                  </h4>
-                  <div className="form-group">
-                    <select className="chosen-select" name="addjbmaincate">
-                      <option value="Chennai">Chennai</option>
-                      <option value="Bangaluru">Bangaluru</option>
-                      <option value="Delhi">Delhi</option>
-                    </select>
-                  </div>
+                <div className="form-group">
+                  <select
+                    className="chosen-select"
+                    onChange={(e) => setLocationFilter(e.target.value)}
+                    value={locationFilter}
+                  >
+                    <option value="">Select Location</option>
+                    <option value="Mumbai">Chennai</option>
+                    <option value="Pune">Bangaluru</option>
+                    <option value="Nashik">Delhi</option>
+                  </select>
                 </div>
+                {/* </div> */}
                 {/* <!-- END --> */}
                 {/* <!-- START --> */}
                 <div className="filt-com lhs-rati lhs-avail lhs-cate">
@@ -270,12 +306,12 @@ const ProfilesFilter = () => {
                 {/* <!-- END --> */}
                 {/* <!-- START --> */}
                 <div className="filt-com filt-send-query">
-                  <div className="send-query">
-                    <h5>What are you looking for?</h5>
-                    <p>We will help you to arrage the best match to you.</p>
-                    <a href="#!" data-toggle="modal" data-target="#expfrm">
+                  <div className="send-query text-white">
+                    <h5 className="text-white">What are you looking for?</h5>
+                    <p className="text-white">We will help you to arrage the best match to you.</p>
+                    <Link href="/contact" className="text-white">
                       Send your queries
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 {/* <!-- END --> */}
@@ -289,13 +325,16 @@ const ProfilesFilter = () => {
                     <ul>
                       <li>Sort by:</li>
                       <li>
-                        <div className="form-group">
-                          <select className="chosen-select">
-                            <option value="">Most relative</option>
-                            <option value="Men">Date listed: Newest</option>
-                            <option value="Men">Date listed: Oldest</option>
-                          </select>
-                        </div>
+                      <div className="form-group">
+  <select
+    className="chosen-select"
+    onChange={(e) => handleSortChange(e.target.value)}
+  >
+    <option value="">Most relevant</option>
+    <option value="newest">Date listed: Newest</option>
+    <option value="oldest">Date listed: Oldest</option>
+  </select>
+</div>
                       </li>
                       <li>
                         <div className="sort-grid sort-grid-1">
@@ -312,7 +351,7 @@ const ProfilesFilter = () => {
                 </div>
                 <div className="all-list-sh">
                   <ul>
-                    {filteredUsers.map((elem) => (
+                    {filteredUsers.map((elem, ind) => (
                       <li key={elem._id}>
                         <div
                           className="all-pro-box user-avil-onli"
@@ -359,6 +398,7 @@ const ProfilesFilter = () => {
                               >
                                 Send Interest
                               </button>
+
                               <Link
                                 href={`/profile-details/${elem._id}`}
                                 className="py-1 px-3 rounded-pill"

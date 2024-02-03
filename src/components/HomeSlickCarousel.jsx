@@ -104,7 +104,7 @@ const HomeSlickCarousel = () => {
                           />
                           <h4 className="text-white">Wedding</h4>
                           <p className="text-white">1200+ Profiles</p>
-                          <Link className="text-light" href="wedding-video.html">View more</Link>
+                          <Link className="text-light" href="/gallery">View more</Link>
                         </div>
                       </div>
                     </li>
@@ -122,7 +122,7 @@ const HomeSlickCarousel = () => {
                           />
                           <h4 className="text-white">All Services</h4>
                           <p className="text-white">1200+ Profiles</p>
-                          <Link className="text-light" href="services.html">View more</Link>
+                          <Link className="text-light" href="/services">View more</Link>
                         </div>
                       </div>
                     </li>
@@ -140,7 +140,7 @@ const HomeSlickCarousel = () => {
                           />
                           <h4 className="text-white">Join Now</h4>
                           <p className="text-white">Start for free</p>
-                          <Link className="text-light" href="plans.html">Get started</Link>
+                          <Link className="text-light" href="/plans">Get started</Link>
                         </div>
                       </div>
                     </li>
@@ -158,28 +158,11 @@ const HomeSlickCarousel = () => {
                           />
                           <h4 className="text-white">Photo gallery</h4>
                           <p className="text-white">1200+ Profiles</p>
-                          <Link className="text-light" href="photo-gallery.html">View more</Link>
+                          <Link className="text-light" href="/gallery">View more</Link>
                         </div>
                       </div>
                     </li>
-                    <li>
-                      <div
-                        className="wow fadeInUp hacc hacc4"
-                        data-wow-delay="0.4s"
-                      >
-                        <div className="con">
-                          <img
-                            src="/images/icon/cake.png"
-                            alt=""
-                            loading="lazy"
-                            className="mx-auto mb-3"
-                          />
-                          <h4 className="text-white">Blog & Articles</h4>
-                          <p className="text-white">Start for free</p>
-                          <Link className="text-light" href="blog.html">Get started</Link>
-                        </div>
-                      </div>
-                    </li>
+                   
                   </Slider>
                 </ul>
               </div>

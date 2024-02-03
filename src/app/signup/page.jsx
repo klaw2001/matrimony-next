@@ -2,12 +2,12 @@
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-  // const router = useRouter();
+  const router = useRouter();
   
   const [user, setUser] = useState({
     name: "",

@@ -32,7 +32,7 @@ const Header = () => {
                     <Link href="/about">About</Link>
                   </li>
                   <li>
-                    <a href="faq.html">FAQ</a>
+                    <Link href="/faq">FAQ</Link>
                   </li>
                   <li>
                     <Link href="/contact">Contact</Link>
@@ -42,15 +42,15 @@ const Header = () => {
               <div className="rhs">
                 <ul className="m-0">
                   <li>
-                    <a href="tel:+9704462944">
+                    <a href="tel:+91 8104666091">
                       <i className="fa fa-phone" aria-hidden="true"></i>
-                      &nbsp;+01 5312 5312
+                      &nbsp;+91 81046 66091
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:info@example.com">
+                    <a href="mailto:info@quickmatch.com">
                       <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                      &nbsp; help@company.com
+                      &nbsp; info@quickmatch.com
                     </a>
                   </li>
                   <li>
@@ -144,7 +144,7 @@ const Header = () => {
                                   <h5 className="text-white">
                                     All Services
                                     <span className="text-white">
-                                      Lorem ipsum dummy
+                                      Our Matrimonial Services
                                     </span>
                                   </h5>
                                   <span className="explor-cta text-white">
@@ -161,7 +161,7 @@ const Header = () => {
                                   <h5 className="text-white">
                                     Join Now{" "}
                                     <span className="text-white">
-                                      Lorem ipsum dummy
+                                      Our Membership Plans Coming Soon
                                     </span>
                                   </h5>
                                   <span className="explor-cta text-white">
@@ -181,35 +181,15 @@ const Header = () => {
                       </span>
                      
                     </li> */}
-                    <li className="smenu-pare">
-                      <span className="smenu">Top pages</span>
-                      <div className="smenu-open smenu-single">
-                        <ul>
-                          <li>
-                            <Link href="/all-profiles">All profiles</Link>
-                          </li>
-                          {/* <li>
-                          <a href="profile-details.html">Profile details</a>
-                        </li> */}
-
+                    
                           <li>
                             <Link href="/about">About</Link>
                           </li>
                           <li>
-                            <Link href="/contact">Contact</Link>
-                          </li>
-                          <li>
                             <Link href="/gallery">Photo gallery</Link>
                           </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li>
-                      <Link href="/plans">Plans</Link>
-                    </li>
-                    <li>
-                      <Link href="/signup">Register</Link>
-                    </li>
+                   
+                    
                     {id && (
 
                     <li className="smenu-pare">
@@ -235,6 +215,9 @@ const Header = () => {
                       </div>
                     </li>
                     )}
+                          <li>
+                            <Link href="/contact">Contact</Link>
+                          </li>
                   </ul>
                 </div>
 

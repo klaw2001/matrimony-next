@@ -1,6 +1,7 @@
 "use client";
 import ChatBox from "@/components/ChatBox";
 import Conversation from "@/components/Conversation";
+import RecentConnections from "@/components/RecentConnections";
 import Layout from "@/components/layouts/Layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -41,7 +42,7 @@ const ChatListPage = () => {
     if (currentChat?._id !== elem?._id) {
       setShowChatbox(true);
       setCurrentChat(elem);
-    } 
+    }
   };
 
   const closeBox = () => {
@@ -71,8 +72,13 @@ const ChatListPage = () => {
               <div className="col-12">
                 <div className="row">
                   <div className="col-md-12 db-sec-com">
-                    <h2 className="db-tit">Chat list</h2>
-                    <div className="db-pro-stat">
+                    <div className="row align-items-center">
+                      <div className="col-6 text-start">
+                        <h2 className="db-tit">Chat list</h2>
+                      </div>
+                     
+                    </div>
+                    <div className="db-pro-stat mt-2">
                       <div className="db-chat">
                         <ul>
                           {conversations.map((elem) => (
@@ -89,6 +95,23 @@ const ChatListPage = () => {
                           ))}
                         </ul>
                       </div>
+                      <RecentConnections sender={userID} users={user} conversations={conversations} setConversations={conversations}/>
+                      {/* <div className="db-chat">
+                        <ul>
+                          {user.map((elem) => (
+                            <Conversation
+                              key={elem._id}
+                              conversation={elem}
+                              userID={userID}
+                              handleClick={() => handleClick(elem)}
+                              showChatbox={showChatbox}
+                              closeBox={closeBox}
+                              messages={messages}
+                              currentChat={currentChat}
+                            />
+                          ))}
+                        </ul>
+                      </div> */}
                     </div>
                   </div>
                 </div>
