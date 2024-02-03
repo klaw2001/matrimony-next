@@ -6663,7 +6663,7 @@ span.mail::before {
 
 .cta-dark {
     background: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
+    color: white !important;
     font-size: 13px;
     font-weight: 600;
     padding: 13px 30px;

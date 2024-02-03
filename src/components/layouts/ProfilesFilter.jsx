@@ -1,10 +1,12 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ProfilesFilter = () => {
+  const router = useRouter()
   const [users, setUsers] = useState([]);
 
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -73,6 +75,15 @@ const ProfilesFilter = () => {
   ]);
 
   const sendRequestHandler = async (requestedUserId) => {
+    if(!requesterId){
+      toast.error('Register to send a Request')
+      setTimeout(() => {
+        router.push('/signup')
+      }, 3000);
+      return;
+    }
+
+
     // Check if requesterId is already present
     const isRequesterIdPresent = filteredUsers.some((user) =>
       user.connectionRequests.some(

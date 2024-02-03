@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const UserEditProfile = () => {
   const router = useParams();
@@ -12,6 +13,7 @@ const UserEditProfile = () => {
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,16 +38,47 @@ const UserEditProfile = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleDropSingleFile = (files) => {
+    const newFile = files[0];
+    if (newFile) {
+      setFile(
+        Object.assign(newFile, {
+          preview: URL.createObjectURL(newFile),
+        })
+      );
+    }
+  };
+
+  const imageUpload = async () => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "ml_default");
+    data.append("cloud_name", "dua6sy5y5");
+    const res = await fetch(
+      "	https://api.cloudinary.com/v1_1/dua6sy5y5/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const res2 = await res.json();
+    return res2.url;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    if (file) {
+      const image = await imageUpload();
+      formData.images = image;
+    }
+    await axios
       .put(`/api/auth/singleuser/${id}`, formData)
       .then((res) => {
-        console.log(res);
+        toast.success('Profile Updated Succesfully')
       })
       .catch((err) => console.log(err));
-    console.log("Form submitted:", formData);
   };
+
   return (
     <Layout>
       {/* <!-- REGISTER --> */}
@@ -109,6 +142,23 @@ const UserEditProfile = () => {
                             value={formData.password}
                             onChange={handleInputChange}
                           />
+                        </div>
+                        <div className="form-group">
+                          <label className="lb">Profile Picture:</label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) =>
+                              handleDropSingleFile(e.target.files)
+                            }
+                          />
+                          {file && (
+                            <img
+                              src={file.preview}
+                              alt="Preview"
+                              className="preview-image"
+                            />
+                          )}
                         </div>
                       </div>
                       {/* <!--END PROFILE BIO--> */}
@@ -243,10 +293,10 @@ const UserEditProfile = () => {
                             name="jobType"
                             value={formData?.jobType}
                           >
-                            <option value='Business'>Business</option>
-                            <option value='Employee'>Employee</option>
-                            <option value='Government'>Government</option>
-                            <option value='Jobless'>Jobless</option>
+                            <option value="Business">Business</option>
+                            <option value="Employee">Employee</option>
+                            <option value="Government">Government</option>
+                            <option value="Jobless">Jobless</option>
                           </select>
                         </div>
                         <div className="form-group">
@@ -338,7 +388,6 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               name="facebook"
-
                               className="form-control"
                               value={formData?.facebook}
                               onChange={handleInputChange}
@@ -351,7 +400,6 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               name="instagram"
-
                               className="form-control"
                               value={formData?.instagram}
                               onChange={handleInputChange}
@@ -362,7 +410,6 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               name="twitter"
-
                               className="form-control"
                               value={formData?.twitter}
                               onChange={handleInputChange}
@@ -375,7 +422,6 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               name="youtube"
-
                               className="form-control"
                               value={formData?.youtube}
                               onChange={handleInputChange}
@@ -386,7 +432,6 @@ const UserEditProfile = () => {
                             <input
                               type="text"
                               name="linkedin"
-
                               className="form-control"
                               value={formData?.linkedin}
                               onChange={handleInputChange}

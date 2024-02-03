@@ -1,11 +1,12 @@
 import Layout from "@/components/layouts/Layout";
+import PlansNot from "@/components/layouts/PlansNot";
 import React from "react";
 
 const UserPlan = () => {
   return (
     <Layout>
       {/* <!-- LOGIN --> */}
-      <section>
+      {/* <section>
         <div className="db">
           <div className="container">
             <div className="row">
@@ -115,7 +116,8 @@ const UserPlan = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <PlansNot/>
       {/* <!-- END --> */}
     </Layout>
   );

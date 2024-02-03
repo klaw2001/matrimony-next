@@ -1,11 +1,13 @@
 import Layout from '@/components/layouts/Layout'
+import PlansNot from '@/components/layouts/PlansNot'
 import React from 'react'
 
 const Plans = () => {
   return (
     <Layout>
+        <PlansNot/>
             {/* <!-- PRICING PLANS --> */}
-    <section>
+    {/* <section>
         <div class="plans-ban">
             <div class="container">
                 <div class="row">
@@ -16,11 +18,11 @@ const Plans = () => {
                 </div>
             </div>
         </div>
-    </section>
+    </section> */}
     {/* <!-- END --> */}
 
     {/* <!-- PRICING PLANS --> */}
-    <section>
+    {/* <section>
         <div class="plans-main">
             <div class="container">
                 <div class="row">
@@ -76,7 +78,7 @@ const Plans = () => {
                 </div>
             </div>
         </div>
-    </section>
+    </section> */}
     {/* <!-- END --> */}
     </Layout>
   )

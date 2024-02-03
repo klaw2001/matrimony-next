@@ -196,9 +196,9 @@ const Header = () => {
                       <span className="smenu">Dashboard</span>
                       <div className="smenu-open smenu-single">
                         <ul>
-                          <li>
+                          {/* <li>
                             <Link href="/dashboard">Dashboard</Link>
-                          </li>
+                          </li> */}
                           <li>
                             <Link href="/user-profile">My profile</Link>
                           </li>

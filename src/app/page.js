@@ -85,7 +85,7 @@ export default function Home() {
                   <li>
                     <div className="cus-revi-box">
                       <div className="revi-im">
-                        <img src="images/user/1.jpg" alt="" loading="lazy" />
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" loading="lazy" />
                         <i className="cir-com cir-1"></i>
                         <i className="cir-com cir-2"></i>
                         <i className="cir-com cir-3"></i>
@@ -100,7 +100,7 @@ export default function Home() {
                   <li>
                     <div className="cus-revi-box">
                       <div className="revi-im">
-                        <img src="images/user/2.jpg" alt="" loading="lazy" />
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" loading="lazy" />
                         <i className="cir-com cir-1"></i>
                         <i className="cir-com cir-2"></i>
                         <i className="cir-com cir-3"></i>
@@ -115,7 +115,7 @@ export default function Home() {
                   <li>
                     <div className="cus-revi-box">
                       <div className="revi-im">
-                        <img src="images/user/3.jpg" alt="" loading="lazy" />
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" loading="lazy" />
                         <i className="cir-com cir-1"></i>
                         <i className="cir-com cir-2"></i>
                         <i className="cir-com cir-3"></i>
@@ -196,7 +196,7 @@ export default function Home() {
     {/* <!-- END --> */}
 
     {/* <!-- ABOUT START --> */}
-    <section>S
+    <section>
         <div className="ab-wel">
             <div className="container">
                 <div className="row">

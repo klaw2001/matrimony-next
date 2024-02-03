@@ -78,7 +78,7 @@ const UserProfile = () => {
                                   <div className="auth-pro-sm sett-pro-wid">
                                     <div className="auth-pro-sm-img">
                                       <img
-                                        src="images/profiles/15.jpg"
+                                        src={user.images}
                                         alt=""
                                       />
                                     </div>
