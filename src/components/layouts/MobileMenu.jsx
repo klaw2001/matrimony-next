@@ -1,17 +1,29 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
+import Link from "next/link";
 
 const MobileMenu = ({ isOpen, toggleMenu }) => {
   const [close, setClose] = useState(false);
+  const [id, setUserId] = useState(null);
 
   const handleclose = () => {
-    toggleMenu()
+    toggleMenu();
     setClose(!close);
   };
+  useEffect(() => {
+    // const userName = localStorage.getItem("userName");
+    const userID = localStorage.getItem("loggedinUser");
+    setUserId(userID);
+    // setUser(userName);
+  }, []);
   return (
     <>
-      <div className={`mob-me-all mobile_menu ${isOpen ? "act" : ""}  ${close && ""}`}>
+      <div
+        className={`mob-me-all mobile_menu ${isOpen ? "act" : ""}  ${
+          close && ""
+        }`}
+      >
         <div className="mob-me-clo">
           <button className="w-auto bg-transparent" onClick={handleclose}>
             <img src="/images/icon/close.svg" alt="" />
@@ -23,83 +35,53 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           </h4>
           <ul>
             <li>
-              <a href="all-profiles.html">Browse profiles</a>
+              <Link href="/all-profiles">All Profiles</Link>
             </li>
             <li>
-              <a href="wedding.html">Wedding page</a>
+              <Link href="/contact">Wedding Reservation</Link>
             </li>
             <li>
-              <a href="services.html">All Services</a>
+              <Link href="/services">Services</Link>
             </li>
             <li>
-              <a href="plans.html">Join Now</a>
+              <Link href="/plans">Plans</Link>
             </li>
           </ul>
           <h4>
             <i className="fa fa-align-center" aria-hidden="true"></i> All Pages
           </h4>
           <ul>
+          {id && (
+
+<>
+
+      <li>
+        <Link href="/user-profile">My profile</Link>
+      </li>
+      <li>
+        <Link href="/interests">Interests</Link>
+      </li>
+      <li>
+        <Link href="/chat-list">Chat lists</Link>
+      </li>
+      <li>
+        <Link href="/user-plan">My plan details</Link>
+      </li>
+</>
+    
+)}
             <li>
-              <a href="all-profiles.html">All profiles</a>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <a href="profile-details.html">Profile details</a>
+              <Link href="/gallery">Photo gallery</Link>
             </li>
             <li>
-              <a href="wedding.html">Wedding</a>
+              <Link href="/contact">Contact</Link>
             </li>
-            <li>
-              <a href="wedding-video.html">Wedding video</a>
-            </li>
-            <li>
-              <a href="services.html">Our Services</a>
-            </li>
-            <li>
-              <a href="plans.html">Pricing plans</a>
-            </li>
-            <li>
-              <a href="login.html">Login</a>
-            </li>
-            <li>
-              <a href="sign-up.html">Sign-up</a>
-            </li>
-            <li>
-              <a href="photo-gallery.html">Photo gallery</a>
-            </li>
-            <li>
-              <a href="photo-gallery-1.html">Photo gallery 1</a>
-            </li>
-            <li>
-              <a href="contact.html">Contact</a>
-            </li>
-            <li>
-              <a href="about.html">About</a>
-            </li>
-            <li>
-              <a href="blog.html">Blog</a>
-            </li>
-            <li>
-              <a href="blog-detail.html">Blog detail</a>
-            </li>
-            <li>
-              <a href="enquiry.html">Ask your doubts</a>
-            </li>
-            <li>
-              <a href="make-reservation.html">Make Reservation</a>
-            </li>
-            <li>
-              <a href="faq.html">FAQ</a>
-            </li>
-            <li>
-              <a href="coming-soon.html" target="_blank">
-                Coming soon
-              </a>
-            </li>
-            <li>
-              <a href="404.html">404</a>
-            </li>
+            
           </ul>
-          <div className="menu-pop-help">
+          {/* <div className="menu-pop-help">
             <h4>Support Team</h4>
             <div className="user-pro">
               <img src="/public/images/profiles/1.jpg" alt="" loading="lazy" />
@@ -199,7 +181,7 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
               <p>Tell us what kind of service you are looking for.</p>
               <a href="enquiry.html">Register for free</a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

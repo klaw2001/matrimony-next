@@ -5,5 +5,18 @@
     width: 100% !important;
     margin-top: 20px !important;
     bottom: -50px !important;
+}
 
+@media screen and (max-width:769px) {
+    .cta-new{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width:426px) {
+    .gal-image{
+        height: 616px !important;
+    }
+    .cus-revi-box {
+        padding: 30px 35px 30px;
+    }
 }

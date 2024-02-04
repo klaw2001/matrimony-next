@@ -1,8 +1,14 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const HeroSearchLayout = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    setUser(userName);
+  }, []);
     const router = useRouter()
     const handleClick = (e) =>{
         e.preventDefault()
@@ -47,6 +53,7 @@ const HeroSearchLayout = () => {
               <option>Muslim</option>
               <option>Jain</option>
               <option>Christian</option>
+              <option>Buddhist</option>
             </select>
           </div>
         </li>
@@ -63,11 +70,12 @@ const HeroSearchLayout = () => {
             </select>
           </div>
         </li>
-        <li className="sr-btn">
-          <input type="submit" value="Search" onClick={(e)=>handleClick(e)} />
+        <li className="sr-btn text-white">
+          <input type="submit" value="Search" onClick={(e)=>handleClick(e)} className="text-white" />
         </li>
       </ul>
     </form>
+   
   );
 };
 

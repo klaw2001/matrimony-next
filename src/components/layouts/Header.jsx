@@ -125,7 +125,7 @@ const Header = () => {
                               <li>
                                 <div className="menu-box menu-box-1">
                                   <h5 className="text-white">
-                                    Wedding page{" "}
+                                    Wedding{" "}
                                     <span className="text-white">
                                       Make reservation
                                     </span>
@@ -134,7 +134,7 @@ const Header = () => {
                                     More details
                                   </span>
                                   <Link
-                                    href="/wedding"
+                                    href="/contact"
                                     className="fclick"
                                   ></Link>
                                 </div>

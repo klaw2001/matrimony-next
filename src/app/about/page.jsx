@@ -53,7 +53,7 @@ const About = () => {
                   <div className="opacity-100" data-dely="0.6">
                     <img src="/images/icon/rings.png" alt="" loading="lazy" />
                     <h4>2000+ weddings</h4>
-                    <p>Lakhs of peoples have found their life partner</p>
+                    <p>Thousands of peoples have found their life partner</p>
                   </div>
                 </li>
               </ul>
@@ -277,7 +277,7 @@ const About = () => {
 
                             <div>
                               <h4> Akshay & Swati</h4>
-                              <span>Hyderabad</span>
+                              <span>Mumbai</span>
                             </div>
                           </div>
                         </div>
@@ -307,7 +307,7 @@ const About = () => {
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
                             <div>
                               <h4>Vivek & Shivani</h4>
-                              <span>Delhi</span>
+                              <span>Mumbai</span>
                             </div>
                           </div>
                         </div>

@@ -94,6 +94,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  education: {
+    type: String,
+    default: null,
+    enum: ["graduate", "ssc", "hsc", "postgraduate"],
+  },
+  maritalStatus: {
+    type: String,
+    default: null,
+    enum: ["single", "married", "divorced", "widow", "widower"],
+  },
   school: {
     type: String,
     default: null,

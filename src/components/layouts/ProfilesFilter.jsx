@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ProfilesFilter = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [users, setUsers] = useState([]);
 
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -16,12 +16,14 @@ const ProfilesFilter = () => {
   const [locationFilter, setLocationFilter] = useState("");
   const [availabilityFilter, setAvailabilityFilter] = useState("");
   const [profileFilter, setProfileFilter] = useState("");
+  const [educationFilter, setEducationFilter] = useState(""); // New state for education
+  const [maritalStatusFilter, setMaritalStatusFilter] = useState("");
   const [show, setShow] = useState(false);
   const [requesterId, SetrequesterId] = useState(null);
 
   useEffect(() => {
     SetrequesterId(localStorage.getItem("loggedinUser"));
-  } ,[]);
+  }, []);
   useEffect(() => {
     axios
       .get("/api/auth/all-users")
@@ -39,7 +41,10 @@ const ProfilesFilter = () => {
     let newFilteredUsers = users.filter((user) => {
       // Implement your filtering logic here
       let isGenderMatch = !genderFilter || user.gender === genderFilter;
-      let isAgeMatch = !ageFilter || user.age.toString() === ageFilter;
+      let isAgeMatch =
+      !ageFilter ||
+      (user.age >= parseInt(ageFilter.split("-")[0], 10) &&
+        user.age <= parseInt(ageFilter.split("-")[1], 10));
       let isReligionMatch = !religionFilter || user.religion === religionFilter;
       let isLocationMatch = !locationFilter || user.city === locationFilter;
       let isAvailabilityMatch =
@@ -51,6 +56,10 @@ const ProfilesFilter = () => {
         (profileFilter === "all" && true) ||
         (profileFilter === "premium" && user.isAdmin) ||
         (profileFilter === "free" && !user.isAdmin);
+      let isEducationMatch =
+        !educationFilter || user.education === educationFilter;
+      let isMaritalStatusMatch =
+        !maritalStatusFilter || user.maritalStatus === maritalStatusFilter;
 
       return (
         isGenderMatch &&
@@ -58,7 +67,9 @@ const ProfilesFilter = () => {
         isReligionMatch &&
         isLocationMatch &&
         isAvailabilityMatch &&
-        isProfileMatch
+        isProfileMatch &&
+        isEducationMatch &&
+        isMaritalStatusMatch
       );
     });
 
@@ -78,14 +89,13 @@ const ProfilesFilter = () => {
   ]);
 
   const sendRequestHandler = async (requestedUserId) => {
-    if(!requesterId){
-      toast.error('Register to send a Request')
+    if (!requesterId) {
+      toast.error("Register to send a Request");
       setTimeout(() => {
-        router.push('/signup')
+        router.push("/signup");
       }, 3000);
       return;
     }
-
 
     // Check if requesterId is already present
     const isRequesterIdPresent = filteredUsers.some((user) =>
@@ -121,19 +131,23 @@ const ProfilesFilter = () => {
   };
   const handleSortChange = (sortOption) => {
     let sortedUsers = [...filteredUsers];
-  
+
     switch (sortOption) {
-      case 'newest':
-        sortedUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      case "newest":
+        sortedUsers.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         break;
-      case 'oldest':
-        sortedUsers.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      case "oldest":
+        sortedUsers.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
         break;
       default:
         // Default to most relevant
         break;
     }
-  
+
     setFilteredUsers(sortedUsers);
   };
 
@@ -205,6 +219,47 @@ const ProfilesFilter = () => {
                       <option value="Muslim">Muslim</option>
                       <option value="Jain">Jain</option>
                       <option value="Christian">Christian</option>
+                      <option>Buddhist</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="filt-com lhs-cate">
+                  <h4>
+                    <i className="fa fa-graduation-cap" aria-hidden="true"></i>{" "}
+                    Education
+                  </h4>
+                  <div className="form-group">
+                    <select
+                      className="chosen-select"
+                      onChange={(e) => setEducationFilter(e.target.value)}
+                      value={educationFilter}
+                    >
+                      <option value="">Select Education</option>
+                      <option value="graduate">Graduate</option>
+                      <option value="ssc">SSC</option>
+                      <option value="hsc">HSC</option>
+                      <option value="postgraduate">Postgraduate</option>
+                    </select>
+                  </div>
+                </div>
+                {/* <!-- END --> */}
+                {/* <!-- START --> */}
+                <div className="filt-com lhs-cate">
+                  <h4>
+                    <i className="fa fa-heart" aria-hidden="true"></i> Marital
+                    Status
+                  </h4>
+                  <div className="form-group">
+                    <select
+                      className="chosen-select"
+                      onChange={(e) => setMaritalStatusFilter(e.target.value)}
+                      value={maritalStatusFilter}
+                    >
+                      <option value="">Select Marital Status</option>
+                      <option value="single">Single</option>
+                      <option value="married">Married</option>
+                      <option value="divorced">Divorced</option>
+                      <option value="widow">Widow</option>
                     </select>
                   </div>
                 </div>
@@ -322,7 +377,9 @@ const ProfilesFilter = () => {
                 <div className="filt-com filt-send-query">
                   <div className="send-query text-white">
                     <h5 className="text-white">What are you looking for?</h5>
-                    <p className="text-white">We will help you to arrage the best match to you.</p>
+                    <p className="text-white">
+                      We will help you to arrage the best match to you.
+                    </p>
                     <Link href="/contact" className="text-white">
                       Send your queries
                     </Link>
@@ -339,16 +396,16 @@ const ProfilesFilter = () => {
                     <ul>
                       <li>Sort by:</li>
                       <li>
-                      <div className="form-group">
-  <select
-    className="chosen-select"
-    onChange={(e) => handleSortChange(e.target.value)}
-  >
-    <option value="">Most relevant</option>
-    <option value="newest">Date listed: Newest</option>
-    <option value="oldest">Date listed: Oldest</option>
-  </select>
-</div>
+                        <div className="form-group">
+                          <select
+                            className="chosen-select"
+                            onChange={(e) => handleSortChange(e.target.value)}
+                          >
+                            <option value="">Most relevant</option>
+                            <option value="newest">Date listed: Newest</option>
+                            <option value="oldest">Date listed: Oldest</option>
+                          </select>
+                        </div>
                       </li>
                       <li>
                         <div className="sort-grid sort-grid-1">
@@ -374,9 +431,9 @@ const ProfilesFilter = () => {
                         >
                           {/* <!--PROFILE IMAGE--> */}
                           <div className="pro-img">
-                            <a href="profile-details.html">
-                              <img src="images/profiles/4.jpg" alt="" />
-                            </a>
+                            <Link href={`/profile-details/${elem._id}`}>
+                              <img src={elem.images || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt={elem.name} />
+                            </Link>
                             <div
                               className="pro-ave"
                               title="User currently available"
@@ -384,7 +441,7 @@ const ProfilesFilter = () => {
                               <span className="pro-ave-yes"></span>
                             </div>
                             <div className="pro-avl-status">
-                              <h5>Available Online</h5>
+                              <h5 className="text-white">Available Online</h5>
                             </div>
                           </div>
                           {/* <!--END PROFILE IMAGE--> */}
