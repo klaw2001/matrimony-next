@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import MySpinner from "../MySpinner";
 
 const ProfilesFilter = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const ProfilesFilter = () => {
   const [maritalStatusFilter, setMaritalStatusFilter] = useState("");
   const [show, setShow] = useState(false);
   const [requesterId, SetrequesterId] = useState(null);
+  const [loading, setLoading] = useState(true); // New loading state
+
 
   useEffect(() => {
     SetrequesterId(localStorage.getItem("loggedinUser"));
@@ -32,9 +35,12 @@ const ProfilesFilter = () => {
           (user) => user._id !== requesterId
         );
         setUsers(updatedUsers);
-        setFilteredUsers(updatedUsers); // Set filteredUsers to all users by default
+        setFilteredUsers(updatedUsers); 
+        setLoading(false);
+
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err)
+        setLoading(false); });
   }, []);
 
   const filterUsers = () => {
@@ -156,6 +162,7 @@ const ProfilesFilter = () => {
   return (
     <>
       {/* <!-- START --> */}
+      
       <section>
         <div className="all-weddpro all-jobs all-serexp chosenini">
           <div className="container">
@@ -420,6 +427,11 @@ const ProfilesFilter = () => {
                     </ul>
                   </div>
                 </div>
+                {loading ?(
+                  <div className="d-flex justify-content-center align-items-start w-100 h-100 pt-5">
+                    <MySpinner/>
+                  </div>
+                ):(
                 <div className="all-list-sh">
                   <ul>
                     {filteredUsers.map((elem, ind) => (
@@ -496,6 +508,8 @@ const ProfilesFilter = () => {
                     ))}
                   </ul>
                 </div>
+
+                )}
               </div>
             </div>
           </div>
