@@ -24,24 +24,24 @@ const ProfilesFilter = () => {
   const [loading, setLoading] = useState(true); // New loading state
 
 
+  // useEffect(() => {
+  // }, []);
   useEffect(() => {
     SetrequesterId(localStorage.getItem("loggedinUser"));
-  }, []);
-  useEffect(() => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
-        const updatedUsers = res.data.data.filter(
+        let array1 = res?.data?.data
+        const updatedUsers = array1.filter(
           (user) => user._id !== requesterId
         );
         setUsers(updatedUsers);
         setFilteredUsers(updatedUsers); 
         setLoading(false);
-
       })
       .catch((err) => {console.log(err)
         setLoading(false); });
-  }, []);
+  }, [requesterId]);
 
   const filterUsers = () => {
     let newFilteredUsers = users.filter((user) => {
@@ -518,6 +518,6 @@ const ProfilesFilter = () => {
       {/* <!-- END --> */}
     </>
   );
-};
+}
 
 export default ProfilesFilter;

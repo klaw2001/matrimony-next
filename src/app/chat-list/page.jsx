@@ -16,23 +16,33 @@ const ChatListPage = () => {
   const [user, setUser] = useState([]);
   const [userID, SetUserID] = useState(null);
 
-  useEffect(() => {
-    SetUserID(localStorage.getItem("loggedinUser"));
-  } ,[]);
+  const config = {
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'If-Modified-Since': '0',
+    },
+  };
 
+useEffect(()=>{
+
+  SetUserID(localStorage.getItem("loggedinUser"));
+},[])
+  
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/api/chat/singleConversation/" + userID);
+        const res = await axios.get("/api/chat/singleConversation/" + userID , config);
         setConversations(res.data.data);
       } catch (error) {
         console.log(error);
       }
     };
     getConversations();
-  }, []);
+  }, [userID]);
 
   useEffect(() => {
+    SetUserID(localStorage.getItem("loggedinUser"));
     axios
       .get(`/api/connections/${userID}`)
       .then((res) => {
@@ -56,7 +66,7 @@ const ChatListPage = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(`/api/chat/getMessage/${currentChat?._id}`);
+        const res = await axios.get(`/api/chat/getMessage/${currentChat._id}`, config);
         setMessages(res.data.data);
       } catch (error) {
         console.log(error);
@@ -85,7 +95,6 @@ const ChatListPage = () => {
                         <ul>
                           {conversations.map((elem) => (
                             <Conversation
-                              key={elem._id}
                               conversation={elem}
                               userID={userID}
                               handleClick={() => handleClick(elem)}

@@ -1,5 +1,6 @@
 import connectDB from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
+import mongoose from "mongoose";
 
 connectDB();
 
@@ -9,7 +10,12 @@ export default async function handler(req, res) {
       return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const userId = req.query.id; // Assuming you are passing userId as a query parameter
+    const userId = req.query.id;
+    // Assuming you are passing userId as a query parameter
+
+    if (!mongoose.isValidObjectId(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
 
     // Find the user by their ID and populate the connectionRequests field
     const user = await User.findById(userId).populate(

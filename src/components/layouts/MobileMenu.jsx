@@ -6,16 +6,16 @@ import Link from "next/link";
 const MobileMenu = ({ isOpen, toggleMenu }) => {
   const [close, setClose] = useState(false);
   const [id, setUserId] = useState(null);
-
+  const [user , setUser] = useState(null)
   const handleclose = () => {
     toggleMenu();
     setClose(!close);
   };
   useEffect(() => {
-    // const userName = localStorage.getItem("userName");
+    const userName = localStorage.getItem("userName");
     const userID = localStorage.getItem("loggedinUser");
     setUserId(userID);
-    // setUser(userName);
+    setUser(userName);
   }, []);
   return (
     <>
@@ -30,6 +30,19 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           </button>
         </div>
         <div className="mv-bus">
+          <div className="" >
+            {id ? (
+              <div className="head-pro">
+                <Link href={`/user-profile`}>
+                  <h4>{user}</h4>
+                </Link>
+              </div>
+            ) : (
+              <Link href="/signup" className="cta-dark text-white">
+                Sign Up
+              </Link>
+            )}{" "}
+          </div>
           <h4>
             <i className="fa fa-globe" aria-hidden="true"></i> EXPLORE CATEGORY
           </h4>
@@ -51,25 +64,22 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
             <i className="fa fa-align-center" aria-hidden="true"></i> All Pages
           </h4>
           <ul>
-          {id && (
-
-<>
-
-      <li>
-        <Link href="/user-profile">My profile</Link>
-      </li>
-      <li>
-        <Link href="/interests">Interests</Link>
-      </li>
-      <li>
-        <Link href="/chat-list">Chat lists</Link>
-      </li>
-      <li>
-        <Link href="/user-plan">My plan details</Link>
-      </li>
-</>
-    
-)}
+            {id && (
+              <>
+                <li>
+                  <Link href="/user-profile">My profile</Link>
+                </li>
+                <li>
+                  <Link href="/interests">Interests</Link>
+                </li>
+                <li>
+                  <Link href="/chat-list">Chat lists</Link>
+                </li>
+                <li>
+                  <Link href="/user-plan">My plan details</Link>
+                </li>
+              </>
+            )}
             <li>
               <Link href="/about">About</Link>
             </li>
@@ -79,7 +89,6 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
             <li>
               <Link href="/contact">Contact</Link>
             </li>
-            
           </ul>
           {/* <div className="menu-pop-help">
             <h4>Support Team</h4>

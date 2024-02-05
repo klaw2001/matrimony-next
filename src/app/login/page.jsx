@@ -35,8 +35,8 @@ const Login = () => {
             router.push('/')
           }, 2000);
         } catch (error) {
-            toast.error('Something Went Wrong')
-          console.error(error); // Handle login error
+            toast.error(error.response.data.error)
+          console.error(error.response.data.error); // Handle login error
         }
       };
   return (

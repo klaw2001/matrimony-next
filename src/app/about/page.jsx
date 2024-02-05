@@ -14,7 +14,8 @@ const About = () => {
                 <div className="hom-ban">
                   <div className="ban-tit text-warning">
                     <span>
-                      <i className="no1 text-warning">#1</i> <span className="text-warning">Wedding Website</span>
+                      <i className="no1 text-warning">#1</i>{" "}
+                      <span className="text-warning">Wedding Website</span>
                     </span>
                     <h1>About us</h1>
                     <p>
@@ -93,16 +94,18 @@ const About = () => {
                       Welcome to <em>Quick Match matrimony</em>
                     </h2>
                     <p>
-                      Our one-stop shop for finding the ideal life partner! We
-                      are passionate about uniting individuals based on shared
-                      values, interests, and goals. Our journey began 6 years
-                      ago when we realized that many people were dissatisfied
-                      with traditional marriage methods.{" "}
-                    </p>
-                    <p>
-                      {" "}
-                      <Link href="/plans">Click here to</Link> Start you
-                      matrimony service now.
+                      Hello there! I'm Amol Bhalerao, a Hospitality Management
+                      graduate with an MBA in operations. By day, I ensure
+                      quality in a private company, and by heart, I'm involved
+                      in social work through my father's matrimony business.
+                      Uncovering the hurdles of high fees in matchmaking sites,
+                      my mission is to revolutionize the industry. Join our
+                      community today as we strive to provide an affordable and
+                      responsible platform, empowering users with access to
+                      top-notch matches. Together, let's make a positive impact
+                      on countless lives in their search for ideal life
+                      partners. Spread the word and be part of this
+                      transformative initiative!.{" "}
                     </p>
                   </div>
                   <div className="ab-wel-tit-1">
@@ -114,6 +117,11 @@ const About = () => {
                       and commitment to delivering exceptional customer service.
                     </p>
                   </div>
+                    <p>
+                      {" "}
+                      <Link href="/plans"><span className="fw-bold">Click here to</span></Link> Start you
+                      matrimony service now.
+                    </p>
                   <div className="ab-wel-tit-2">
                     <ul>
                       <li>
@@ -238,12 +246,17 @@ const About = () => {
                             </div>
                             <div className="ab-test-conte">
                               <p>
-                              This website saved our family from an arranged marriage disaster by finding us compatible partners who understand each other well.
+                                This website saved our family from an arranged
+                                marriage disaster by finding us compatible
+                                partners who understand each other well.
                               </p>
                             </div>
                           </div>
                           <div className="ab-rat-user">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                            <img
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                              alt=""
+                            />
 
                             <div>
                               <h4>Abhay & Nisha</h4>
@@ -268,12 +281,18 @@ const About = () => {
                             </div>
                             <div className="ab-test-conte">
                               <p>
-                              With so many fake profiles out there nowadays, this site stands apart due its strict verification process ensuring only real people get matched up!
+                                With so many fake profiles out there nowadays,
+                                this site stands apart due its strict
+                                verification process ensuring only real people
+                                get matched up!
                               </p>
                             </div>
                           </div>
                           <div className="ab-rat-user">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                            <img
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                              alt=""
+                            />
 
                             <div>
                               <h4> Akshay & Swati</h4>
@@ -297,14 +316,18 @@ const About = () => {
                               <span>(50 Reviews)</span>
                             </div>
                             <div className="ab-test-conte">
-                            <p>
-  My wife and I met through their portal; we&rsquo;re deeply grateful for the wonderful service they provide.
-</p>
-
+                              <p>
+                                My wife and I met through their portal;
+                                we&rsquo;re deeply grateful for the wonderful
+                                service they provide.
+                              </p>
                             </div>
                           </div>
                           <div className="ab-rat-user">
-                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                            <img
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                              alt=""
+                            />
                             <div>
                               <h4>Vivek & Shivani</h4>
                               <span>Mumbai</span>
@@ -339,7 +362,10 @@ const About = () => {
                             </div>
                           </div>
                           <div className="ab-rat-user">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                            <img
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                              alt=""
+                            />
                             <div>
                               <h4>John Smith</h4>
                               <span>IT Profession</span>
@@ -370,7 +396,10 @@ const About = () => {
                             </div>
                           </div>
                           <div className="ab-rat-user">
-                          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                            <img
+                              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                              alt=""
+                            />
                             <div>
                               <h4>Julia Ann</h4>
                               <span>Teacher</span>

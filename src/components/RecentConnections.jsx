@@ -16,7 +16,9 @@ const RecentConnections = ({
 
   const handleClick = async (reciever , e) => {
     e.preventDefault()
+    console.log(sender, reciever)
     try {
+      
       const res = await axios.post("/api/chat/addConversation", {sender, reciever});
       toast.success("Conversation Added");
       setConversations([...conversations, res.data.data]);
@@ -25,6 +27,7 @@ const RecentConnections = ({
     }
   };
   const acceptedUsers = users?.filter((user) => user.status === "accepted");
+  console.log(acceptedUsers)
 
   return (
     <>
@@ -44,7 +47,7 @@ const RecentConnections = ({
             >
               <div className="db-chat-pro">
                 {" "}
-                <img src="images/profiles/1.jpg" alt="" />{" "}
+                <img src={elem.requester?.images} alt="" />{" "}
               </div>
               <div className="db-chat-bio">
                 <h5>{elem?.requester?.name}</h5>
@@ -53,7 +56,7 @@ const RecentConnections = ({
               <div className="" style={{ float: "right" }}>
                 <button
                   className="cta-dark"
-                  onClick={(e) => handleClick(elem?._id , e)}
+                  onClick={(e) => handleClick(elem?.requester?._id, e)}
                 >
                   Add Conversation
                 </button>

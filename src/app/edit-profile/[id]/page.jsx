@@ -2,12 +2,14 @@
 import Layout from "@/components/layouts/Layout";
 import { getSingleUser } from "@/helpers/getUsers";
 import axios from "axios";
+// import 'dotenv/config'
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const UserEditProfile = () => {
+
   const router = useParams();
   const { id } = router;
   const [user, setUser] = useState({});

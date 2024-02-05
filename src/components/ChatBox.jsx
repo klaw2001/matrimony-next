@@ -33,7 +33,7 @@ const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat
       <div className="inn">
         <form name="new_chat_form" method="post">
           <div className="s1">
-            <img src="images/user/2.jpg" className="intephoto2" alt="" />
+            <img src={friend.images} className="intephoto2" alt="" />
             <h4>
               <b className="intename2">
               {friend?._id === currentChat?.members[1] ? friend?.name : "Friend's Name"}

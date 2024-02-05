@@ -7,6 +7,11 @@ connectDB();
 // Combined handler for GET, PUT, and DELETE requests
 export default async function handler(req, res) {
   const userId = req.query.id;
+  
+  if (!userId || typeof userId !== "string") {
+    return res.status(400).json({ message: "Invalid user ID format" });
+  }
+
 
   if (req.method === "GET") {
     try {

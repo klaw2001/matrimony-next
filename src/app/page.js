@@ -234,11 +234,7 @@ export default function Home() {
                       ago when we realized that many people were dissatisfied
                       with traditional marriage methods.{" "}
                     </p>
-                    <p>
-                      {" "}
-                      <Link href="/plans">Click here to</Link> Start you
-                      matrimony service now.
-                    </p>
+                    
                   </div>
                   <div className="ab-wel-tit-1">
                     <p>
@@ -249,6 +245,11 @@ export default function Home() {
                       and commitment to delivering exceptional customer service.
                     </p>
                   </div>
+                  <p>
+                      {" "}
+                      <Link href="/plans"><span className="fw-bold">Click here to</span></Link> Start you
+                      matrimony service now.
+                    </p>
                   <div className="ab-wel-tit-2">
                     <ul>
                       <li>
