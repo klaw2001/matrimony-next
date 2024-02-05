@@ -94,15 +94,15 @@ const About = () => {
                       Welcome to <em>Quick Match matrimony</em>
                     </h2>
                     <p>
-                      Hello there! I'm Amol Bhalerao, a Hospitality Management
+                      Hello there! I&apos;m Amol Bhalerao, a Hospitality Management
                       graduate with an MBA in operations. By day, I ensure
-                      quality in a private company, and by heart, I'm involved
-                      in social work through my father's matrimony business.
+                      quality in a private company, and by heart, I&apos;m involved
+                      in social work through my father&apos;s matrimony business.
                       Uncovering the hurdles of high fees in matchmaking sites,
                       my mission is to revolutionize the industry. Join our
                       community today as we strive to provide an affordable and
                       responsible platform, empowering users with access to
-                      top-notch matches. Together, let's make a positive impact
+                      top-notch matches. Together, let&apos;s make a positive impact
                       on countless lives in their search for ideal life
                       partners. Spread the word and be part of this
                       transformative initiative!.{" "}
