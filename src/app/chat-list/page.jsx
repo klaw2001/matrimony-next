@@ -95,6 +95,7 @@ useEffect(()=>{
                         <ul>
                           {conversations.map((elem) => (
                             <Conversation
+                            key={elem._id}
                               conversation={elem}
                               userID={userID}
                               handleClick={() => handleClick(elem)}

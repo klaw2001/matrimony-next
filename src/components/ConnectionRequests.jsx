@@ -45,10 +45,12 @@ const ConnectionRequests = () => {
   };
 
   const acceptRequestHandler = async (id) => {
+    console.log(id , userID)
     try {
       const response = await axios.post("/api/connections/respondRequest", {
-        requesterId: id,
-        requestedUserId: userID,
+        requesterId: userID,
+        requestedUserId: id,
+        response:'accepted'
       });
 
       console.log(response.data);
