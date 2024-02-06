@@ -167,7 +167,7 @@ const ProfilesFilter = () => {
         <div className="all-weddpro all-jobs all-serexp chosenini">
           <div className="container">
             <div className="row">
-              <div className="col-md-3 fil-mob-view">
+              <div className="col-md-3">
                 <span className="filter-clo">+</span>
                 {/* <!-- START --> */}
                 <div className="filt-com lhs-cate">
@@ -381,17 +381,7 @@ const ProfilesFilter = () => {
                 </div>
                 {/* <!-- END --> */}
                 {/* <!-- START --> */}
-                <div className="filt-com filt-send-query">
-                  <div className="send-query text-white">
-                    <h5 className="text-white">What are you looking for?</h5>
-                    <p className="text-white">
-                      We will help you to arrage the best match to you.
-                    </p>
-                    <Link href="/contact" className="text-white">
-                      Send your queries
-                    </Link>
-                  </div>
-                </div>
+                
                 {/* <!-- END --> */}
               </div>
               <div className="col-md-9">
