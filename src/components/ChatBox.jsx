@@ -3,8 +3,10 @@ import Message from "./Message";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat , setAllMessages}) => {
+const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentChat , setAllMessages}) => {
+  console.log(friendID)
   const [newMessage, setNewMessage] = useState("");
+  const [friend, setFriend] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -21,6 +23,31 @@ const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    async function getFriend() {
+      try {
+        const response = await fetch(`/api/auth/singleuser/${friendID}`, {
+          method: "GET",
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+            "If-Modified-Since": "0",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setFriend(data.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching friend data:", err);
+      }
+    }
+    getFriend();
+  }, []);
    
 
 
@@ -33,10 +60,14 @@ const ChatBox = ({ showChatbox, closeBox, friend, messages, userID , currentChat
       <div className="inn">
         <form name="new_chat_form" method="post">
           <div className="s1">
-            <img src={friend.images} className="intephoto2" alt="" />
+            <img src={friend?.images} className="intephoto2" alt="" />
             <h4>
               <b className="intename2">
-              {friend?._id === currentChat?.members[1] ? friend?.name : "Friend's Name"}
+              {
+              // friend?._id === currentChat?.members[1] ? 
+              friend?.name 
+              // : "Friend's Name"
+              }
                 </b>,
             </h4>
             <span className="avlsta avilyes text-white">Available online</span>

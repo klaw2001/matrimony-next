@@ -181,43 +181,41 @@ const Header = () => {
                       </span>
                      
                     </li> */}
-                    
-                          <li>
-                            <Link href="/about">About</Link>
-                          </li>
-                          <li>
-                            <Link href="/gallery">Photo gallery</Link>
-                          </li>
-                   
-                    
-                    {id && (
 
-                    <li className="smenu-pare">
-                      <span className="smenu">Dashboard</span>
-                      <div className="smenu-open smenu-single">
-                        <ul>
-                          {/* <li>
+                    <li>
+                      <Link href="/about">About</Link>
+                    </li>
+                    <li>
+                      <Link href="/gallery">Photo gallery</Link>
+                    </li>
+
+                    {id && (
+                      <li className="smenu-pare">
+                        <span className="smenu">Dashboard</span>
+                        <div className="smenu-open smenu-single">
+                          <ul>
+                            {/* <li>
                             <Link href="/dashboard">Dashboard</Link>
                           </li> */}
-                          <li>
-                            <Link href="/user-profile">My profile</Link>
-                          </li>
-                          <li>
-                            <Link href="/interests">Interests</Link>
-                          </li>
-                          <li>
-                            <Link href="/chat-list">Chat lists</Link>
-                          </li>
-                          <li>
-                            <Link href="/user-plan">My plan details</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                            <li>
+                              <Link href="/user-profile">My profile</Link>
+                            </li>
+                            <li>
+                              <Link href="/interests">Interests</Link>
+                            </li>
+                            <li>
+                              <Link href={"/chat-list/" + id}>Chat lists</Link>
+                            </li>
+                            <li>
+                              <Link href="/user-plan">My plan details</Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
                     )}
-                          <li>
-                            <Link href="/contact">Contact</Link>
-                          </li>
+                    <li>
+                      <Link href="/contact">Contact</Link>
+                    </li>
                   </ul>
                 </div>
 

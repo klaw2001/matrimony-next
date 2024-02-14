@@ -11,6 +11,9 @@
     .cta-new{
         width: 100% !important;
     }
+    .db-pro-stat{
+        padding: 6px;
+    }
 }
 @media screen and (max-width:426px) {
     .gal-image{

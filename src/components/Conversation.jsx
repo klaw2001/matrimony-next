@@ -5,6 +5,7 @@ import Message from "./Message";
 import { io } from "socket.io-client";
 import MySpinner from "./MySpinner";
 const Conversation = ({
+  // key,
   conversation,
   userID,
   handleClick,
@@ -49,26 +50,20 @@ const Conversation = ({
 
   return (
     <>
-      {loading ? (
-        <div className="d-flex justify-content-center align-items-start w-100 h-100">
-          <MySpinner/>
+      <li className="db-chat-trig"  onClick={() => handleClick(conversation)}>
+        <div className="db-chat-pro">
+          {" "}
+          <img src={friend.images} alt="" />{" "}
         </div>
-      ) : (
-          <li className="db-chat-trig" onClick={handleClick} key={conversation._id}>
-            <div className="db-chat-pro">
-              {" "}
-              <img src={friend.images} alt="" />{" "}
-            </div>
-            <div className="db-chat-bio">
-              <h5>{friend?.name}</h5>
-              <span>Tap To Chat</span>
-            </div>
-            <div className="db-chat-info"></div>
-          </li>
-      )}
+        <div className="db-chat-bio">
+          <h5>{friend?.name}</h5>
+          <span>Tap To Chat</span>
+        </div>
+        <div className="db-chat-info"></div>
+      </li>
 
-      {friend?._id === currentChat?.members[1] && (
-        <ChatBox
+      {/* {friend?._id === currentChat?.members[1] && ( */}
+        {/* <ChatBox
           showChatbox={showChatbox}
           closeBox={closeBox}
           friend={friend}
@@ -76,8 +71,8 @@ const Conversation = ({
           setAllMessages={setAllMessages}
           userID={userID}
           currentChat={currentChat}
-        />
-      )}
+        /> */}
+      {/* )} */}
     </>
   );
 };

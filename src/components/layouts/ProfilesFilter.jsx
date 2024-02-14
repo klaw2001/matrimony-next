@@ -23,7 +23,6 @@ const ProfilesFilter = () => {
   const [requesterId, SetrequesterId] = useState(null);
   const [loading, setLoading] = useState(true); // New loading state
 
-
   // useEffect(() => {
   // }, []);
   useEffect(() => {
@@ -31,16 +30,16 @@ const ProfilesFilter = () => {
     axios
       .get("/api/auth/all-users")
       .then((res) => {
-        let array1 = res?.data?.data
-        const updatedUsers = array1.filter(
-          (user) => user._id !== requesterId
-        );
+        let array1 = res?.data?.data;
+        const updatedUsers = array1.filter((user) => user._id !== requesterId);
         setUsers(updatedUsers);
-        setFilteredUsers(updatedUsers); 
+        setFilteredUsers(updatedUsers);
         setLoading(false);
       })
-      .catch((err) => {console.log(err)
-        setLoading(false); });
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, [requesterId]);
 
   const filterUsers = () => {
@@ -48,9 +47,9 @@ const ProfilesFilter = () => {
       // Implement your filtering logic here
       let isGenderMatch = !genderFilter || user.gender === genderFilter;
       let isAgeMatch =
-      !ageFilter ||
-      (user.age >= parseInt(ageFilter.split("-")[0], 10) &&
-        user.age <= parseInt(ageFilter.split("-")[1], 10));
+        !ageFilter ||
+        (user.age >= parseInt(ageFilter.split("-")[0], 10) &&
+          user.age <= parseInt(ageFilter.split("-")[1], 10));
       let isReligionMatch = !religionFilter || user.religion === religionFilter;
       let isLocationMatch = !locationFilter || user.city === locationFilter;
       let isAvailabilityMatch =
@@ -103,36 +102,21 @@ const ProfilesFilter = () => {
       return;
     }
 
-    // Check if requesterId is already present
-    const isRequesterIdPresent = filteredUsers.some((user) =>
-      user.connectionRequests.some(
-        (request) => request.requester === requesterId
-      )
-    );
-
-    if (isRequesterIdPresent) {
-      console.error("Error: RequesterId already present in connectionRequests");
-      toast.info("You've already sent a request to this user");
-      return; // Do not proceed with sending the request
-    }
-
-    // If requesterId is not present, proceed with sending the request
+    console.log(requesterId, requestedUserId);
     try {
-      const res = await axios.post("/api/connections/sendRequest/", {
-        requesterId: requesterId,
-        requestedUserId: requestedUserId,
+      const res = await axios.post("/api/chat/addConversation", {
+        sender: requesterId,
+        receiver: requestedUserId, // Ensure correct spelling here
       });
 
-      console.log(res.data);
-
-      if (res.data.success === true) {
-        console.log("Request sent successfully");
+      if (res.status === 200) {
+        toast.success("Redirecting To Chat Page");
+        setTimeout(() => {
+          router.push(`/chat-list/${requesterId}`);
+        }, 3000);
       }
-
-      toast.success("Request Sent Successfully");
-    } catch (err) {
-      console.error("Error sending request:", err);
-      toast.error("Something went wrong");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
   const handleSortChange = (sortOption) => {
@@ -162,7 +146,7 @@ const ProfilesFilter = () => {
   return (
     <>
       {/* <!-- START --> */}
-      
+
       <section>
         <div className="all-weddpro all-jobs all-serexp chosenini">
           <div className="container">
@@ -381,7 +365,7 @@ const ProfilesFilter = () => {
                 </div>
                 {/* <!-- END --> */}
                 {/* <!-- START --> */}
-                
+
                 {/* <!-- END --> */}
               </div>
               <div className="col-md-9">
@@ -417,88 +401,95 @@ const ProfilesFilter = () => {
                     </ul>
                   </div>
                 </div>
-                {loading ?(
+                {loading ? (
                   <div className="d-flex justify-content-center align-items-start w-100 h-100 pt-5">
-                    <MySpinner/>
+                    <MySpinner />
                   </div>
-                ):(
-                <div className="all-list-sh">
-                  <ul>
-                    {filteredUsers.map((elem, ind) => (
-                      <li key={elem._id}>
-                        <div
-                          className="all-pro-box user-avil-onli"
-                          data-useravil="avilyes"
-                          data-aviltxt="Available online"
-                        >
-                          {/* <!--PROFILE IMAGE--> */}
-                          <div className="pro-img">
-                            <Link href={`/profile-details/${elem._id}`}>
-                              <img src={elem.images || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt={elem.name} />
-                            </Link>
-                            <div
-                              className="pro-ave"
-                              title="User currently available"
-                            >
-                              <span className="pro-ave-yes"></span>
-                            </div>
-                            <div className="pro-avl-status">
-                              <h5 className="text-white">Available Online</h5>
-                            </div>
-                          </div>
-                          {/* <!--END PROFILE IMAGE--> */}
-
-                          {/* <!--PROFILE NAME--> */}
-                          <div className="pro-detail">
-                            <h4>
-                              <Link href={`/profile-details/${elem._id}`}>
-                                {elem.name}
-                              </Link>
-                            </h4>
-                            <div className="pro-bio">
-                              <span className="text-white">{elem.degree}</span>
-                              <span className="text-white">
-                                {elem.position}
-                              </span>
-                              <span className="text-white">{`${elem.age} Years old`}</span>
-                              <span className="text-white">{`Height: ${elem.height} Cms`}</span>
-                            </div>
-
-                            <div className="">
-                              <button
-                                className="py-1 px-3 rounded-pill bg-success text-white"
-                                onClick={() => sendRequestHandler(elem._id)}
-                              >
-                                Send Interest
-                              </button>
-
-                              <Link
-                                href={`/profile-details/${elem._id}`}
-                                className="py-1 px-3 rounded-pill"
-                              >
-                                More detaiils
-                              </Link>
-                            </div>
-                          </div>
-                          {/* <!--END PROFILE NAME--> */}
-                          {/* <!--SAVE--> */}
-                          <span
-                            className="enq-sav"
-                            data-toggle="tooltip"
-                            title="Click to save this provile."
+                ) : (
+                  <div className="all-list-sh">
+                    <ul>
+                      {filteredUsers.map((elem, ind) => (
+                        <li key={elem._id}>
+                          <div
+                            className="all-pro-box user-avil-onli"
+                            data-useravil="avilyes"
+                            data-aviltxt="Available online"
                           >
-                            <i
-                              className="fa fa-thumbs-o-up"
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                          {/* <!--END SAVE--> */}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                            {/* <!--PROFILE IMAGE--> */}
+                            <div className="pro-img">
+                              <Link href={`/profile-details/${elem._id}`}>
+                                <img
+                                  src={
+                                    elem.images ||
+                                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                  }
+                                  alt={elem.name}
+                                />
+                              </Link>
+                              <div
+                                className="pro-ave"
+                                title="User currently available"
+                              >
+                                <span className="pro-ave-yes"></span>
+                              </div>
+                              <div className="pro-avl-status">
+                                <h5 className="text-white">Available Online</h5>
+                              </div>
+                            </div>
+                            {/* <!--END PROFILE IMAGE--> */}
 
+                            {/* <!--PROFILE NAME--> */}
+                            <div className="pro-detail">
+                              <h4>
+                                <Link href={`/profile-details/${elem._id}`}>
+                                  {elem.name}
+                                </Link>
+                              </h4>
+                              <div className="pro-bio">
+                                <span className="text-white">
+                                  {elem.degree}
+                                </span>
+                                <span className="text-white">
+                                  {elem.position}
+                                </span>
+                                <span className="text-white">{`${elem.age} Years old`}</span>
+                                <span className="text-white">{`Height: ${elem.height} Cms`}</span>
+                              </div>
+
+                              <div className="">
+                                <button
+                                  className="py-1 px-3 rounded-pill bg-success text-white"
+                                  onClick={() => sendRequestHandler(elem._id)}
+                                >
+                                  Chat Now
+                                </button>
+
+                                <Link
+                                  href={`/profile-details/${elem._id}`}
+                                  className="py-1 px-3 rounded-pill"
+                                >
+                                  More detaiils
+                                </Link>
+                              </div>
+                            </div>
+                            {/* <!--END PROFILE NAME--> */}
+                            {/* <!--SAVE--> */}
+                            <span
+                              className="enq-sav"
+                              data-toggle="tooltip"
+                              title="Click to save this provile."
+                            >
+                              <i
+                                className="fa fa-thumbs-o-up"
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+                            {/* <!--END SAVE--> */}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </div>
             </div>
@@ -508,6 +499,6 @@ const ProfilesFilter = () => {
       {/* <!-- END --> */}
     </>
   );
-}
+};
 
 export default ProfilesFilter;
