@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import Link from "next/link";
@@ -7,16 +6,23 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
   const [close, setClose] = useState(false);
   const [id, setUserId] = useState(null);
   const [user , setUser] = useState(null)
-  const handleclose = () => {
-    toggleMenu();
-    setClose(!close);
+
+  const handleLinkClick = () => {
+    toggleMenu(); // Close the menu
   };
+
   useEffect(() => {
     const userName = localStorage.getItem("userName");
     const userID = localStorage.getItem("loggedinUser");
     setUserId(userID);
     setUser(userName);
   }, []);
+
+  const handleclose = () => {
+    toggleMenu();
+    setClose(!close);
+  };
+
   return (
     <>
       <div
@@ -33,12 +39,12 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           <div className="" >
             {id ? (
               <div className="head-pro">
-                <Link href={`/user-profile`}>
+                <Link href={`/user-profile`} onClick={handleLinkClick}>
                   <h4>{user}</h4>
                 </Link>
               </div>
             ) : (
-              <Link href="/signup" className="cta-dark text-white">
+              <Link href="/signup" className="cta-dark text-white" onClick={handleLinkClick}>
                 Sign Up
               </Link>
             )}{" "}
@@ -48,16 +54,16 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           </h4>
           <ul>
             <li>
-              <Link href="/all-profiles">All Profiles</Link>
+              <Link href="/all-profiles" onClick={handleLinkClick}>All Profiles</Link>
             </li>
             <li>
-              <Link href="/contact">Wedding Reservation</Link>
+              <Link href="/contact" onClick={handleLinkClick}>Wedding Reservation</Link>
             </li>
             <li>
-              <Link href="/services">Services</Link>
+              <Link href="/services" onClick={handleLinkClick}>Services</Link>
             </li>
             <li>
-              <Link href="/plans">Plans</Link>
+              <Link href="/plans" onClick={handleLinkClick}>Plans</Link>
             </li>
           </ul>
           <h4>
@@ -67,130 +73,30 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
             {id && (
               <>
                 <li>
-                  <Link href="/user-profile">My profile</Link>
+                  <Link href="/user-profile" onClick={handleLinkClick}>My profile</Link>
                 </li>
                 <li>
-                  <Link href="/interests">Interests</Link>
+                  <Link href="/plans" onClick={handleLinkClick}>Plans</Link>
                 </li>
                 <li>
-                  <Link href="/chat-list">Chat lists</Link>
+                  <Link href="/chat-list" onClick={handleLinkClick}>Chat lists</Link>
                 </li>
                 <li>
-                  <Link href="/user-plan">My plan details</Link>
+                  <Link href="/user-plan" onClick={handleLinkClick}>My plan details</Link>
                 </li>
               </>
             )}
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about" onClick={handleLinkClick}>About</Link>
             </li>
             <li>
-              <Link href="/gallery">Photo gallery</Link>
+              <Link href="/gallery" onClick={handleLinkClick}>Photo gallery</Link>
             </li>
             <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact" onClick={handleLinkClick}>Contact</Link>
             </li>
           </ul>
-          {/* <div className="menu-pop-help">
-            <h4>Support Team</h4>
-            <div className="user-pro">
-              <img src="/public/images/profiles/1.jpg" alt="" loading="lazy" />
-            </div>
-            <div className="user-bio">
-              <h5>Ashley emyy</h5>
-              <span>Senior personal advisor</span>
-              <a href="enquiry.html" className="btn btn-primary btn-sm">
-                Ask your doubts
-              </a>
-            </div>
-          </div>
-          <div className="menu-pop-soci">
-            <ul>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-whatsapp" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-youtube-play" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#!">
-                  <i className="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="late-news">
-            <h4>Latest news</h4>
-            <ul>
-              <li>
-                <div className="rel-pro-img">
-                  <img
-                    src="../../public/images/couples/1.jpg"
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-                <div className="rel-pro-con">
-                  <h5>Long established fact that a reader distracted</h5>
-                  <span className="ic-date">12 Dec 2023</span>
-                </div>
-                <a href="blog-detail.html" className="fclick"></a>
-              </li>
-              <li>
-                <div className="rel-pro-img">
-                  <img
-                    src="../../public/images/couples/3.jpg"
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-                <div className="rel-pro-con">
-                  <h5>Long established fact that a reader distracted</h5>
-                  <span className="ic-date">12 Dec 2023</span>
-                </div>
-                <a href="blog-detail.html" className="fclick"></a>
-              </li>
-              <li>
-                <div className="rel-pro-img">
-                  <img
-                    src="../../public/images/couples/4.jpg"
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-                <div className="rel-pro-con">
-                  <h5>Long established fact that a reader distracted</h5>
-                  <span className="ic-date">12 Dec 2023</span>
-                </div>
-                <a href="blog-detail.html" className="fclick"></a>
-              </li>
-            </ul>
-          </div>
-          <div className="prof-rhs-help">
-            <div className="inn">
-              <h3>Tell us your Needs</h3>
-              <p>Tell us what kind of service you are looking for.</p>
-              <a href="enquiry.html">Register for free</a>
-            </div>
-          </div> */}
+          {/* Other menu content */}
         </div>
       </div>
     </>

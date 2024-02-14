@@ -31,7 +31,7 @@ export default function Home() {
                       </h1>
                       <p>Most trusted Matrimony Brand in the World.</p>
                     </div>
-                    <div className="ban-search chosenini">
+                    <div className="ban-search chosenini justify-content-center d-flex justify-content-center align-items-center flex-column flex-lg-row">
                       <HeroSearchLayout />
                     </div>
                   </div>

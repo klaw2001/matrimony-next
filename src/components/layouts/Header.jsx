@@ -186,6 +186,9 @@ const Header = () => {
                       <Link href="/about">About</Link>
                     </li>
                     <li>
+                      <Link href="/plans">Plans</Link>
+                    </li>
+                    <li>
                       <Link href="/gallery">Photo gallery</Link>
                     </li>
 
@@ -200,9 +203,9 @@ const Header = () => {
                             <li>
                               <Link href="/user-profile">My profile</Link>
                             </li>
-                            <li>
+                            {/* <li>
                               <Link href="/interests">Interests</Link>
-                            </li>
+                            </li> */}
                             <li>
                               <Link href={"/chat-list/" + id}>Chat lists</Link>
                             </li>

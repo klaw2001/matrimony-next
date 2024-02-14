@@ -3203,7 +3203,7 @@ table td{}
 
 .all-pro-head {
     padding: 35px 30px 38px;
-    background: url("../../public/images/banner.jpg") 0px -105px / cover no-repeat;
+    background: url("/@/images/banner.jpg") 0px -105px / cover no-repeat;
     position: relative;
     width: 100%;
     float: left;
@@ -5249,7 +5249,7 @@ span.mail::before {
     display: block;
     background: rgb(255, 228, 230);
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0) !important;
     font-size: 15px;
     font-weight: 600;
     padding: 12px;
@@ -5330,12 +5330,12 @@ span.mail::before {
 .pri-box-pop a.cta {
     background: rgb(215, 67, 84);
     text-align: center;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255) !important;
 }
 
 .pri-box:hover a.cta {
     background: rgb(229, 135, 19);
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255) !important;
     box-shadow: rgb(187, 110, 15) 0px 10px 14px -9px;
 }
 

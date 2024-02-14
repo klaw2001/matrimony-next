@@ -9,15 +9,15 @@ const HeroSearchLayout = () => {
     const userName = localStorage.getItem("userName");
     setUser(userName);
   }, []);
-    const router = useRouter()
-    const handleClick = (e) =>{
-        e.preventDefault()
-        router.push('/all-profiles')
-    }
-   return (
+  const router = useRouter();
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push("/all-profiles");
+  };
+  return (
     <form>
-      <ul>
-        <li className="sr-look">
+      <ul className="text-center d-flex justify-content-center align-items-center flex-column flex-lg-row">
+        <li className="w-100 sr-look">
           <div className="form-group">
             <label>I am looking for</label>
             <select className="chosen-select">
@@ -27,7 +27,7 @@ const HeroSearchLayout = () => {
             </select>
           </div>
         </li>
-        <li className="sr-age">
+        {/* <li className="sr-age">
           <div className="form-group">
             <label>Age</label>
             <select className="chosen-select">
@@ -35,11 +35,6 @@ const HeroSearchLayout = () => {
               <option value="">18 to 30</option>
               <option value="">31 to 40</option>
               <option value="">41 to 50</option>
-              <option value="">51 to 60</option>
-              <option value="">61 to 70</option>
-              <option value="">71 to 80</option>
-              <option value="">81 to 90</option>
-              <option value="">91 to 100</option>
             </select>
           </div>
         </li>
@@ -62,20 +57,52 @@ const HeroSearchLayout = () => {
             <label>City</label>
             <select className="chosen-select">
               <option>Location</option>
-              <option>Any location</option>
-              <option>Chennai</option>
-              <option>New york</option>
-              <option>Perth</option>
-              <option>London</option>
+              <option>Maharashtra</option>
             </select>
           </div>
         </li>
-        <li className="sr-btn text-white">
-          <input type="submit" value="Search" onClick={(e)=>handleClick(e)} className="text-white" />
+        <li className="sr-cit">
+          <div className="form-group">
+            <label>City</label>
+            <select className="chosen-select">
+              <option value="">Select Education</option>
+              <option value="graduate">Graduate</option>
+              <option value="ssc">SSC</option>
+              <option value="hsc">HSC</option>
+              <option value="postgraduate">Postgraduate</option>
+            </select>
+          </div>
+        </li>
+        <li className="sr-cit">
+          <div className="form-group">
+            <label>City</label>
+            <select className="chosen-select">
+              <option value="">Select Marital Status</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+              <option value="widow">Widow</option>
+            </select>
+          </div>
+        </li> */}
+        <li className="w-100 sr-btn text-white">
+          <input
+            type="submit"
+            value="More Filters"
+            onClick={(e) => handleClick(e)}
+            className="text-white"
+          />
+        </li>
+        <li className="w-100 sr-btn text-white">
+          <input
+            type="submit"
+            value="Search"
+            onClick={(e) => handleClick(e)}
+            className="text-white"
+          />
         </li>
       </ul>
     </form>
-   
   );
 };
 

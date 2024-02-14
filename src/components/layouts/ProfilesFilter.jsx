@@ -210,7 +210,7 @@ const ProfilesFilter = () => {
                       <option value="Muslim">Muslim</option>
                       <option value="Jain">Jain</option>
                       <option value="Christian">Christian</option>
-                      <option>Buddhist</option>
+                      <option value="Buddhist">Buddhist</option>
                     </select>
                   </div>
                 </div>
@@ -264,8 +264,8 @@ const ProfilesFilter = () => {
                   >
                     <option value="">Select Location</option>
                     <option value="Mumbai">Chennai</option>
-                    <option value="Pune">Bangaluru</option>
-                    <option value="Nashik">Delhi</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    
                   </select>
                 </div>
                 {/* </div> */}
