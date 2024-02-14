@@ -1,12 +1,43 @@
 import React, { useEffect, useState } from "react";
 import Message from "./Message";
 import axios from "axios";
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 
-const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentChat , setAllMessages}) => {
-  console.log(friendID)
+const ChatBox = ({
+  showChatbox,
+  closeBox,
+  friendID,
+  messages,
+  userID,
+  currentChat,
+  setAllMessages,
+}) => {
   const [newMessage, setNewMessage] = useState("");
   const [friend, setFriend] = useState({});
+  const [socket, setSocket] = useState(null); // State to hold the socket instance
+
+  useEffect(() => {
+    async function socketInitializer() {
+      await fetch("/api/socket");
+  
+      const newSocket = io(); // Create a new socket instance
+      newSocket.on("receive-message", (data) => {
+        setAllMessages((pre) => [...pre, data]);
+      });
+      setSocket(newSocket); // Set the socket instance in the state
+    }
+  
+    if (!socket) {
+      socketInitializer();
+    }
+  
+    return () => {
+      if (socket) {
+        socket.disconnect(); // Disconnect the socket if it exists
+      }
+    };
+  }, [socket]); // Dependency array to run the effect only when `socket` changes
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -14,11 +45,13 @@ const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentCh
       text: newMessage,
       conversation: currentChat._id,
     };
-
+  
     try {
       const res = await axios.post("/api/chat/addMessage", message);
-      setAllMessages([...messages, res.data.data]);
-      setNewMessage('')
+      if (res.status === 201 && socket) {
+        socket.emit("send-message", message); // Emit message through socket if it exists
+        setNewMessage("");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -48,8 +81,6 @@ const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentCh
     }
     getFriend();
   }, []);
-   
-
 
   return (
     <div className="chatbox" style={{ right: showChatbox ? "0" : "-500px" }}>
@@ -58,30 +89,20 @@ const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentCh
       </span>
 
       <div className="inn">
-        <form name="new_chat_form" method="post">
+        <form name="new_chat_form" method="post" onSubmit={handleSubmit}>
           <div className="s1">
             <img src={friend?.images} className="intephoto2" alt="" />
             <h4>
-              <b className="intename2">
-              {
-              // friend?._id === currentChat?.members[1] ? 
-              friend?.name 
-              // : "Friend's Name"
-              }
-                </b>,
+              <b className="intename2">{friend?.name}</b>,
             </h4>
             <span className="avlsta avilyes text-white">Available online</span>
           </div>
           <div className="s2 chat-box-messages">
-            {/* <span className="chat-wel">Start a new chat!!! now</span> */}
             <div className="chat-con">
-              {/* <div className="chat-lhs">Hi</div>
-        <div className="chat-rhs">Hi</div> */}
               {messages?.map((m) => (
                 <Message message={m} own={m.sender === userID} key={m._id} />
               ))}
             </div>
-            {/* <span>Start A New Chat!!! Now</span> */}
           </div>
           <div className="s3">
             <input
@@ -92,12 +113,7 @@ const ChatBox = ({ showChatbox, closeBox, friendID, messages, userID , currentCh
               onChange={(e) => setNewMessage(e.target.value)}
               value={newMessage}
             />
-            <button
-              id="chat_send1"
-              name="chat_send"
-              type="submit"
-              onClick={handleSubmit}
-            >
+            <button id="chat_send1" name="chat_send" type="submit">
               Send <i className="fa fa-paper-plane-o" aria-hidden="true"></i>
             </button>
           </div>

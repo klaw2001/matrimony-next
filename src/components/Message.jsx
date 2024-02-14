@@ -9,7 +9,7 @@ const Message = ({ message, own }) => {
         own ? "justify-content-end" : "justify-content-start"
       }`}
     >
-      <div style={{ width: "fit-content" }} className={`mb-1 ${messageClass}`}>
+      <div style={{ width: "fit-content" }} className={`mb-1 ${messageClass}`} key={message._id}>
         {message.text}
       </div>
     </div>
