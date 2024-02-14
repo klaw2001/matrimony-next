@@ -14,6 +14,7 @@ const ProfileDetails = () => {
   const router = useParams();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [myid , setMyid] = useState(null)
   const { id } = router;
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,11 @@ const ProfileDetails = () => {
 
     fetchData();
   }, [id]);
+
+  useEffect(()=>{
+    const id = localStorage.getItem('loggedinUser')
+    setMyid(id)
+  })
   const personal_info = user.personalInfo || [];
   const rawDate = personal_info[0]?.dob;
 
@@ -48,40 +54,29 @@ const ProfileDetails = () => {
     });
   };
 
-  const sendRequestHandler = async () => {
-    const requesterId = localStorage.getItem("loggedinUser");
-
-    if (!requesterId) {
+  const sendRequestHandler = async (requestedUserId) => {
+    if (!myid) {
       toast.error("Register to send a Request");
       setTimeout(() => {
         router.push("/signup");
       }, 3000);
       return;
     }
-    const requestedUserId = user._id;
 
     try {
-      const res = await axios.post("/api/connections/sendRequest/", {
-        requesterId,
-        requestedUserId,
+      const res = await axios.post("/api/chat/addConversation", {
+        sender: myid,
+        receiver: requestedUserId, // Ensure correct spelling here
       });
 
-      console.log(res.data);
-
-     
-
-      if (res.data.success === true) {
-        console.log("Request sent successfully");
+      if (res.status === 200) {
+        toast.success("Redirecting To Chat Page");
+        setTimeout(() => {
+          router.push(`/chat-list/${myid}`);
+        }, 3000);
       }
-
-      toast.success("Request Sent Successfully");
-    } catch (err) {
-      if(err.response.status === 400){
-        toast.info("Request Already Sent")
-      }else{
-
-        toast.error("Something went wrong");
-      }
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -113,9 +108,9 @@ const ProfileDetails = () => {
                       <div className="s3 position-fixed bottom-0 w-100 start-0 end-0">
                         <button
                           className="cta fol cta-chat text-white cta-new"
-                          onClick={sendRequestHandler}
+                          onClick={()=>sendRequestHandler(user._id)}
                         >
-                          Send Interest
+                          Start Chat
                         </button>
                       </div>
                   </div>
@@ -251,7 +246,7 @@ const ProfileDetails = () => {
                     </div> */}
                     {/* <!-- END PROFILE ABOUT --> */}
                     {/* <!-- PROFILE ABOUT --> */}
-                    <div className="pr-bio-c pr-bio-conta">
+                    {/* <div className="pr-bio-c pr-bio-conta">
                       <h3>Contact info</h3>
                       <ul>
                         <li>
@@ -271,17 +266,9 @@ const ProfileDetails = () => {
                             {user.email}
                           </span>
                         </li>
-                        {/* <li>
-                          <span>
-                            <i
-                              className="fa fa fa-map-marker"
-                              aria-hidden="true"
-                            ></i>
-                            <b>Address: </b>{user.address}
-                          </span>
-                        </li> */}
+                        
                       </ul>
-                    </div>
+                    </div> */}
                     {/* <!-- END PROFILE ABOUT --> */}
                     {/* <!-- PROFILE ABOUT --> */}
                     <div class="pr-bio-c pr-bio-info">

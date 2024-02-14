@@ -102,7 +102,6 @@ const ProfilesFilter = () => {
       return;
     }
 
-    console.log(requesterId, requestedUserId);
     try {
       const res = await axios.post("/api/chat/addConversation", {
         sender: requesterId,
