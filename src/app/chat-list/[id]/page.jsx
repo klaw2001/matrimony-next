@@ -72,6 +72,7 @@ const ChatListPage = () => {
           config
         );
         setMessages(res.data.data);
+        setLoading(false)
       } catch (error) {
         console.log(error);
       }
@@ -135,6 +136,8 @@ const ChatListPage = () => {
           currentChat={currentChat}
           userID={userID}
           setAllMessages={setMessages}
+          loading={loading}
+
         />
       )}
 

@@ -6,7 +6,7 @@ export const sendEmail = async ({ email, emailType, userId }) => {
   try {
     // create a hased token
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
-
+    console.log(email, emailType, userId)
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
         verifyToken: hashedToken,
@@ -23,8 +23,8 @@ export const sendEmail = async ({ email, emailType, userId }) => {
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
-        user: "3fd364695517df",
-        pass: "7383d58fd399cf",
+        user: "bdb2f33329eed3",
+        pass: "d7bbc2cf9e9c38"
         //TODO: add these credentials to .env file
       },
     });

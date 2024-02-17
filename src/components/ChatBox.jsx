@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Message from "./Message";
 import axios from "axios";
 import io from "socket.io-client";
+import MySpinner from "./MySpinner";
 
 const ChatBox = ({
   showChatbox,
@@ -15,29 +16,35 @@ const ChatBox = ({
   const [newMessage, setNewMessage] = useState("");
   const [friend, setFriend] = useState({});
   const [socket, setSocket] = useState(null); // State to hold the socket instance
+  const [loading , setLoading] = useState(true)
+  useEffect(()=>{
+    if(messages){
+      setLoading(false)
+    }
+  },[messages])
 
   useEffect(() => {
     async function socketInitializer() {
       await fetch("/api/socket");
-  
+
       const newSocket = io(); // Create a new socket instance
       newSocket.on("receive-message", (data) => {
         setAllMessages((pre) => [...pre, data]);
       });
       setSocket(newSocket); // Set the socket instance in the state
     }
-  
+
     if (!socket) {
       socketInitializer();
     }
-  
+
     return () => {
       if (socket) {
         socket.disconnect(); // Disconnect the socket if it exists
       }
     };
   }, [socket]); // Dependency array to run the effect only when `socket` changes
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -45,7 +52,7 @@ const ChatBox = ({
       text: newMessage,
       conversation: currentChat._id,
     };
-  
+
     try {
       const res = await axios.post("/api/chat/addMessage", message);
       if (res.status === 201 && socket) {
@@ -74,7 +81,6 @@ const ChatBox = ({
 
         const data = await response.json();
         setFriend(data.data);
-        setLoading(false);
       } catch (err) {
         console.error("Error fetching friend data:", err);
       }
@@ -98,11 +104,17 @@ const ChatBox = ({
             <span className="avlsta avilyes text-white">Available online</span>
           </div>
           <div className="s2 chat-box-messages">
-            <div className="chat-con">
-              {messages?.map((m) => (
-                <Message message={m} own={m.sender === userID} key={m._id} />
-              ))}
-            </div>
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-start w-100 h-100">
+                <MySpinner />
+              </div>
+            ) : (
+              <div className="chat-con">
+                {messages?.map((m) => (
+                  <Message message={m} own={m.sender === userID} key={m._id} />
+                ))}
+              </div>
+            )}
           </div>
           <div className="s3">
             <input

@@ -97,7 +97,7 @@ const Login = () => {
                             value={credentials.password}
                           />
                         </div>
-                        <div className="form-group form-check">
+                        <div className="form-group form-check d-flex justify-content-between align-items-center">
                           <label className="form-check-label">
                             <input
                               className="form-check-input"
@@ -108,6 +108,7 @@ const Login = () => {
                             />{" "}
                             Remember me
                           </label>
+                          <Link href='/reset-password' className="fw-bold text-decoration-underline" style={{fontSize:'13px'}}>Forgot Password ?</Link>
                         </div>
                         <button type="submit" className="btn btn-primary">
                           Sign in
